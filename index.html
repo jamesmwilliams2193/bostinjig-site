@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bostin Jig: brilliant tools, made to fit your business</title>
-<meta name="description" content="Bostin Jig builds simple custom apps for West Midlands firms still running on spreadsheets, paper and WhatsApp. Fixed prices, live in weeks.">
+<title>Bostin Jig Software: brilliant tools, made to fit your business</title>
+<meta name="description" content="Bostin Jig Software builds simple custom apps for West Midlands firms still running on spreadsheets, paper and WhatsApp. Fixed prices, live in weeks.">
 <meta name="theme-color" content="#0E0F12">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
@@ -65,7 +65,10 @@
   .site-head .wrap { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 70px; }
   .mark { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--paper); }
   .mark svg { flex: none; }
-  .mark-word { font-family: var(--display); font-weight: 800; font-size: 21px; line-height: 1; letter-spacing: -0.01em; text-transform: uppercase; white-space: nowrap; }
+  .mark-word { display: inline-flex; flex-direction: column; gap: 5px; }
+  .mark-name { font-family: var(--display); font-weight: 800; font-size: 21px; line-height: 1; letter-spacing: -0.01em; text-transform: uppercase; white-space: nowrap; }
+  .mark-sub { display: flex; justify-content: space-between; font: 700 10px/1 var(--display); color: var(--molten); }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .site-nav { display: flex; align-items: center; gap: 26px; }
   .site-nav a:not(.btn) { color: var(--text); text-decoration: none; font-size: 16px; font-weight: 500; }
   .site-nav a:not(.btn):hover { color: var(--paper); }
@@ -285,7 +288,8 @@
     .site-head .wrap { min-height: 62px; }
     .hero { min-height: auto; }
     .mark svg { width: 34px; height: 34px; }
-    .mark-word { font-size: 17px; }
+    .mark-name { font-size: 17px; }
+    .mark-sub { font-size: 8.5px; }
     .site-nav .btn { min-height: 40px; padding: 0 14px; font-size: 14px; }
     .tools, .rates, .care, .field-row { grid-template-columns: 1fr; }
     .tools { gap: 12px; }
@@ -324,7 +328,7 @@
 
 <header class="site-head">
   <div class="wrap">
-    <a class="mark" href="#top" aria-label="Bostin Jig home">
+    <a class="mark" href="#top" aria-label="Bostin Jig Software home">
       <svg viewBox="0 0 100 100" width="40" height="40" aria-hidden="true">
   <defs>
     <radialGradient id="sky-h" cx="50" cy="80" r="64" gradientUnits="userSpaceOnUse">
@@ -347,7 +351,7 @@
   </g>
   <path d="M57 23 C68 23 73 34 73 50" fill="none" stroke="#111216" stroke-width="6" clip-path="url(#disc-h)"/>
 </svg>
-      <span class="mark-word">Bostin Jig</span>
+      <span class="mark-word"><span class="mark-name">Bostin Jig</span><span class="mark-sub" aria-hidden="true"><span>S</span><span>O</span><span>F</span><span>T</span><span>W</span><span>A</span><span>R</span><span>E</span></span><span class="sr">Software</span></span>
     </a>
     <nav class="site-nav" aria-label="Main">
       <a href="#build" data-bc="What we mek">What we build</a>
@@ -706,7 +710,7 @@
 
 <footer class="site-foot">
   <div class="wrap">
-    <p data-bc="© 2026 Bostin Jig. Tara-a-bit!">© 2026 Bostin Jig. Brilliant tools, made to fit.</p>
+    <p data-bc="© 2026 Bostin Jig Software. Tara-a-bit!">© 2026 Bostin Jig Software. Brilliant tools, made to fit.</p>
     <p><a href="mailto:james@bostinjig.co.uk">james@bostinjig.co.uk</a></p>
   </div>
 </footer>
