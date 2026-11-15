@@ -5,379 +5,684 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bostin Jig: brilliant tools, made to fit your business</title>
 <meta name="description" content="Bostin Jig builds simple custom apps for West Midlands firms still running on spreadsheets, paper and WhatsApp. Fixed prices, live in weeks.">
+<meta name="theme-color" content="#0E0F12">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<script>document.documentElement.classList.add('js');if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('calm');</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Oswald:wght@500;600;700&family=Rubik:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600&family=Unbounded:wght@500;700;800&display=swap">
 <style>
   :root {
-    --iron: #1C2230;
-    --iron-2: #262E3F;
-    --steel: #3A4458;
-    --paper: #F6F1E7;
-    --paper-2: #EDE6D8;
+    --bg: #0E0F12;
+    --iron: #18191E;
+    --steel: #24262D;
+    --steel-2: #33363F;
+    --red: #C8102E;
+    --line: rgba(243, 238, 228, 0.12);
+    --paper: #F3EEE4;
+    --text: #C9CBD2;
+    --soft: #9A9DA6;
     --molten: #E8742C;
-    --molten-text: #B04E14;
-    --ember: #F0965A;
-    --ink-soft: #4A4F5C;
-    --rule: #D9CFBD;
-    --display: 'Oswald', 'Arial Narrow', Arial, sans-serif;
-    --text: 'Rubik', Arial, sans-serif;
+    --hot: #FFB27A;
+    --white-hot: #FFE8D2;
+    --display: 'Unbounded', 'Arial Black', system-ui, sans-serif;
+    --body: 'Rubik', system-ui, sans-serif;
+    --wrap: 1200px;
+    --flag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 60' preserveAspectRatio='none'%3E%3Cdefs%3E%3CclipPath id='w'%3E%3Cpolygon points='45,0 55,0 55,20 100,52 100,60 0,60 0,52 45,20'/%3E%3C/clipPath%3E%3C/defs%3E%3Crect width='50' height='60' fill='%23121419'/%3E%3Crect x='50' width='50' height='60' fill='%23C8102E'/%3E%3Cpolygon points='45,0 55,0 55,20 100,52 100,60 0,60 0,52 45,20' fill='%23F5F2EC'/%3E%3Cg%3E%3Crect x='-3.5' y='-0.65' width='7' height='1.3' rx='0.65' fill='%23F5F2EC' transform='translate%2845.71 41.43%29 rotate%2830.96%29'/%3E%3Crect x='-3.7' y='-2.1' width='7.4' height='4.2' rx='2.1' fill='none' stroke='%23F5F2EC' stroke-width='1.25' transform='translate%2841.43 38.86%29 rotate%2830.96%29'/%3E%3Crect x='-3.5' y='-0.65' width='7' height='1.3' rx='0.65' fill='%23F5F2EC' transform='translate%2837.14 36.28%29 rotate%2830.96%29'/%3E%3Crect x='-3.7' y='-2.1' width='7.4' height='4.2' rx='2.1' fill='none' stroke='%23F5F2EC' stroke-width='1.25' transform='translate%2832.85 33.71%29 rotate%2830.96%29'/%3E%3Crect x='-3.5' y='-0.65' width='7' height='1.3' rx='0.65' fill='%23F5F2EC' transform='translate%2828.56 31.14%29 rotate%2830.96%29'/%3E%3Crect x='-3.7' y='-2.1' width='7.4' height='4.2' rx='2.1' fill='none' stroke='%23F5F2EC' stroke-width='1.25' transform='translate%2824.28 28.57%29 rotate%2830.96%29'/%3E%3Crect x='-3.5' y='-0.65' width='7' height='1.3' rx='0.65' fill='%23F5F2EC' transform='translate%2819.99 25.99%29 rotate%2830.96%29'/%3E%3Crect x='-3.7' y='-2.1' width='7.4' height='4.2' rx='2.1' fill='none' stroke='%23F5F2EC' stroke-width='1.25' transform='translate%2815.70 23.42%29 rotate%2830.96%29'/%3E%3Crect x='-3.5' y='-0.65' width='7' height='1.3' rx='0.65' fill='%23F5F2EC' transform='translate%2811.41 20.85%29 rotate%2830.96%29'/%3E%3Crect x='-3.7' y='-2.1' width='7.4' height='4.2' rx='2.1' fill='none' stroke='%23F5F2EC' stroke-width='1.25' transform='translate%287.13 18.28%29 rotate%2830.96%29'/%3E%3Crect x='-3.5' y='-0.65' width='7' height='1.3' rx='0.65' fill='%23F5F2EC' transform='translate%282.84 15.70%29 rotate%2830.96%29'/%3E%3Crect x='-3.7' y='-2.1' width='7.4' height='4.2' rx='2.1' fill='none' stroke='%23F5F2EC' stroke-width='1.25' transform='translate%28-1.45 13.13%29 rotate%2830.96%29'/%3E%3Crect x='-3.5' y='-0.65' width='7' height='1.3' rx='0.65' fill='%23F5F2EC' transform='translate%2854.29 41.43%29 rotate%28149.04%29'/%3E%3Crect x='-3.7' y='-2.1' width='7.4' height='4.2' rx='2.1' fill='none' stroke='%23F5F2EC' stroke-width='1.25' transform='translate%2858.57 38.86%29 rotate%28149.04%29'/%3E%3Crect x='-3.5' y='-0.65' width='7' height='1.3' rx='0.65' fill='%23F5F2EC' transform='translate%2862.86 36.28%29 rotate%28149.04%29'/%3E%3Crect x='-3.7' y='-2.1' width='7.4' height='4.2' rx='2.1' fill='none' stroke='%23F5F2EC' stroke-width='1.25' transform='translate%2867.15 33.71%29 rotate%28149.04%29'/%3E%3Crect x='-3.5' y='-0.65' width='7' height='1.3' rx='0.65' fill='%23F5F2EC' transform='translate%2871.44 31.14%29 rotate%28149.04%29'/%3E%3Crect x='-3.7' y='-2.1' width='7.4' height='4.2' rx='2.1' fill='none' stroke='%23F5F2EC' stroke-width='1.25' transform='translate%2875.72 28.57%29 rotate%28149.04%29'/%3E%3Crect x='-3.5' y='-0.65' width='7' height='1.3' rx='0.65' fill='%23F5F2EC' transform='translate%2880.01 25.99%29 rotate%28149.04%29'/%3E%3Crect x='-3.7' y='-2.1' width='7.4' height='4.2' rx='2.1' fill='none' stroke='%23F5F2EC' stroke-width='1.25' transform='translate%2884.30 23.42%29 rotate%28149.04%29'/%3E%3Crect x='-3.5' y='-0.65' width='7' height='1.3' rx='0.65' fill='%23F5F2EC' transform='translate%2888.59 20.85%29 rotate%28149.04%29'/%3E%3Crect x='-3.7' y='-2.1' width='7.4' height='4.2' rx='2.1' fill='none' stroke='%23F5F2EC' stroke-width='1.25' transform='translate%2892.87 18.28%29 rotate%28149.04%29'/%3E%3Crect x='-3.5' y='-0.65' width='7' height='1.3' rx='0.65' fill='%23F5F2EC' transform='translate%2897.16 15.70%29 rotate%28149.04%29'/%3E%3Crect x='-3.7' y='-2.1' width='7.4' height='4.2' rx='2.1' fill='none' stroke='%23F5F2EC' stroke-width='1.25' transform='translate%28101.45 13.13%29 rotate%28149.04%29'/%3E%3Crect x='-3.7' y='-2.1' width='7.4' height='4.2' rx='2.1' fill='none' stroke='%23F5F2EC' stroke-width='1.25' transform='translate%2850.00 44.60%29 rotate%280.00%29'/%3E%3C/g%3E%3Cg clip-path='url%28%23w%29'%3E%3Crect x='-3.5' y='-0.65' width='7' height='1.3' rx='0.65' fill='%23121419' transform='translate%2845.71 41.43%29 rotate%2830.96%29'/%3E%3Crect x='-3.7' y='-2.1' width='7.4' height='4.2' rx='2.1' fill='none' stroke='%23121419' stroke-width='1.25' transform='translate%2841.43 38.86%29 rotate%2830.96%29'/%3E%3Crect x='-3.5' y='-0.65' width='7' height='1.3' rx='0.65' fill='%23121419' transform='translate%2837.14 36.28%29 rotate%2830.96%29'/%3E%3Crect x='-3.7' y='-2.1' width='7.4' height='4.2' rx='2.1' fill='none' stroke='%23121419' stroke-width='1.25' transform='translate%2832.85 33.71%29 rotate%2830.96%29'/%3E%3Crect x='-3.5' y='-0.65' width='7' height='1.3' rx='0.65' fill='%23121419' transform='translate%2828.56 31.14%29 rotate%2830.96%29'/%3E%3Crect x='-3.7' y='-2.1' width='7.4' height='4.2' rx='2.1' fill='none' stroke='%23121419' stroke-width='1.25' transform='translate%2824.28 28.57%29 rotate%2830.96%29'/%3E%3Crect x='-3.5' y='-0.65' width='7' height='1.3' rx='0.65' fill='%23121419' transform='translate%2819.99 25.99%29 rotate%2830.96%29'/%3E%3Crect x='-3.7' y='-2.1' width='7.4' height='4.2' rx='2.1' fill='none' stroke='%23121419' stroke-width='1.25' transform='translate%2815.70 23.42%29 rotate%2830.96%29'/%3E%3Crect x='-3.5' y='-0.65' width='7' height='1.3' rx='0.65' fill='%23121419' transform='translate%2811.41 20.85%29 rotate%2830.96%29'/%3E%3Crect x='-3.7' y='-2.1' width='7.4' height='4.2' rx='2.1' fill='none' stroke='%23121419' stroke-width='1.25' transform='translate%287.13 18.28%29 rotate%2830.96%29'/%3E%3Crect x='-3.5' y='-0.65' width='7' height='1.3' rx='0.65' fill='%23121419' transform='translate%282.84 15.70%29 rotate%2830.96%29'/%3E%3Crect x='-3.7' y='-2.1' width='7.4' height='4.2' rx='2.1' fill='none' stroke='%23121419' stroke-width='1.25' transform='translate%28-1.45 13.13%29 rotate%2830.96%29'/%3E%3Crect x='-3.5' y='-0.65' width='7' height='1.3' rx='0.65' fill='%23121419' transform='translate%2854.29 41.43%29 rotate%28149.04%29'/%3E%3Crect x='-3.7' y='-2.1' width='7.4' height='4.2' rx='2.1' fill='none' stroke='%23121419' stroke-width='1.25' transform='translate%2858.57 38.86%29 rotate%28149.04%29'/%3E%3Crect x='-3.5' y='-0.65' width='7' height='1.3' rx='0.65' fill='%23121419' transform='translate%2862.86 36.28%29 rotate%28149.04%29'/%3E%3Crect x='-3.7' y='-2.1' width='7.4' height='4.2' rx='2.1' fill='none' stroke='%23121419' stroke-width='1.25' transform='translate%2867.15 33.71%29 rotate%28149.04%29'/%3E%3Crect x='-3.5' y='-0.65' width='7' height='1.3' rx='0.65' fill='%23121419' transform='translate%2871.44 31.14%29 rotate%28149.04%29'/%3E%3Crect x='-3.7' y='-2.1' width='7.4' height='4.2' rx='2.1' fill='none' stroke='%23121419' stroke-width='1.25' transform='translate%2875.72 28.57%29 rotate%28149.04%29'/%3E%3Crect x='-3.5' y='-0.65' width='7' height='1.3' rx='0.65' fill='%23121419' transform='translate%2880.01 25.99%29 rotate%28149.04%29'/%3E%3Crect x='-3.7' y='-2.1' width='7.4' height='4.2' rx='2.1' fill='none' stroke='%23121419' stroke-width='1.25' transform='translate%2884.30 23.42%29 rotate%28149.04%29'/%3E%3Crect x='-3.5' y='-0.65' width='7' height='1.3' rx='0.65' fill='%23121419' transform='translate%2888.59 20.85%29 rotate%28149.04%29'/%3E%3Crect x='-3.7' y='-2.1' width='7.4' height='4.2' rx='2.1' fill='none' stroke='%23121419' stroke-width='1.25' transform='translate%2892.87 18.28%29 rotate%28149.04%29'/%3E%3Crect x='-3.5' y='-0.65' width='7' height='1.3' rx='0.65' fill='%23121419' transform='translate%2897.16 15.70%29 rotate%28149.04%29'/%3E%3Crect x='-3.7' y='-2.1' width='7.4' height='4.2' rx='2.1' fill='none' stroke='%23121419' stroke-width='1.25' transform='translate%28101.45 13.13%29 rotate%28149.04%29'/%3E%3Crect x='-3.7' y='-2.1' width='7.4' height='4.2' rx='2.1' fill='none' stroke='%23121419' stroke-width='1.25' transform='translate%2850.00 44.60%29 rotate%280.00%29'/%3E%3C/g%3E%3C/svg%3E");
+    --pad: clamp(18px, 4vw, 48px);
   }
-  * { box-sizing: border-box; }
+  * { box-sizing: border-box; min-width: 0; }
   html { scroll-behavior: smooth; }
-  body { margin: 0; background: var(--paper); color: var(--iron); font-family: var(--text); font-size: 18px; line-height: 1.6; }
-  img, svg { display: block; max-width: 100%; }
-  a { color: inherit; }
-  :focus-visible { outline: 3px solid var(--molten); outline-offset: 3px; }
-  .wrap { width: min(1160px, 100% - 48px); margin-inline: auto; }
-  h1, h2 { font-family: var(--display); text-transform: uppercase; letter-spacing: 0.01em; margin: 0; }
-  h2 { font-size: clamp(36px, 5vw, 60px); line-height: 1.05; font-weight: 600; }
-  h3 { font-size: 22px; line-height: 1.3; margin: 0; font-weight: 600; }
-  p { margin: 0; }
-  .measure { max-width: 62ch; }
-  .lead { font-size: 21px; line-height: 1.55; }
-  .muted { color: var(--ink-soft); }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 17px/1.6 var(--body); overflow-x: clip; -webkit-font-smoothing: antialiased; }
+  body::after { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 100; opacity: 0.05; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  img, svg { display: block; }
+  a { color: var(--hot); }
+  h1, h2, h3, p { margin: 0; }
+  h2 { font-family: var(--display); font-weight: 700; color: var(--paper); font-size: clamp(30px, 4.6vw, 52px); line-height: 1.05; letter-spacing: -0.02em; text-wrap: balance; }
+  h3 { font-family: var(--display); font-weight: 500; color: var(--paper); font-size: 19px; line-height: 1.25; letter-spacing: -0.01em; }
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding-inline: var(--pad); }
+  .band { padding-block: clamp(60px, 8vw, 104px); position: relative; }
+  .section-head { display: grid; gap: 16px; margin-bottom: clamp(36px, 5vw, 56px); max-width: 760px; }
+  .lead { font-size: clamp(18px, 2vw, 21px); line-height: 1.55; color: var(--text); max-width: 60ch; }
+  .skip { position: absolute; left: -999px; top: 8px; background: var(--paper); color: var(--bg); padding: 10px 16px; border-radius: 8px; z-index: 200; }
+  .skip:focus { left: 8px; }
+  :focus-visible { outline: 3px solid var(--hot); outline-offset: 3px; }
 
   /* Buttons */
-  .btn { display: inline-block; font-family: var(--text); font-weight: 600; font-size: 18px; text-decoration: none; padding: 16px 26px; border-radius: 6px; border: 2px solid transparent; cursor: pointer; }
-  .btn-molten { background: var(--molten); color: var(--iron); }
-  .btn-molten:hover { background: var(--ember); }
-  .btn-ghost { border-color: rgba(246, 241, 231, 0.5); color: var(--paper); }
-  .btn-ghost:hover { border-color: var(--paper); }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 26px; border-radius: 12px; font: 600 17px/1 var(--body); text-decoration: none; cursor: pointer; border: 0; transition: transform .15s ease, box-shadow .2s ease, background-color .2s ease; }
+  .btn-molten { background: var(--molten); color: #1A1209; box-shadow: 0 0 0 1px rgba(255,178,122,.5) inset, 0 10px 30px -8px rgba(232,116,44,.65); }
+  .btn-molten:hover { background: #F2843D; transform: translateY(-1px); box-shadow: 0 0 0 1px rgba(255,232,210,.6) inset, 0 14px 36px -8px rgba(232,116,44,.8); }
+  .btn-ghost { background: transparent; color: var(--paper); box-shadow: 0 0 0 1.5px var(--line) inset; }
+  .btn-ghost:hover { box-shadow: 0 0 0 1.5px rgba(243,238,228,.4) inset; }
+  .btn:disabled { opacity: .6; cursor: wait; }
 
   /* Header */
-  .site-head { background: var(--iron); color: var(--paper); }
-  .site-head .wrap { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 18px; }
-  .mark { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-  .mark svg { display: block; flex: none; }
-  .mark-word { font-family: 'Alfa Slab One', Georgia, serif; font-size: 27px; font-weight: 400; line-height: 1; }
-  .site-nav { display: flex; align-items: center; gap: 28px; }
-  .site-nav a { text-decoration: none; font-weight: 500; }
-  .site-nav a:hover { color: var(--ember); }
-  .site-nav .btn { padding: 10px 18px; font-size: 16px; }
-  .site-nav .btn:hover { color: var(--iron); }
+  .site-head { position: sticky; top: 0; z-index: 50; background: rgba(14,15,18,.8); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+  .site-head::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: linear-gradient(90deg, var(--red), var(--molten) 55%, var(--hot)); opacity: .9; }
+  .site-head .wrap { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 70px; }
+  .mark { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--paper); }
+  .mark svg { flex: none; }
+  .mark-word { font-family: var(--display); font-weight: 800; font-size: 21px; line-height: 1; letter-spacing: -0.01em; text-transform: uppercase; white-space: nowrap; }
+  .site-nav { display: flex; align-items: center; gap: 26px; }
+  .site-nav a:not(.btn) { color: var(--text); text-decoration: none; font-size: 16px; font-weight: 500; }
+  .site-nav a:not(.btn):hover { color: var(--paper); }
+  .site-nav .btn { min-height: 44px; padding: 0 18px; font-size: 15px; }
 
   /* Hero */
-  .hero { background: var(--iron); color: var(--paper); overflow: hidden; }
-  .hero .wrap { display: grid; grid-template-columns: 1.15fr 0.85fr; align-items: center; gap: 32px; padding-block: 72px 96px; }
-  .hero h1 { font-size: clamp(56px, 8.4vw, 112px); line-height: 0.95; font-weight: 700; }
-  .hero .lead { color: #C9CED8; margin-top: 28px; max-width: 34em; }
-  .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 36px; }
-  .hero-note { margin-top: 28px; color: #C9CED8; font-size: 16px; max-width: 34em; }
-  .hero-note b { color: var(--ember); font-weight: 600; }
-  .hero-art { width: 100%; height: auto; }
-  .spark { transform-box: fill-box; transform-origin: center; }
-  @media (prefers-reduced-motion: no-preference) {
-    .spark { animation: spark 900ms ease-out both; }
-    .spark:nth-of-type(2) { animation-delay: 80ms; }
-    .spark:nth-of-type(3) { animation-delay: 160ms; }
-    .spark:nth-of-type(4) { animation-delay: 240ms; }
-    .spark:nth-of-type(5) { animation-delay: 320ms; }
-    .glow { animation: glow 1400ms ease-out both; }
-    @keyframes spark { from { opacity: 0; transform: scale(0.3); } to { opacity: 1; transform: scale(1); } }
-    @keyframes glow { from { opacity: 0; } to { opacity: 0.18; } }
+  .hero { position: relative; overflow: hidden; min-height: min(86vh, 820px); display: flex; align-items: center; isolation: isolate; }
+  .hero::before { content: ""; position: absolute; inset: auto -10% -40% -10%; height: 80%; z-index: -2;
+    background: radial-gradient(60% 60% at 50% 100%, rgba(232,116,44,.3), rgba(200,16,46,.14) 45%, transparent 72%); }
+  .hero::after { content: ""; position: absolute; inset: 0; z-index: -2; opacity: .5;
+    background: linear-gradient(rgba(243,238,228,.05) 1px, transparent 1px) 0 0 / 100% 64px;
+    mask-image: linear-gradient(transparent, #000 30%, #000 70%, transparent); -webkit-mask-image: linear-gradient(transparent, #000 30%, #000 70%, transparent); }
+  #sparks { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+  .hero .wrap { width: 100%; padding-block: clamp(48px, 8vw, 96px); }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 56px); align-items: center; }
+  .hero-art { position: relative; display: grid; place-items: center; }
+  .hero-art svg { width: 100%; max-width: 420px; height: auto; position: relative; filter: drop-shadow(0 30px 50px rgba(200,16,46,.35)); }
+  .forge-glow { position: absolute; inset: -4%; border-radius: 50%; background: radial-gradient(closest-side, rgba(232,116,44,.5), rgba(200,16,46,.22) 60%, transparent); filter: blur(18px); animation: breathe 5s ease-in-out infinite; }
+  @keyframes breathe { 0%, 100% { opacity: .65; transform: scale(.96); } 50% { opacity: 1; transform: scale(1.03); } }
+  .cut { position: relative; font-family: var(--display); font-weight: 800; color: var(--paper); font-size: clamp(42px, 5.8vw, 86px); line-height: 1.02; letter-spacing: -0.035em; max-width: 12ch; text-wrap: balance; }
+  .cut-text { display: block; }
+  .laser { position: absolute; top: -10%; bottom: -10%; left: 0; width: 3px; border-radius: 3px; opacity: 0; pointer-events: none;
+    background: linear-gradient(transparent, var(--white-hot) 18%, #fff 50%, var(--white-hot) 82%, transparent);
+    box-shadow: 0 0 10px 3px rgba(255,178,122,.9), 0 0 40px 12px rgba(232,116,44,.5); }
+  .js:not(.calm) .cut:not(.cutting) .cut-text { clip-path: inset(-25% 100% -25% 0); }
+  .cutting .cut-text { animation: reveal 1.5s cubic-bezier(.55,.05,.35,1) both, cool 3.4s ease-out both; }
+  .cutting .laser { animation: sweep 1.5s cubic-bezier(.55,.05,.35,1) both; }
+  @keyframes reveal { from { clip-path: inset(-25% 100% -25% 0); } to { clip-path: inset(-25% 0 -25% 0); } }
+  @keyframes cool {
+    0% { color: var(--white-hot); text-shadow: 0 0 6px var(--hot), 0 0 24px var(--molten), 0 0 60px rgba(232,116,44,.6); }
+    45% { color: var(--hot); text-shadow: 0 0 16px rgba(232,116,44,.55); }
+    100% { color: var(--paper); text-shadow: 0 0 0 transparent; }
   }
+  @keyframes sweep { 0% { left: 0; opacity: 0; } 5% { opacity: 1; } 92% { opacity: 1; } 100% { left: 100%; opacity: 0; } }
+  .hero .lead { margin-top: 28px; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 36px; }
+  .bc-toggle { margin-top: 30px; display: inline-flex; align-items: center; gap: 12px; min-height: 44px; padding: 6px 16px 6px 8px; border-radius: 999px; border: 0; cursor: pointer;
+    background: rgba(243,238,228,.06); box-shadow: 0 0 0 1px var(--line) inset; color: var(--paper); font: 500 15px/1 var(--body); }
+  .bc-toggle:hover { background: rgba(243,238,228,.1); }
+  .bc-switch { width: 46px; height: 26px; border-radius: 999px; background: var(--steel-2); position: relative; transition: background-color .25s ease; flex: none; }
+  .bc-switch::after { content: ""; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: var(--paper); transition: transform .25s cubic-bezier(.5,1.6,.5,1); }
+  .bc-toggle[aria-pressed="true"] .bc-switch { background: var(--molten); box-shadow: 0 0 16px rgba(232,116,44,.7); }
+  .bc-toggle[aria-pressed="true"] .bc-switch::after { transform: translateX(20px); }
+  .swap { animation: flicker .45s steps(2, end); }
+  @keyframes flicker { 0% { opacity: .15; filter: blur(2px); } 50% { opacity: .6; } 100% { opacity: 1; filter: none; } }
 
-  /* Sections */
-  section.band { padding-block: 96px; }
-  .band-dark { background: var(--iron); color: var(--paper); }
-  .band-dark .muted { color: #C9CED8; }
-  .band-alt { background: var(--paper-2); }
-  .section-head { display: grid; gap: 16px; margin-bottom: 48px; }
 
-  /* Before and after */
-  .ba { display: grid; grid-template-columns: 1fr auto 1fr; gap: 32px; align-items: center; }
-  .ba-side { display: grid; gap: 20px; }
-  .ba-side h3 { font-family: var(--display); text-transform: uppercase; font-size: 28px; font-weight: 600; }
-  .ba-arrow { width: 72px; height: 40px; }
+  /* Made in the Black Country */
+  .bc-band { position: relative; overflow: hidden; isolation: isolate; padding-top: clamp(72px, 9vw, 120px);
+    background: linear-gradient(180deg, var(--bg) 0%, #1A0A10 22%, #4E0A16 46%, #9A0E24 68%, #C8102E 82%, #E8742C 100%); }
+  .bc-band::before { content: ""; position: absolute; left: 0; right: 0; margin-inline: auto; bottom: 8%; width: min(900px, 120vw); height: 70%; z-index: -1;
+    background: radial-gradient(closest-side, rgba(255,178,122,.55), rgba(232,116,44,.2) 55%, transparent); filter: blur(20px); animation: breathe 6s ease-in-out infinite; }
+  .bc-copy { position: relative; z-index: 2; max-width: 760px; }
+  .bc-title { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 24px; }
+  .bc-copy h2 { color: #fff; }
+  .bc-copy .lead { color: #F3E3DC; margin-top: 20px; }
+  .flag-wrap { display: flex; align-items: flex-start; flex: none; }
+  .flag-pole { width: 5px; height: 150px; border-radius: 2px; background: linear-gradient(90deg, #8A93A6, #E8ECF2, #6B7385); position: relative; }
+  .flag-pole::before { content: ""; position: absolute; top: -7px; left: -3px; width: 10px; height: 10px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #FFE8D2, #B8892F); }
+  .flag { width: 160px; height: 96px; display: flex; background: var(--flag) center / 100% 100% no-repeat; box-shadow: 0 10px 24px rgba(0,0,0,.45); position: relative; }
+  .flag.waving { background: none; box-shadow: none; }
+  .flag .slice { flex: 1 0 0; height: 100%; background-image: var(--flag); background-repeat: no-repeat; animation: wave 2.4s ease-in-out infinite; }
+  .flag.waving::after { content: ""; position: absolute; inset: 0; pointer-events: none; mix-blend-mode: soft-light;
+    background: repeating-linear-gradient(90deg, rgba(255,255,255,.0) 0, rgba(255,255,255,.35) 12%, rgba(0,0,0,.35) 25%, rgba(255,255,255,0) 37%) 0 0 / 200% 100%; animation: shade 2.4s linear infinite; }
+  @keyframes wave { 0%, 100% { transform: translateY(-3px); } 50% { transform: translateY(3px); } }
+  @keyframes shade { to { background-position: -200% 0; } }
+  .skyline { position: relative; display: block; overflow: visible; width: 100%; height: clamp(240px, 34vw, 420px); margin-top: clamp(24px, 4vw, 48px); }
+  .skyline .ink { fill: #0A0C11; }
+  .skyline .rig { stroke: #0A0C11; fill: none; stroke-linecap: square; }
+  .smoke { fill: rgba(40, 20, 24, .55); transform-box: fill-box; transform-origin: center; animation: smoke 9s ease-out infinite; }
+  .smoke.s2 { animation-delay: -3s; } .smoke.s3 { animation-delay: -6s; }
+  @keyframes smoke { 0% { transform: translate(0, 0) scale(.4); opacity: 0; } 15% { opacity: .9; } 100% { transform: translate(60px, -150px) scale(2.4); opacity: 0; } }
+  .ember { fill: #FFB27A; transform-box: fill-box; animation: ember 4s linear infinite; opacity: 0; }
+  .ember.e2 { animation-delay: -1.3s; } .ember.e3 { animation-delay: -2.6s; } .ember.e4 { animation-delay: -.7s; }
+  @keyframes ember { 0% { transform: translate(0, 0); opacity: 0; } 10% { opacity: 1; } 100% { transform: translate(24px, -120px); opacity: 0; } }
+  .furnace-glow { fill: #FFB27A; opacity: .9; filter: url(#glow-blur); animation: breathe 3s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+  .skyline-note { position: absolute; right: var(--pad); bottom: 14px; z-index: 2; font-size: 13px; color: rgba(243,238,228,.85); text-align: right; max-width: 60ch; }
+  .bc-switch::after { background-size: cover; }
+  .bc-toggle[aria-pressed="true"] .bc-switch::after { background: var(--flag) center / cover no-repeat; box-shadow: 0 0 0 1.5px #F5F2EC; }
 
-  /* Parts list */
-  .parts { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; column-gap: 56px; }
-  .parts li { display: grid; grid-template-columns: 44px 1fr; gap: 18px; padding-block: 26px; border-top: 2px solid var(--rule); }
-  .parts li:nth-child(-n+2) { border-top-color: var(--iron); }
-  .parts svg { width: 44px; height: 44px; color: var(--molten-text); }
-  .parts p { color: var(--ink-soft); margin-top: 6px; }
-  .parts-foot { margin-top: 32px; font-weight: 500; }
+  /* Before / after */
+  .ba { position: relative; height: clamp(560px, 52vw, 600px); border-radius: 22px; overflow: hidden; box-shadow: 0 0 0 1px var(--line), 0 40px 80px -40px rgba(0,0,0,.8); touch-action: pan-y; user-select: none; -webkit-user-select: none; cursor: ew-resize; --pos: 50%; }
+  .ba-layer { position: absolute; inset: 0; }
+  .ba-before { background: #E6E1D6; color: #2B2B2B; }
+  .ba-after { background: radial-gradient(70% 80% at 70% 70%, rgba(232,116,44,.4), rgba(200,16,46,.18) 45%, transparent 70%), linear-gradient(160deg, #18191E, #0E0F12); clip-path: inset(0 0 0 var(--pos)); }
+  .ba-tag { position: absolute; top: 18px; font: 600 14px/1 var(--body); padding: 9px 14px; border-radius: 999px; }
+  .ba-before .ba-tag { left: 18px; background: #2B2B2B; color: #F3EEE4; }
+  .ba-after .ba-tag { right: 18px; background: var(--molten); color: #1A1209; }
+  .sheet { position: absolute; left: 4%; top: 13%; width: min(560px, 62%); background: #fff; border: 1px solid #B9B4A8; transform: rotate(-2.5deg); box-shadow: 0 10px 30px rgba(0,0,0,.18); font-size: 13px; }
+  .sheet-title { background: #217346; color: #fff; padding: 6px 10px; font-size: 12px; font-weight: 500; }
+  .sheet-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr .8fr; }
+  .sheet-grid span { border-right: 1px solid #DDD8CC; border-bottom: 1px solid #DDD8CC; padding: 6px 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-height: 30px; }
+  .sheet-grid .h { background: #EFEDE6; font-weight: 600; }
+  .sheet-grid .bad { color: #C0261B; font-weight: 600; background: #FBE3E0; }
+  .chat { position: absolute; right: 52%; bottom: 7%; width: min(300px, 46%); background: #ECE5DD; border-radius: 14px; padding: 12px; transform: rotate(2deg); box-shadow: 0 12px 30px rgba(0,0,0,.2); display: grid; gap: 8px; font-size: 14px; }
+  .chat-head { font-weight: 600; font-size: 13px; color: #555; }
+  .bubble { background: #fff; padding: 8px 10px; border-radius: 10px; line-height: 1.35; }
+  .bubble.me { background: #D9F2C9; justify-self: end; }
+  .bubble small { display: block; font-size: 11px; color: #8A8A8A; margin-top: 2px; }
+  .note { position: absolute; left: 30%; top: 54%; width: 170px; padding: 16px 14px; background: #FFE15C; color: #3A3000; font: 600 17px/1.25 'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', var(--body); transform: rotate(-7deg); box-shadow: 0 10px 18px rgba(0,0,0,.18); }
+  .phone { position: absolute; top: 50%; left: 72%; transform: translate(-50%, -50%) rotate(-3deg); width: 280px; height: 500px; border-radius: 40px; background: #0B0E14; padding: 12px; box-shadow: 0 0 0 1.5px #3A3C44, 0 30px 70px -20px rgba(0,0,0,.8), 0 0 80px -20px rgba(232,116,44,.6); }
+  .screen { height: 100%; border-radius: 30px; background: #F6F3EC; color: #18191E; overflow: hidden; display: flex; flex-direction: column; }
+  .app-top { padding: 22px 18px 12px; display: flex; align-items: center; justify-content: space-between; }
+  .app-top b { font: 700 20px/1 var(--display); letter-spacing: -0.02em; }
+  .app-top span { font-size: 12px; color: #6B7080; }
+  .jobs { display: grid; gap: 8px; padding: 0 12px; }
+  .job { background: #fff; border-radius: 14px; padding: 11px 12px; display: flex; align-items: center; justify-content: space-between; gap: 8px; box-shadow: 0 1px 0 rgba(0,0,0,.05); }
+  .job p { font-size: 14px; font-weight: 600; line-height: 1.25; }
+  .job small { display: block; font-size: 12px; color: #6B7080; font-weight: 400; }
+  .chip { flex: none; font-size: 11px; font-weight: 600; padding: 5px 8px; border-radius: 999px; }
+  .chip.live { background: #FDE5D4; color: #A2440E; }
+  .chip.done { background: #DDEFE5; color: #1E6B47; }
+  .chip.new { background: #DCE6FA; color: #24489A; }
+  .chip.send { background: #EEE9DE; color: #4A4F5C; }
+  .app-cta { margin: auto 12px 14px; background: var(--molten); color: #1A1209; text-align: center; font-weight: 600; font-size: 14px; padding: 12px; border-radius: 12px; }
+  .ba-handle { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 0; pointer-events: none; }
+  .ba-handle::before { content: ""; position: absolute; top: 0; bottom: 0; left: -1.5px; width: 3px; background: var(--white-hot); box-shadow: 0 0 12px 3px rgba(255,178,122,.8), 0 0 40px 8px rgba(232,116,44,.45); }
+  .ba-knob { position: absolute; top: 50%; left: 0; transform: translate(-50%, -50%); width: 56px; height: 56px; border-radius: 50%; background: var(--molten); display: grid; place-items: center; box-shadow: 0 0 0 4px rgba(14,15,18,.6), 0 0 24px rgba(232,116,44,.9); }
+  .ba-range { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+  .ba:has(.ba-range:focus-visible) .ba-knob { outline: 3px solid var(--white-hot); outline-offset: 3px; }
+  .ba-hint { margin-top: 14px; color: var(--soft); font-size: 15px; }
 
-  /* Rate board */
-  .board { background: var(--iron); color: var(--paper); border-radius: 10px; padding: 48px; position: relative; }
-  .rate { display: grid; grid-template-columns: 1fr auto; gap: 8px 24px; padding-block: 24px; border-bottom: 2px dashed var(--steel); }
-  .rate:first-of-type { padding-top: 0; }
-  .rate-name { font-family: var(--display); text-transform: uppercase; font-size: 32px; font-weight: 600; line-height: 1.1; }
-  .rate-price { font-family: var(--display); font-size: 40px; font-weight: 600; line-height: 1.1; color: var(--ember); text-align: right; white-space: nowrap; }
-  .rate-desc { color: #C9CED8; grid-column: 1 / -1; max-width: 60ch; }
-  .rate-time { font-weight: 600; color: var(--paper); }
-  .stamp { margin-top: 32px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; background: var(--molten); color: var(--iron); border-radius: 8px; padding: 22px 28px; }
-  .stamp strong { font-family: var(--display); text-transform: uppercase; font-size: 30px; line-height: 1.1; }
-  .care { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 56px; }
-  .care-plan { border: 2px solid var(--iron); border-radius: 10px; padding: 32px; display: grid; gap: 10px; align-content: start; }
-  .care-price { font-family: var(--display); font-size: 36px; font-weight: 600; line-height: 1.1; }
-  .care-price span { font-family: var(--text); font-size: 18px; font-weight: 500; color: var(--ink-soft); }
-  .pay-note { margin-top: 28px; }
+  /* What we build */
+  .tools { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .tool { position: relative; padding: 28px 26px 30px; border-radius: 18px; background: linear-gradient(180deg, rgba(36,38,45,.75), rgba(24,25,30,.75)); box-shadow: 0 0 0 1px var(--line) inset; overflow: hidden; transition: box-shadow .25s ease, transform .25s ease; }
+  .tool::before { content: ""; position: absolute; inset: 0; opacity: 0; transition: opacity .25s ease; pointer-events: none;
+    background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 0%), rgba(232,116,44,.22), transparent 60%); }
+  .tool:hover { box-shadow: 0 0 0 1px rgba(232,116,44,.6) inset; transform: translateY(-2px); }
+  .tool:hover::before { opacity: 1; }
+  .tool svg { width: 44px; height: 44px; color: var(--molten); margin-bottom: 22px; filter: drop-shadow(0 0 10px rgba(232,116,44,.45)); }
+  .tool p { margin-top: 10px; color: var(--soft); font-size: 16px; }
+  .tools-foot { margin-top: 28px; color: var(--paper); font-weight: 500; }
 
-  /* Steps */
-  .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; counter-reset: step; }
-  .steps li { counter-increment: step; display: grid; gap: 12px; align-content: start; }
-  .steps li::before { content: counter(step); font-family: var(--display); font-size: 56px; font-weight: 700; line-height: 1; color: var(--ember); }
-  .steps p { color: #C9CED8; }
+  /* Prices */
+  .prices { background: linear-gradient(180deg, transparent, rgba(24,25,30,.7) 20%, rgba(24,25,30,.7) 80%, transparent); }
+  .rates { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .rate { padding: 30px 26px; border-radius: 18px; background: var(--iron); box-shadow: 0 0 0 1px var(--line) inset; display: flex; flex-direction: column; gap: 12px; }
+  .rate .price { font: 800 clamp(38px, 4.4vw, 52px)/1 var(--display); color: var(--paper); letter-spacing: -0.03em; white-space: nowrap; }
+  .rate .from { font: 500 15px/1 var(--body); color: var(--soft); letter-spacing: 0; }
+  .rate p { color: var(--soft); font-size: 16px; }
+  .rate .when { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--line); color: var(--paper); font-weight: 500; font-size: 15px; white-space: nowrap; }
+  .founding { margin-top: 16px; position: relative; border-radius: 18px; padding: 26px 28px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 28px;
+    background: linear-gradient(100deg, rgba(200,16,46,.32), rgba(232,116,44,.1) 60%, rgba(232,116,44,.22)); box-shadow: 0 0 0 1px rgba(232,116,44,.6) inset, 0 0 50px -16px rgba(200,16,46,.8); }
+  .founding h3 { font-weight: 700; font-size: 22px; }
+  .founding p { color: var(--paper); max-width: 52ch; }
+  .founding .price-tag { font: 800 40px/1 var(--display); color: var(--white-hot); text-shadow: 0 0 22px rgba(232,116,44,.8); white-space: nowrap; }
+  .care { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 16px; }
+  .care-plan { padding: 26px; border-radius: 18px; box-shadow: 0 0 0 1px var(--line) inset; display: grid; gap: 10px; }
+  .care-price { font: 700 30px/1 var(--display); color: var(--paper); letter-spacing: -0.02em; }
+  .care-price span { font: 500 15px var(--body); color: var(--soft); letter-spacing: 0; }
+  .care-plan p:last-child { color: var(--soft); font-size: 16px; }
+  .pay-note { margin-top: 26px; color: var(--soft); max-width: 70ch; }
+
+  /* How a job runs */
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; position: relative; counter-reset: step; }
+  .steps::before, .steps::after { content: ""; position: absolute; top: 27px; left: 28px; right: calc((100% - 72px) / 4 - 28px); height: 2px; background: var(--line); }
+  .steps::after { background: linear-gradient(90deg, var(--red), var(--molten) 60%, var(--hot)); box-shadow: 0 0 14px rgba(232,116,44,.8); transform-origin: left; transform: scaleX(0); transition: transform 1.6s cubic-bezier(.5,0,.2,1); }
+  .steps.lit::after { transform: scaleX(1); }
+  .step { position: relative; counter-increment: step; }
+  .step::before { content: counter(step); display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; margin-bottom: 22px; position: relative; z-index: 1;
+    background: var(--iron); color: var(--paper); font: 700 20px/1 var(--display); box-shadow: 0 0 0 2px var(--steel-2) inset; transition: background-color .4s ease, color .4s ease, box-shadow .4s ease; }
+  .steps.lit .step::before { background: var(--molten); color: #1A1209; box-shadow: 0 0 0 2px var(--hot) inset, 0 0 26px rgba(232,116,44,.7); }
+  .steps.lit .step:nth-child(2)::before { transition-delay: .4s; }
+  .steps.lit .step:nth-child(3)::before { transition-delay: .8s; }
+  .steps.lit .step:nth-child(4)::before { transition-delay: 1.2s; }
+  .step p { margin-top: 10px; color: var(--soft); font-size: 16px; }
 
   /* About */
-  .about { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 64px; align-items: start; }
-  .about .lead { margin-top: 24px; }
-  .about-points { display: grid; gap: 16px; margin-top: 28px; }
-  .name-plate { background: var(--iron); color: var(--paper); border-radius: 10px; padding: 36px; display: grid; gap: 20px; }
-  .name-plate dt { font-family: var(--display); text-transform: uppercase; font-size: 30px; font-weight: 600; color: var(--ember); line-height: 1.1; }
-  .name-plate dd { margin: 4px 0 0; color: #C9CED8; }
+  .about { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: clamp(36px, 6vw, 80px); align-items: center; }
+  .about .lead { color: var(--paper); margin-top: 20px; }
+  .about-points { display: grid; gap: 14px; margin-top: 18px; }
+  .about-points p { color: var(--soft); max-width: 58ch; }
+  .plate { position: relative; padding: 40px 36px 36px; border-radius: 16px; background: linear-gradient(145deg, #3A3C44, #24262D 55%, #2E3036); box-shadow: 0 0 0 1px rgba(243,238,228,.16) inset, 0 30px 60px -30px rgba(0,0,0,.9); }
+  .plate::before { content: ""; position: absolute; inset: 0; border-radius: 16px; opacity: .35; pointer-events: none;
+    background: repeating-linear-gradient(90deg, rgba(255,255,255,.04) 0 1px, transparent 1px 3px); }
+  .screw { position: absolute; width: 14px; height: 14px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #9A9DA6, #3A3C44); box-shadow: 0 1px 1px rgba(0,0,0,.5); }
+  .screw::after { content: ""; position: absolute; left: 3px; right: 3px; top: 6px; height: 2px; background: #18191E; transform: rotate(35deg); }
+  .screw.tl { top: 14px; left: 14px; } .screw.tr { top: 14px; right: 14px; } .screw.bl { bottom: 14px; left: 14px; } .screw.br { bottom: 14px; right: 14px; }
+  .plate-mark { width: 96px; height: 96px; margin-bottom: 22px; }
+  .plate dl { margin: 0; display: grid; gap: 18px; }
+  .plate dt { font-family: var(--display); font-weight: 800; font-size: 28px; text-transform: uppercase; letter-spacing: -0.01em; color: var(--paper); line-height: 1; text-shadow: 0 -1px 0 rgba(0,0,0,.6), 0 1px 0 rgba(255,255,255,.12); }
+  .plate dd { margin: 6px 0 0; color: var(--text); }
 
   /* Contact */
-  .contact { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 64px; align-items: start; }
-  .contact .lead { margin-top: 24px; color: #C9CED8; }
-  .contact-direct { margin-top: 28px; font-size: 20px; }
-  .contact-direct a { color: var(--ember); font-weight: 600; }
-  form { display: grid; gap: 18px; }
-  .field { display: grid; gap: 6px; }
-  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-  label { font-weight: 500; }
-  label span { font-weight: 400; color: #C9CED8; }
-  input, textarea { font: inherit; color: var(--iron); background: var(--paper); border: 2px solid transparent; border-radius: 6px; padding: 12px 14px; width: 100%; }
-  input:focus, textarea:focus { border-color: var(--molten); outline: none; }
-  textarea { min-height: 140px; resize: vertical; }
+  .contact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: clamp(36px, 6vw, 72px); align-items: start; }
+  .contact .lead { margin-top: 18px; }
+  .contact-direct { margin-top: 18px; color: var(--soft); }
+  form { padding: clamp(22px, 3vw, 32px); border-radius: 20px; background: var(--iron); box-shadow: 0 0 0 1px var(--line) inset; display: grid; gap: 16px; }
+  .field-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .field { display: grid; gap: 7px; }
+  label { color: var(--paper); font-size: 15px; font-weight: 500; }
+  label span { color: var(--soft); font-weight: 400; }
+  input, textarea { width: 100%; font: 16px/1.4 var(--body); color: var(--paper); background: var(--bg); border: 1px solid var(--steel-2); border-radius: 10px; padding: 12px 14px; min-height: 48px; }
+  textarea { min-height: 130px; resize: vertical; }
+  input:focus, textarea:focus { outline: none; border-color: var(--molten); box-shadow: 0 0 0 3px rgba(232,116,44,.3); }
   .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
-  .form-status { min-height: 28px; font-weight: 500; }
-  .form-status.ok { color: #9FD3AE; }
-  .form-status.err { color: var(--ember); }
-  .privacy { font-size: 15px; color: #C9CED8; }
+  .form-status { min-height: 1.5em; font-size: 15px; }
+  .form-status.ok { color: #8FD9A8; }
+  .form-status.err { color: #FF9C8A; }
+  .privacy { font-size: 14px; color: var(--soft); }
 
   /* Footer */
-  .site-foot { background: #141925; color: #C9CED8; padding-block: 36px; font-size: 16px; }
+  .site-foot { border-top: 2px solid var(--red); padding-block: 34px; font-size: 15px; color: var(--soft); }
   .site-foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 32px; }
   .site-foot a { color: var(--paper); }
 
-  @media (max-width: 900px) {
+  @media (max-width: 960px) {
     .site-nav a:not(.btn) { display: none; }
-    .hero .wrap, .about, .contact { grid-template-columns: 1fr; }
-    .hero-art { max-width: 460px; margin-inline: auto; }
-    .ba { grid-template-columns: 1fr; }
-    .ba-arrow { transform: rotate(90deg); margin-inline: auto; }
-    .parts, .care { grid-template-columns: 1fr; }
-    .parts li:nth-child(2) { border-top-color: var(--rule); }
-    .steps { grid-template-columns: 1fr 1fr; }
-    .board { padding: 32px 24px; }
+    .tools, .rates { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .rates .rate:last-child { grid-column: 1 / -1; }
+    .about, .contact, .hero-grid { grid-template-columns: 1fr; }
+    .hero-art { display: none; }
+    .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 36px; }
+    .steps::before, .steps::after { display: none; }
   }
-  @media (max-width: 560px) {
-    section.band { padding-block: 64px; }
-    .mark { gap: 8px; }
-    .mark svg { width: 40px; height: 29px; }
-    .mark-word { font-size: 19px; white-space: nowrap; }
-    .site-nav .btn { white-space: nowrap; padding: 10px 14px; font-size: 15px; }
-    .steps, .field-row { grid-template-columns: 1fr; }
-    .rate { grid-template-columns: 1fr; }
-    .rate-price { text-align: left; }
+  @media (max-width: 640px) {
+    .site-head .wrap { min-height: 62px; }
+    .hero { min-height: auto; }
+    .mark svg { width: 34px; height: 34px; }
+    .mark-word { font-size: 17px; }
+    .site-nav .btn { min-height: 40px; padding: 0 14px; font-size: 14px; }
+    .tools, .rates, .care, .field-row { grid-template-columns: 1fr; }
+    .tools { gap: 12px; }
+    .tool { display: grid; grid-template-columns: 40px minmax(0, 1fr); column-gap: 16px; padding: 20px 18px; }
+    .tool svg { width: 36px; height: 36px; margin: 0; grid-row: span 2; }
+    .tool p { margin-top: 4px; }
+    .steps { grid-template-columns: 1fr; gap: 0; }
+    .step { padding-left: 76px; padding-bottom: 30px; }
+    .step::before { position: absolute; left: 0; top: 0; }
+    .step:not(:last-child)::after { content: ""; position: absolute; left: 27px; top: 56px; bottom: 0; width: 2px; background: var(--line); }
+    .steps.lit .step:not(:last-child)::after { background: linear-gradient(var(--molten), var(--red)); }
+    .ba { height: 600px; }
+    .sheet { left: 4%; top: 11%; width: 86%; font-size: 12px; transform: rotate(-2deg); }
+    .sheet-grid span:nth-child(4n) { display: none; }
+    .sheet-grid { grid-template-columns: 1.3fr 1fr 1fr; }
+    .chat { right: auto; left: 6%; bottom: 5%; width: 64%; }
+    .note { left: auto; right: 4%; top: 50%; width: 130px; font-size: 15px; }
+    .phone { left: 50%; width: 250px; height: 460px; }
+    .founding { padding: 24px 22px; }
+    .flag-pole { height: 110px; }
+    .flag { width: 115px; height: 69px; }
+    .skyline-note { left: var(--pad); text-align: left; }
+  }
+  @media (max-width: 380px) {
+    .site-nav .btn { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .laser { display: none; }
   }
 </style>
 </head>
 <body>
+<a class="skip" href="#top">Skip to content</a>
 
 <header class="site-head">
   <div class="wrap">
     <a class="mark" href="#top" aria-label="Bostin Jig home">
-      <svg width="52" height="38" viewBox="5 21 94 68" aria-hidden="true">
-        <g transform="translate(0 4)">
-          <path d="M60 46 C72 45 84 45 94 48 C98 49 97 54 93 54 C82 54 70 53 58 52 Z" fill="#E8742C"/>
-          <path d="M10 55 C8 43 14 32 28 28 C44 23 66 22 78 26 C88 29 92 37 88 45 C76 48 62 50 48 51 C34 52 20 54 10 55 Z" fill="#E8742C"/>
-          <path d="M60 49.6 C70 48.4 80 47.4 88 45" fill="none" stroke="#1C2230" stroke-width="2.6" stroke-linecap="round"/>
-          <circle cx="46" cy="64" r="5.5" fill="#F6F1E7"/>
-          <path d="M59 66 Q65 58.5 71 66" fill="none" stroke="#F6F1E7" stroke-width="5.5" stroke-linecap="round"/>
-          <path d="M42 76 Q56 84 72 73" fill="none" stroke="#F6F1E7" stroke-width="5.5" stroke-linecap="round"/>
-        </g>
-      </svg>
+      <svg viewBox="0 0 100 100" width="40" height="40" aria-hidden="true">
+  <defs>
+    <radialGradient id="sky-h" cx="50" cy="80" r="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFD9A8"/>
+      <stop offset="0.3" stop-color="#FF8A3D"/>
+      <stop offset="0.62" stop-color="#E0402A"/>
+      <stop offset="1" stop-color="#9E0C22"/>
+    </radialGradient>
+    <clipPath id="disc-h"><circle cx="50" cy="50" r="48"/></clipPath>
+  </defs>
+  <circle cx="50" cy="50" r="48" fill="url(#sky-h)"/>
+  <g clip-path="url(#disc-h)" fill="#111216">
+    <rect x="0" y="76" width="100" height="24"/>
+    <path d="M14 77 V54 a5 5 0 0 1 10 0 V77 Z M26 77 V50 a5 5 0 0 1 10 0 V77 Z"/>
+    <path d="M37 77 L43 40 H57 L63 77 Z"/>
+    <rect x="44" y="29" width="12" height="12"/>
+    <rect x="42" y="20" width="16" height="6"/>
+    <rect x="45" y="20" width="4" height="10"/><rect x="51" y="20" width="4" height="10"/>
+    <path d="M67 66 V52 a6 3 0 0 1 12 0 V66 L73 72 Z"/>
+  </g>
+  <path d="M57 23 C68 23 73 34 73 50" fill="none" stroke="#111216" stroke-width="6" clip-path="url(#disc-h)"/>
+</svg>
       <span class="mark-word">Bostin Jig</span>
     </a>
     <nav class="site-nav" aria-label="Main">
-      <a href="#build">What we build</a>
-      <a href="#prices">Prices</a>
-      <a href="#how">How it works</a>
-      <a class="btn btn-molten" href="#contact">Book a free call</a>
+      <a href="#build" data-bc="What we mek">What we build</a>
+      <a href="#prices" data-bc="Ow much?">Prices</a>
+      <a href="#how" data-bc="How it werks">How it works</a>
+      <a href="#about" data-bc="Who's this?">About</a>
+      <a class="btn btn-molten" href="#contact" data-bc="Gizza bell">Book a free call</a>
     </nav>
   </div>
 </header>
 
 <main id="top">
-  <section class="hero">
-    <div class="wrap">
+  <section class="hero" id="hero" aria-labelledby="hero-title">
+    <canvas id="sparks" aria-hidden="true"></canvas>
+    <div class="wrap hero-grid">
       <div>
-        <h1>Brilliant tools, made to fit your business.</h1>
-        <p class="lead">We replace the spreadsheets, paper forms and WhatsApp threads your team juggles with one simple app, built around how you already work. Fixed price, live in weeks.</p>
-        <div class="hero-actions">
-          <a class="btn btn-molten" href="#contact">Book a free 30-minute call</a>
-          <a class="btn btn-ghost" href="#prices">See prices</a>
-        </div>
-        <p class="hero-note"><b>Bostin</b> is Black Country for brilliant. A <b>jig</b> is a tool made to do one job perfectly, every time.</p>
+      <h1 class="cut" id="hero-title"><span class="cut-text" data-bc="Bostin tools, made to fit yer business.">Brilliant tools, made to fit your business.</span><span class="laser" aria-hidden="true"></span></h1>
+      <p class="lead" data-bc="Bin the spreadsheets, paper forms and WhatsApp threads yer lot am juggling. One simple app, built round how yow already werk. Fixed price, live in weeks.">We replace the spreadsheets, paper forms and WhatsApp threads your team juggles with one simple app, built around how you already work. Fixed price, live in weeks.</p>
+      <div class="hero-actions">
+        <a class="btn btn-molten" href="#contact" data-bc="Gizza bell, it's free">Book a free 30-minute call</a>
+        <a class="btn btn-ghost" href="#prices" data-bc="Ow much?">See prices</a>
       </div>
-      <svg class="hero-art" width="720" height="585" viewBox="0 0 720 585" role="img" aria-label="A glowing piece of metal on an anvil, throwing off sparks">
-        <ellipse cx="380" cy="508" rx="250" ry="12" fill="#12161F"/>
-        <path d="M60 210 Q150 212 230 188 L640 188 L640 262 L540 262 Q492 272 482 318 L482 400 L572 452 L572 500 L188 500 L188 452 L278 400 L278 318 Q268 272 220 262 L170 262 Q110 256 60 210 Z" fill="#3A4458"/>
-        <rect x="230" y="188" width="410" height="12" fill="#4B566D"/>
-        <ellipse class="glow" cx="455" cy="168" rx="120" ry="44" fill="#E8742C" opacity="0.18"/>
-        <rect x="380" y="160" width="150" height="28" rx="6" fill="#E8742C"/>
-        <g stroke="#F0965A" stroke-width="8" stroke-linecap="round">
-          <line class="spark" x1="440" y1="140" x2="390" y2="80"/>
-          <line class="spark" x1="450" y1="135" x2="432" y2="50"/>
-          <line class="spark" x1="465" y1="135" x2="495" y2="45"/>
-          <line class="spark" x1="480" y1="140" x2="560" y2="75"/>
-          <line class="spark" x1="490" y1="150" x2="600" y2="125"/>
-        </g>
-        <g fill="#F3C29B">
-          <circle class="spark" cx="360" cy="60" r="7"/>
-          <circle class="spark" cx="420" cy="22" r="6"/>
-          <circle class="spark" cx="515" cy="18" r="7"/>
-          <circle class="spark" cx="590" cy="52" r="6"/>
-          <circle class="spark" cx="632" cy="110" r="7"/>
-        </g>
-      </svg>
+      <button class="bc-toggle" id="bc-toggle" type="button" aria-pressed="false"><span class="bc-switch" aria-hidden="true"></span><span>Talk Black Country</span></button>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="forge-glow"></div>
+        <svg viewBox="0 0 100 100" id="emblem">
+  <defs>
+    <radialGradient id="sky-hero" cx="50" cy="82" r="62" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFE0B8"/>
+      <stop offset="0.22" stop-color="#FF9A4A"/>
+      <stop offset="0.5" stop-color="#E8742C"/>
+      <stop offset="0.78" stop-color="#C8102E"/>
+      <stop offset="1" stop-color="#7E0A1C"/>
+    </radialGradient>
+    <clipPath id="disc-hero"><circle cx="50" cy="50" r="46"/></clipPath>
+  </defs>
+  <circle cx="50" cy="50" r="46" fill="url(#sky-hero)"/>
+  <g clip-path="url(#disc-hero)" fill="#111216">
+    <rect x="0" y="80" width="100" height="20"/>
+    <rect x="16.5" y="34" width="3" height="47"/>
+    <path d="M21.5 81 V58 a3 3 0 0 1 6 0 V81 Z M28.5 81 V55 a3 3 0 0 1 6 0 V81 Z M35.5 81 V58 a3 3 0 0 1 6 0 V81 Z"/>
+    <rect x="21" y="64" width="25" height="2"/>
+    <path d="M42 81 V74 H43.5 L46.5 47 H55.5 L58.5 74 H60 V81 Z"/>
+    <rect x="45" y="43.5" width="12" height="4"/>
+    <rect x="47.3" y="35" width="7.4" height="9"/>
+    <rect x="47.6" y="26" width="2" height="10"/><rect x="52.4" y="26" width="2" height="10"/>
+    <rect x="46" y="24.5" width="10" height="2.6"/>
+    <rect x="46.6" y="18" width="1.4" height="7"/><rect x="54" y="18" width="1.4" height="7"/>
+    <path d="M66 70 V56 a4.2 2.4 0 0 1 8.4 0 V70 L70.2 74.5 Z"/>
+    <rect x="69.2" y="74" width="2" height="7"/>
+  </g>
+  <g clip-path="url(#disc-hero)" fill="none" stroke="#111216" stroke-linecap="butt">
+    <path d="M55.5 25.8 C64.5 25.8 69.4 36 70.2 54" stroke-width="3"/>
+    <path d="M41 81 V42 M61 81 V42 M41 42 H61" stroke-width="1.2"/>
+    <path d="M57 45 L88 81" stroke-width="2.4"/>
+    <path d="M60 44 L91 80" stroke-width="1.2"/>
+    <path d="M66 56 V81 M76 67.5 V81" stroke-width="1.4"/>
+  </g>
+</svg>
+      </div>
     </div>
+  </section>
+
+  <section class="bc-band" aria-labelledby="bc-title">
+    <div class="wrap"><div class="bc-copy">
+      <div class="bc-title">
+        <div class="flag-wrap" aria-hidden="true"><span class="flag-pole"></span><span class="flag" id="flag"></span></div>
+        <h2 id="bc-title" data-bc="Black Country born an' bred">Made in the Black Country</h2>
+      </div>
+      <p class="lead">Bostin Jig is built in Bilston, where Elisabeth, the blast furnace locals called Big Lizzy, lit up the sky until 1977. Black by day, red by night. Same graft, new tools.</p>
+    </div></div>
+    <svg class="skyline" viewBox="0 0 1200 320" preserveAspectRatio="xMidYMax slice" role="img" aria-label="Silhouette of the Bilston skyline with the Elisabeth blast furnace against a red sky">
+      <defs><filter id="glow-blur" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="14"/></filter><filter id="smoke-blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter></defs>
+      <ellipse class="furnace-glow" cx="632" cy="96" rx="70" ry="40"/>
+      <g filter="url(#smoke-blur)">
+        <circle class="smoke" cx="612" cy="24" r="16"/><circle class="smoke s2" cx="612" cy="24" r="16"/><circle class="smoke s3" cx="612" cy="24" r="16"/>
+        <circle class="smoke" cx="461" cy="54" r="12"/><circle class="smoke s3" cx="461" cy="54" r="12"/>
+      </g>
+      <circle class="ember" cx="630" cy="70" r="2"/><circle class="ember e2" cx="638" cy="66" r="1.6"/><circle class="ember e3" cx="624" cy="72" r="1.8"/><circle class="ember e4" cx="644" cy="70" r="1.4"/>
+      <g class="ink">
+        <rect x="0" y="292" width="1200" height="28"/>
+        <!-- terraces, left -->
+        <path d="M0 292 V236 L22 220 L44 236 V292 Z M44 292 V232 L68 214 L92 232 V292 Z M92 292 V238 L114 222 L136 238 V292 Z M136 292 V230 L160 212 L184 230 V292 Z M184 292 V236 L206 220 L228 236 V292 Z M228 292 V232 L252 214 L276 232 V292 Z M276 292 V240 L298 224 L320 240 V292 Z"/>
+        <path d="M30 222 h6 v-14 h-6 Z M76 216 h6 v-16 h-6 Z M120 224 h6 v-14 h-6 Z M168 214 h6 v-16 h-6 Z M212 222 h6 v-14 h-6 Z M260 216 h6 v-16 h-6 Z M304 226 h6 v-14 h-6 Z"/>
+        <!-- works sheds -->
+        <path d="M320 292 V250 L350 232 V250 L380 232 V250 L410 232 V250 L440 232 V292 Z"/>
+        <!-- stove chimney -->
+        <rect x="455" y="58" width="12" height="234"/>
+        <!-- hot blast stoves -->
+        <path d="M472 292 V136 A14 14 0 0 1 500 136 V292 Z M506 292 V128 A14 14 0 0 1 534 128 V292 Z M540 292 V136 A14 14 0 0 1 568 136 V292 Z"/>
+        <rect x="466" y="176" width="170" height="8"/>
+        <!-- Elisabeth: furnace body -->
+        <path d="M588 292 V222 H596 L612 112 H652 L668 222 H676 V292 Z"/>
+        <rect x="600" y="100" width="64" height="14"/>
+        <rect x="614" y="70" width="36" height="30"/>
+        <!-- uptakes and bleeders -->
+        <rect x="616" y="40" width="7" height="32"/><rect x="641" y="40" width="7" height="32"/>
+        <rect x="608" y="36" width="48" height="8"/>
+        <rect x="609" y="14" width="5" height="24"/><rect x="650" y="14" width="5" height="24"/>
+        <!-- dust catcher -->
+        <path d="M708 238 V172 A18 10 0 0 1 744 172 V238 L726 258 Z"/>
+        <rect x="712" y="256" width="5" height="36"/><rect x="735" y="256" width="5" height="36"/>
+        <!-- workshop and cast house -->
+        <path d="M676 292 V246 H760 V292 Z"/>
+        <!-- right terraces and stack -->
+        <rect x="1004" y="120" width="14" height="172"/>
+        <path d="M900 292 V238 L922 222 L944 238 V292 Z M944 292 V232 L968 214 L992 232 V292 Z M992 292 V240 L1014 224 L1036 240 V292 Z M1036 292 V234 L1060 216 L1084 234 V292 Z M1084 292 V238 L1106 222 L1128 238 V292 Z M1128 292 V232 L1152 214 L1176 232 V292 Z M1176 292 V238 L1200 222 V292 Z"/>
+        <path d="M928 224 h6 v-14 h-6 Z M976 216 h6 v-16 h-6 Z M1020 226 h6 v-14 h-6 Z M1068 218 h6 v-16 h-6 Z M1112 224 h6 v-14 h-6 Z M1160 216 h6 v-16 h-6 Z"/>
+      </g>
+      <g class="rig">
+        <!-- furnace frame -->
+        <path d="M584 292 V96 M680 292 V96 M584 96 H680 M584 140 L680 196 M680 140 L584 196 M584 196 L680 252 M680 196 L584 252" stroke-width="3"/>
+        <!-- downcomer -->
+        <path d="M652 40 C700 40 716 90 726 164" stroke-width="10"/>
+        <!-- skip incline -->
+        <path d="M652 92 L880 292 M666 82 L894 282" stroke-width="5"/>
+        <path d="M700 134 L716 124 M740 169 L756 159 M780 204 L796 194 M820 239 L836 229 M860 274 L876 264" stroke-width="3"/>
+        <path d="M748 176 V292 M806 227 V292 M852 267 V292" stroke-width="4"/>
+        <!-- gas main from dust catcher to stoves -->
+        <path d="M708 200 H636" stroke-width="7"/>
+      </g>
+    </svg>
+    <p class="skyline-note">Skyline inspired by Elisabeth, Bilston Steel Works, 1954 to 1980.</p>
   </section>
 
   <section class="band" aria-labelledby="familiar">
     <div class="wrap">
       <div class="section-head">
-        <h2 id="familiar">Sound familiar?</h2>
+        <h2 id="familiar" data-bc="Sound familiar, ay it?">Sound familiar?</h2>
+        <p class="lead" data-bc="Gi' the handle a shove and see the difference.">Drag the handle to see the difference one simple app makes.</p>
       </div>
-      <div class="ba">
-        <div class="ba-side">
-          <h3>Now</h3>
-          <p class="muted">Orders taken over the phone and written on scraps of paper. Stock levels in a spreadsheet nobody trusts. Jobs chased in a WhatsApp group until someone loses track.</p>
+      <div class="ba" id="ba">
+        <div class="ba-layer ba-before" aria-hidden="true">
+          <span class="ba-tag">Now</span>
+          <div class="sheet">
+            <div class="sheet-title">Jobs_FINAL_v3_REAL.xlsx</div>
+            <div class="sheet-grid">
+              <span class="h">Job</span><span class="h">Who</span><span class="h">Status</span><span class="h">Paid?</span>
+              <span>14 Cross St</span><span>Dave?</span><span>???</span><span class="bad">#REF!</span>
+              <span>Unit 4 fit-out</span><span></span><span>chase quote</span><span>no</span>
+              <span>Van 2 check</span><span>Sam</span><span class="bad">#N/A</span><span></span>
+              <span>Mrs Patel boiler</span><span>see WhatsApp</span><span>done??</span><span>?</span>
+              <span>New enquiry</span><span></span><span>lost email</span><span class="bad">#VALUE!</span>
+            </div>
+          </div>
+          <div class="note">Ring Dave about the quote!!</div>
+          <div class="chat">
+            <div class="chat-head">Lads (work)</div>
+            <div class="bubble">Who's got the van keys??<small>07:42</small></div>
+            <div class="bubble">Which job am I on today?<small>07:58</small></div>
+            <div class="bubble me">Check the spreadsheet<small>08:03</small></div>
+            <div class="bubble">Which one?!<small>08:04</small></div>
+          </div>
         </div>
-        <svg class="ba-arrow" width="72" height="40" viewBox="0 0 72 40" aria-hidden="true">
-          <path d="M4 20 L56 20 M44 6 L64 20 L44 34" stroke="#E8742C" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <div class="ba-side">
-          <h3>With Bostin Jig</h3>
-          <p class="muted">One app on every phone, tablet and PC. Everyone sees the same, up-to-date picture, and nothing gets lost between shifts.</p>
+        <div class="ba-layer ba-after" aria-hidden="true">
+          <span class="ba-tag">With Bostin Jig</span>
+          <div class="phone">
+            <div class="screen">
+              <div class="app-top"><b>Today</b><span>4 jobs</span></div>
+              <div class="jobs">
+                <div class="job"><p>Boiler service<small>14 Cross St · Dave</small></p><span class="chip live">On site</span></div>
+                <div class="job"><p>Unit 4 fit-out<small>Quote ready</small></p><span class="chip send">Send</span></div>
+                <div class="job"><p>Van 2 check<small>Sam · 07:30</small></p><span class="chip done">Done</span></div>
+                <div class="job"><p>New enquiry<small>From the website</small></p><span class="chip new">New</span></div>
+              </div>
+              <div class="app-cta">+ New job</div>
+            </div>
+          </div>
         </div>
+        <div class="ba-handle"><div class="ba-knob"><svg width="26" height="18" viewBox="0 0 26 18" aria-hidden="true"><path d="M8 2 L2 9 L8 16 M18 2 L24 9 L18 16" fill="none" stroke="#1A1209" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+        <input class="ba-range" id="ba-range" type="range" min="0" max="100" value="50" aria-label="Compare the old way with the app: left shows the old way, right shows the app">
       </div>
+      <p class="ba-hint">Sample data, made up to show the idea.</p>
     </div>
   </section>
 
-  <section class="band band-alt" id="build" aria-labelledby="build-title">
+  <section class="band" id="build" aria-labelledby="build-title">
     <div class="wrap">
       <div class="section-head">
-        <h2 id="build-title">What we build</h2>
-        <p class="lead muted measure">Small, focused tools that take one headache away. Each one has already been built and used for real.</p>
+        <h2 id="build-title" data-bc="What we mek">What we build</h2>
+        <p class="lead" data-bc="Little tools that each sort out one headache.">Small, focused tools that each take one headache away.</p>
       </div>
-      <ul class="parts">
-        <li>
-          <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" aria-hidden="true"><path d="M6 14 L22 6 L38 14 L38 32 L22 40 L6 32 Z M6 14 L22 22 L38 14 M22 22 L22 40"/></svg>
-          <div><h3>Ordering and picking</h3><p>Orders go in once, get picked and sent, and everyone can see where each one is up to.</p></div>
-        </li>
-        <li>
-          <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 6 L6 40 M38 6 L38 40 M6 16 L38 16 M6 28 L38 28 M12 16 L12 10 L20 10 L20 16 M24 28 L24 21 L32 21 L32 28 M10 40 L34 40"/></svg>
-          <div><h3>Stock and van checks</h3><p>Know what’s on the shelf and in every van, without the end-of-month count.</p></div>
-        </li>
-        <li>
+      <div class="tools">
+        <article class="tool">
+          <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="8" width="26" height="32" rx="3"/><path d="M16 8 L16 5 L28 5 L28 8 M16 25 L20 29 L28 20"/></svg>
+          <h3>Job sheets</h3><p>Jobs booked, done and signed off on a phone, with photos, instead of carbon copies in the van.</p>
+        </article>
+        <article class="tool">
+          <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><rect x="6" y="9" width="32" height="29" rx="3"/><path d="M6 17 L38 17 M14 5 L14 12 M30 5 L30 12 M13 25 L15 25 M21 25 L23 25 M29 25 L31 25 M13 31 L15 31 M21 31 L23 31"/></svg>
+          <h3>Bookings and enquiries</h3><p>Every enquiry and booking lands in one place, not scattered across texts, calls and emails.</p>
+        </article>
+        <article class="tool">
+          <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 12 L10 15 L16 9 M22 12 L38 12 M7 24 L10 27 L16 21 M22 24 L38 24 M7 36 L10 39 L16 33 M22 36 L38 36"/></svg>
+          <h3>Checks and inspections</h3><p>Daily checks, audits and safety forms filled in on a phone and filed automatically.</p>
+        </article>
+        <article class="tool">
           <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><rect x="8" y="6" width="28" height="34" rx="4"/><circle cx="22" cy="18" r="5"/><path d="M14 33 Q22 24 30 33"/></svg>
-          <div><h3>Visitor sign-in</h3><p>A tablet at reception replaces the paper book, so you know exactly who’s on site in an emergency.</p></div>
-        </li>
-        <li>
-          <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M28 6 A9 9 0 0 0 20 18 L6 32 A4 4 0 0 0 12 38 L26 24 A9 9 0 0 0 38 16 L32 20 L26 18 L24 12 Z"/></svg>
-          <div><h3>Tool and kit tracking</h3><p>Scan a label to take or return kit. No more “who’s got the…?”</p></div>
-        </li>
-        <li>
+          <h3>Customer records</h3><p>Every customer, job and conversation in one place, so nothing lives only in someone’s head.</p>
+        </article>
+        <article class="tool">
           <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><rect x="9" y="5" width="26" height="34" rx="4"/><path d="M14 12 L30 12 M15 21 L17 21 M21 21 L23 21 M27 21 L29 21 M15 27 L17 27 M21 27 L23 27 M27 27 L29 27 M15 33 L17 33 M21 33 L29 33"/></svg>
-          <div><h3>Quote calculators</h3><p>Your pricing rules built in, so anyone can produce the right quote in a minute.</p></div>
-        </li>
-        <li>
+          <h3>Quote builders</h3><p>Your pricing rules built in, so anyone can produce the right quote in a minute.</p>
+        </article>
+        <article class="tool">
           <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 38 L38 38 M12 32 L12 22 M20 32 L20 12 M28 32 L28 18 M36 32 L36 8"/></svg>
-          <div><h3>Live dashboards</h3><p>The numbers you chase every month, up to date on one screen.</p></div>
-        </li>
-      </ul>
-      <p class="parts-foot">Something else? If it lives in a spreadsheet or on paper, we can probably build it.</p>
+          <h3>Live dashboards</h3><p>The numbers you chase every month, up to date on one screen.</p>
+        </article>
+      </div>
+      <p class="tools-foot" data-bc="Summat else? If it lives in a spreadsheet or on paper, we can probably mek it.">Something else? If it lives in a spreadsheet or on paper, we can probably build it.</p>
     </div>
   </section>
 
-  <section class="band" id="prices" aria-labelledby="prices-title">
+  <section class="band prices" id="prices" aria-labelledby="prices-title">
     <div class="wrap">
       <div class="section-head">
-        <h2 id="prices-title">Fixed prices, agreed up front</h2>
-        <p class="lead muted measure">You know exactly what you’re getting and what it costs before any work starts. Agencies typically charge £8,000 or more for the same kind of tool.</p>
+        <h2 id="prices-title" data-bc="Fixed prices. No messin'.">Fixed prices, agreed up front</h2>
+        <p class="lead">You know exactly what you’re getting and what it costs before any work starts. Agencies typically charge £8,000 or more for the same kind of tool.</p>
       </div>
-      <div class="board">
-        <div class="rate">
-          <h3 class="rate-name">Starter</h3>
-          <p class="rate-price">£2,500</p>
-          <p class="rate-desc">One tool replacing one spreadsheet or paper process, on phone, tablet and PC. <span class="rate-time">Ready in 3–4 weeks.</span></p>
-        </div>
-        <div class="rate">
-          <h3 class="rate-name">Standard</h3>
-          <p class="rate-price">£5,000</p>
-          <p class="rate-desc">Two or three linked tools plus a live dashboard. <span class="rate-time">Ready in 6–8 weeks.</span></p>
-        </div>
-        <div class="rate">
-          <h3 class="rate-name">Plus</h3>
-          <p class="rate-price">From £8,000</p>
-          <p class="rate-desc">A phone app in the App Store and Google Play, or links to your other systems. <span class="rate-time">Ready in 8–12 weeks.</span></p>
-        </div>
-        <div class="stamp">
-          <strong>Founding offer</strong>
-          <p>Our first three clients get a Starter build for £1,750, in return for a testimonial.</p>
-        </div>
+      <div class="rates">
+        <article class="rate">
+          <h3>Starter</h3>
+          <p class="price">£2,500</p>
+          <p>One tool replacing one spreadsheet or paper process, on phone, tablet and PC.</p>
+          <p class="when">Ready in 3–4 weeks</p>
+        </article>
+        <article class="rate">
+          <h3>Standard</h3>
+          <p class="price">£5,000</p>
+          <p>Two or three linked tools plus a live dashboard.</p>
+          <p class="when">Ready in 6–8 weeks</p>
+        </article>
+        <article class="rate">
+          <h3>Plus</h3>
+          <p class="price"><span class="from">From </span>£8,000</p>
+          <p>A phone app in the App Store and Google Play, or links to your other systems.</p>
+          <p class="when">Ready in 8–12 weeks</p>
+        </article>
       </div>
-
+      <div class="founding">
+        <div>
+          <h3>Founding offer</h3>
+          <p>Our first three clients get a Starter build at a founding price, in return for a testimonial.</p>
+        </div>
+        <p class="price-tag">£1,750</p>
+      </div>
       <div class="care">
         <div class="care-plan">
           <h3>Essential care</h3>
           <p class="care-price">£75 <span>a month</span></p>
-          <p class="muted">We keep it running: monitoring, backup checks, fixes and security updates. Replies within 2 working days.</p>
+          <p>We keep it running: monitoring, backup checks, fixes and security updates. Replies within 2 working days.</p>
         </div>
         <div class="care-plan">
           <h3>Plus care</h3>
           <p class="care-price">£195 <span>a month</span></p>
-          <p class="muted">Everything in Essential, plus up to 3 hours of changes every month. Replies the next working day.</p>
+          <p>Everything in Essential, plus up to 3 hours of changes every month. Replies the next working day.</p>
         </div>
       </div>
-      <p class="pay-note muted measure">Half up front, half on handover. Your app runs on your own account, so your data always stays yours.</p>
+      <p class="pay-note">Half up front, half on handover. Your app runs on your own account, so your data always stays yours.</p>
     </div>
   </section>
 
-  <section class="band band-dark" id="how" aria-labelledby="how-title">
+  <section class="band" id="how" aria-labelledby="how-title">
     <div class="wrap">
       <div class="section-head">
-        <h2 id="how-title">How a job runs</h2>
+        <h2 id="how-title" data-bc="How it werks">How a job runs</h2>
       </div>
-      <ol class="steps">
-        <li><h3>A free 30-minute call</h3><p>Show us the spreadsheet or paper form on a screen share. No site visit needed.</p></li>
-        <li><h3>A fixed quote in 3 days</h3><p>Exactly what you get, what it costs and when it’ll be ready.</p></li>
-        <li><h3>Built in weeks</h3><p>A link to the work in progress every week, so there are no surprises.</p></li>
-        <li><h3>Handed over, working</h3><p>Live on your account with a short how-to video, plus a care plan if you want one.</p></li>
+      <ol class="steps" id="steps">
+        <li class="step"><h3>A free 30-minute call</h3><p>Show us the spreadsheet or paper form on a screen share. No site visit needed.</p></li>
+        <li class="step"><h3>A fixed quote in 3 days</h3><p>Exactly what you get, what it costs and when it’ll be ready.</p></li>
+        <li class="step"><h3>Built in weeks</h3><p>A link to the work in progress every week, so there are no surprises.</p></li>
+        <li class="step"><h3>Handed over, working</h3><p>Live on your account with a short how-to video, plus a care plan if you want one.</p></li>
       </ol>
     </div>
   </section>
 
-  <section class="band band-alt" aria-labelledby="about-title">
+  <section class="band" id="about" aria-labelledby="about-title">
     <div class="wrap about">
       <div>
-        <h2 id="about-title">Who’s behind it</h2>
-        <p class="lead">Bostin Jig is James Williams, a self-taught developer from the Black Country.</p>
+        <h2 id="about-title" data-bc="Ow bist?">Who’s behind it</h2>
+        <p class="lead">I’m James Williams, a self-taught developer from the Black Country, and Bostin Jig is me.</p>
         <div class="about-points">
-          <p class="muted measure">James has already built the ordering, stock, sign-in and equipment systems a UK equipment manufacturer’s service operation runs on every day. Your job starts from proven experience, not a blank page.</p>
-          <p class="muted measure">Everything is done remotely, by screen share, email and phone, so you get a fixed price without paying for anyone’s travel.</p>
+          <p>I build every app myself, start to finish. You deal with me, the person doing the work, not a salesperson or a project manager.</p>
+          <p>I work remotely, by screen share, email and phone, so you get a fixed price without paying for anyone’s travel.</p>
         </div>
       </div>
-      <dl class="name-plate">
-        <div><dt>Bostin</dt><dd>Black Country for brilliant.</dd></div>
-        <div><dt>Jig</dt><dd>A made-to-measure tool a workshop builds to do one job perfectly, every time.</dd></div>
-      </dl>
+      <div class="plate">
+        <span class="screw tl"></span><span class="screw tr"></span><span class="screw bl"></span><span class="screw br"></span>
+        <svg viewBox="0 0 100 100" class="plate-mark" role="img" aria-label="Bostin Jig emblem: the Elisabeth blast furnace against a glowing red sky">
+  <defs>
+    <radialGradient id="sky-plate" cx="50" cy="82" r="62" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFE0B8"/>
+      <stop offset="0.22" stop-color="#FF9A4A"/>
+      <stop offset="0.5" stop-color="#E8742C"/>
+      <stop offset="0.78" stop-color="#C8102E"/>
+      <stop offset="1" stop-color="#7E0A1C"/>
+    </radialGradient>
+    <clipPath id="disc-plate"><circle cx="50" cy="50" r="46"/></clipPath>
+  </defs>
+  <circle cx="50" cy="50" r="46" fill="url(#sky-plate)"/>
+  <g clip-path="url(#disc-plate)" fill="#111216">
+    <rect x="0" y="80" width="100" height="20"/>
+    <rect x="16.5" y="34" width="3" height="47"/>
+    <path d="M21.5 81 V58 a3 3 0 0 1 6 0 V81 Z M28.5 81 V55 a3 3 0 0 1 6 0 V81 Z M35.5 81 V58 a3 3 0 0 1 6 0 V81 Z"/>
+    <rect x="21" y="64" width="25" height="2"/>
+    <path d="M42 81 V74 H43.5 L46.5 47 H55.5 L58.5 74 H60 V81 Z"/>
+    <rect x="45" y="43.5" width="12" height="4"/>
+    <rect x="47.3" y="35" width="7.4" height="9"/>
+    <rect x="47.6" y="26" width="2" height="10"/><rect x="52.4" y="26" width="2" height="10"/>
+    <rect x="46" y="24.5" width="10" height="2.6"/>
+    <rect x="46.6" y="18" width="1.4" height="7"/><rect x="54" y="18" width="1.4" height="7"/>
+    <path d="M66 70 V56 a4.2 2.4 0 0 1 8.4 0 V70 L70.2 74.5 Z"/>
+    <rect x="69.2" y="74" width="2" height="7"/>
+  </g>
+  <g clip-path="url(#disc-plate)" fill="none" stroke="#111216" stroke-linecap="butt">
+    <path d="M55.5 25.8 C64.5 25.8 69.4 36 70.2 54" stroke-width="3"/>
+    <path d="M41 81 V42 M61 81 V42 M41 42 H61" stroke-width="1.2"/>
+    <path d="M57 45 L88 81" stroke-width="2.4"/>
+    <path d="M60 44 L91 80" stroke-width="1.2"/>
+    <path d="M66 56 V81 M76 67.5 V81" stroke-width="1.4"/>
+  </g>
+</svg>
+        <dl>
+          <div><dt>Bostin</dt><dd>Black Country for brilliant.</dd></div>
+          <div><dt>Jig</dt><dd>A made-to-measure tool a workshop builds to do one job perfectly, every time.</dd></div>
+        </dl>
+      </div>
     </div>
   </section>
 
-  <section class="band band-dark" id="contact" aria-labelledby="contact-title">
+  <section class="band" id="contact" aria-labelledby="contact-title">
     <div class="wrap contact">
       <div>
-        <h2 id="contact-title">Tell us what’s driving you mad</h2>
-        <p class="lead">Describe the spreadsheet, form or process you want gone. James will reply within 2 working days to book your free 30-minute call.</p>
+        <h2 id="contact-title" data-bc="What's gerrin' on yer nerves?">Tell me what’s driving you mad</h2>
+        <p class="lead">Describe the spreadsheet, form or process you want gone. I’ll reply within 2 working days to book your free 30-minute call.</p>
         <p class="contact-direct">Or email <a href="mailto:james@bostinjig.co.uk">james@bostinjig.co.uk</a></p>
       </div>
       <form id="enquiry" novalidate>
@@ -391,9 +696,9 @@
         </div>
         <div class="field"><label for="message">What do you want to fix?</label><textarea id="message" name="message" required></textarea></div>
         <div class="hp" aria-hidden="true"><label for="website">Leave this empty</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
-        <div><button class="btn btn-molten" type="submit">Send enquiry</button></div>
+        <div><button class="btn btn-molten" type="submit" data-bc="Send it, ar">Send enquiry</button></div>
         <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
-        <p class="privacy">We only use your details to reply to your enquiry.</p>
+        <p class="privacy">I only use your details to reply to your enquiry.</p>
       </form>
     </div>
   </section>
@@ -401,7 +706,7 @@
 
 <footer class="site-foot">
   <div class="wrap">
-    <p>© 2026 Bostin Jig. Brilliant tools, made to fit.</p>
+    <p data-bc="© 2026 Bostin Jig. Tara-a-bit!">© 2026 Bostin Jig. Brilliant tools, made to fit.</p>
     <p><a href="mailto:james@bostinjig.co.uk">james@bostinjig.co.uk</a></p>
   </div>
 </footer>
@@ -443,21 +748,231 @@
       return;
     }
 
+    const label = button.textContent;
     button.disabled = true;
     button.textContent = 'Sending…';
     try {
       await fetch(FORM_ENDPOINT, { method: 'POST', mode: 'no-cors', body: data });
       form.reset();
-      statusEl.textContent = 'Enquiry sent. James will reply by email within 2 working days.';
+      statusEl.textContent = 'Enquiry sent. I’ll reply by email within 2 working days.';
       statusEl.classList.add('ok');
     } catch (err) {
       statusEl.textContent = 'Your enquiry didn’t send. Email james@bostinjig.co.uk instead.';
       statusEl.classList.add('err');
     } finally {
       button.disabled = false;
-      button.textContent = 'Send enquiry';
+      button.textContent = label;
     }
   });
+
+  {
+    const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* Sparks */
+    const hero = document.getElementById('hero');
+    const canvas = document.getElementById('sparks');
+    const ctx = canvas.getContext('2d');
+    const sparks = [];
+    let running = false;
+    let dpr = 1;
+
+    const sizeCanvas = () => {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = hero.clientWidth * dpr;
+      canvas.height = hero.clientHeight * dpr;
+    };
+    sizeCanvas();
+    if ('ResizeObserver' in window) new ResizeObserver(sizeCanvas).observe(hero); else window.addEventListener('resize', sizeCanvas);
+
+    const spawn = (x, y, n, power) => {
+      if (calm) return;
+      for (let i = 0; i < n && sparks.length < 500; i++) {
+        const a = Math.random() * Math.PI * 2;
+        const s = (0.6 + Math.random() * 1.4) * power;
+        sparks.push({ x, y, vx: Math.cos(a) * s, vy: Math.sin(a) * s - power * 0.9, life: 0, max: 30 + Math.random() * 40, hue: 22 + Math.random() * 22 });
+      }
+      if (!running) { running = true; requestAnimationFrame(tick); }
+    };
+
+    const tick = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.globalCompositeOperation = 'lighter';
+      ctx.lineCap = 'round';
+      for (let i = sparks.length - 1; i >= 0; i--) {
+        const p = sparks[i];
+        p.life++;
+        p.vy += 0.14;
+        p.vx *= 0.985;
+        p.vy *= 0.985;
+        p.x += p.vx;
+        p.y += p.vy;
+        const t = 1 - p.life / p.max;
+        if (t <= 0) { sparks.splice(i, 1); continue; }
+        ctx.strokeStyle = `hsla(${p.hue}, 100%, ${55 + t * 35}%, ${t})`;
+        ctx.lineWidth = (1 + t * 1.6) * dpr;
+        ctx.beginPath();
+        ctx.moveTo(p.x * dpr, p.y * dpr);
+        ctx.lineTo((p.x - p.vx * 2.4) * dpr, (p.y - p.vy * 2.4) * dpr);
+        ctx.stroke();
+      }
+      if (sparks.length) requestAnimationFrame(tick);
+      else { running = false; ctx.clearRect(0, 0, canvas.width, canvas.height); }
+    };
+
+    const local = (e) => {
+      const r = hero.getBoundingClientRect();
+      return [e.clientX - r.left, e.clientY - r.top];
+    };
+    let last = [0, 0];
+    hero.addEventListener('pointermove', (e) => {
+      if (e.pointerType !== 'mouse') return;
+      const [x, y] = local(e);
+      if (Math.hypot(x - last[0], y - last[1]) < 14) return;
+      last = [x, y];
+      spawn(x, y, 2, 2.2);
+    });
+    hero.addEventListener('pointerdown', (e) => {
+      const [x, y] = local(e);
+      spawn(x, y, 26, 4.2);
+    });
+
+    /* Laser-cut headline */
+    const cut = document.getElementById('hero-title');
+    const laser = cut.querySelector('.laser');
+    const cutHeadline = () => {
+      if (calm) return;
+      cut.classList.remove('cutting');
+      void cut.offsetWidth;
+      cut.classList.add('cutting');
+      const start = performance.now();
+      const step = (now) => {
+        const lr = laser.getBoundingClientRect();
+        const hr = hero.getBoundingClientRect();
+        const cr = cut.getBoundingClientRect();
+        const x = lr.left + lr.width / 2 - hr.left;
+        for (let i = 0; i < 3; i++) {
+          const y = cr.top - hr.top + Math.random() * cr.height;
+          spawn(x, y, 1, 3);
+        }
+        if (now - start < 1450) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+    let started = false;
+    const startCut = () => { if (started) return; started = true; setTimeout(cutHeadline, 250); };
+    setTimeout(startCut, 2500);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(startCut); else startCut();
+
+    /* Black Country mode */
+    const toggle = document.getElementById('bc-toggle');
+    const swaps = [...document.querySelectorAll('[data-bc]')];
+    swaps.forEach((el) => { el.dataset.std = el.textContent; });
+    const setMode = (on, animate) => {
+      toggle.setAttribute('aria-pressed', String(on));
+      swaps.forEach((el) => {
+        el.textContent = on ? el.dataset.bc : el.dataset.std;
+        if (animate && !calm && el !== cut.querySelector('.cut-text')) {
+          el.classList.remove('swap'); void el.offsetWidth; el.classList.add('swap');
+        }
+      });
+      try { localStorage.setItem('bostin-bc', on ? '1' : '0'); } catch (e) {}
+    };
+    toggle.addEventListener('click', () => {
+      const on = toggle.getAttribute('aria-pressed') !== 'true';
+      setMode(on, true);
+      cutHeadline();
+      const r = toggle.getBoundingClientRect();
+      const hr = hero.getBoundingClientRect();
+      spawn(r.left + 30 - hr.left, r.top + r.height / 2 - hr.top, 30, 4);
+    });
+    try { if (localStorage.getItem('bostin-bc') === '1') setMode(true, false); } catch (e) {}
+
+    /* Before / after slider */
+    const ba = document.getElementById('ba');
+    const range = document.getElementById('ba-range');
+    const setPos = (v) => {
+      const pos = Math.max(0, Math.min(100, v));
+      ba.style.setProperty('--pos', pos + '%');
+      range.value = String(Math.round(pos));
+    };
+    let dragging = false;
+    let moved = false;
+    const fromEvent = (e) => {
+      const r = ba.getBoundingClientRect();
+      setPos(((e.clientX - r.left) / r.width) * 100);
+    };
+    ba.addEventListener('pointerdown', (e) => {
+      dragging = true;
+      moved = true;
+      ba.setPointerCapture(e.pointerId);
+      if (e.pointerType === 'mouse') fromEvent(e);
+    });
+    ba.addEventListener('pointermove', (e) => { if (dragging) fromEvent(e); });
+    const stop = () => { dragging = false; };
+    ba.addEventListener('pointerup', stop);
+    ba.addEventListener('pointercancel', stop);
+    range.addEventListener('input', () => { moved = true; setPos(Number(range.value)); });
+
+    const hint = () => {
+      if (calm || moved) return;
+      const keys = [[0, 50], [700, 28], [1500, 74], [2300, 50]];
+      const t0 = performance.now();
+      const frame = (now) => {
+        if (moved) return;
+        const t = now - t0;
+        let i = 0;
+        while (i < keys.length - 2 && t > keys[i + 1][0]) i++;
+        const [ta, va] = keys[i];
+        const [tb, vb] = keys[i + 1];
+        const k = Math.min(1, Math.max(0, (t - ta) / (tb - ta)));
+        const e = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+        setPos(va + (vb - va) * e);
+        if (t < keys[keys.length - 1][0]) requestAnimationFrame(frame);
+      };
+      requestAnimationFrame(frame);
+    };
+
+    /* Waving flag */
+    const flag = document.getElementById('flag');
+    if (flag && !calm) {
+      const n = 20;
+      for (let i = 0; i < n; i++) {
+        const sl = document.createElement('span');
+        sl.className = 'slice';
+        sl.style.backgroundSize = (n * 100) + '% 100%';
+        sl.style.backgroundPosition = (i / (n - 1) * 100) + '% 0';
+        sl.style.animationDelay = (-i * 0.09) + 's';
+        flag.appendChild(sl);
+      }
+      flag.classList.add('waving');
+    }
+
+    /* Tool cards: heat spot follows the pointer */
+    document.querySelectorAll('.tool').forEach((card) => {
+      card.addEventListener('pointermove', (e) => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      });
+    });
+
+    /* Reveal on scroll */
+    const steps = document.getElementById('steps');
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          if (entry.target === steps) steps.classList.add('lit');
+          if (entry.target === ba) hint();
+          io.unobserve(entry.target);
+        });
+      }, { threshold: 0.45 });
+      io.observe(steps);
+      io.observe(ba);
+    } else {
+      steps.classList.add('lit');
+    }
+  }
 </script>
 </body>
 </html>

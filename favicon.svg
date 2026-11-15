@@ -1,1 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#1C2230"/><g transform="translate(0 4)"><path d="M60 46 C72 45 84 45 94 48 C98 49 97 54 93 54 C82 54 70 53 58 52 Z" fill="#E8742C"/><path d="M10 55 C8 43 14 32 28 28 C44 23 66 22 78 26 C88 29 92 37 88 45 C76 48 62 50 48 51 C34 52 20 54 10 55 Z" fill="#E8742C"/><path d="M60 49.6 C70 48.4 80 47.4 88 45" fill="none" stroke="#1C2230" stroke-width="2.6" stroke-linecap="round"/><circle cx="46" cy="64" r="5.5" fill="#F6F1E7"/><path d="M59 66 Q65 58.5 71 66" fill="none" stroke="#F6F1E7" stroke-width="5.5" stroke-linecap="round"/><path d="M42 76 Q56 84 72 73" fill="none" stroke="#F6F1E7" stroke-width="5.5" stroke-linecap="round"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <radialGradient id="sky" cx="50" cy="80" r="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFD9A8"/>
+      <stop offset="0.3" stop-color="#FF8A3D"/>
+      <stop offset="0.62" stop-color="#E0402A"/>
+      <stop offset="1" stop-color="#9E0C22"/>
+    </radialGradient>
+    <clipPath id="disc"><circle cx="50" cy="50" r="48"/></clipPath>
+  </defs>
+  <circle cx="50" cy="50" r="48" fill="url(#sky)"/>
+  <g clip-path="url(#disc)" fill="#111216">
+    <rect x="0" y="76" width="100" height="24"/>
+    <path d="M14 77 V54 a5 5 0 0 1 10 0 V77 Z M26 77 V50 a5 5 0 0 1 10 0 V77 Z"/>
+    <path d="M37 77 L43 40 H57 L63 77 Z"/>
+    <rect x="44" y="29" width="12" height="12"/>
+    <rect x="42" y="20" width="16" height="6"/>
+    <rect x="45" y="20" width="4" height="10"/><rect x="51" y="20" width="4" height="10"/>
+    <path d="M67 66 V52 a6 3 0 0 1 12 0 V66 L73 72 Z"/>
+  </g>
+  <path d="M57 23 C68 23 73 34 73 50" fill="none" stroke="#111216" stroke-width="6" clip-path="url(#disc)"/>
+</svg>

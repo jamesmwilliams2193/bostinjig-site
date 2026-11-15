@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <radialGradient id="sky" cx="50" cy="82" r="62" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFE0B8"/>
+      <stop offset="0.22" stop-color="#FF9A4A"/>
+      <stop offset="0.5" stop-color="#E8742C"/>
+      <stop offset="0.78" stop-color="#C8102E"/>
+      <stop offset="1" stop-color="#7E0A1C"/>
+    </radialGradient>
+    <clipPath id="disc"><circle cx="50" cy="50" r="46"/></clipPath>
+  </defs>
+  <circle cx="50" cy="50" r="46" fill="url(#sky)"/>
+  <g clip-path="url(#disc)" fill="#111216">
+    <rect x="0" y="80" width="100" height="20"/>
+    <!-- stove chimney -->
+    <rect x="16.5" y="34" width="3" height="47"/>
+    <!-- hot blast stoves -->
+    <path d="M21.5 81 V58 a3 3 0 0 1 6 0 V81 Z M28.5 81 V55 a3 3 0 0 1 6 0 V81 Z M35.5 81 V58 a3 3 0 0 1 6 0 V81 Z"/>
+    <rect x="21" y="64" width="25" height="2"/>
+    <!-- furnace -->
+    <path d="M42 81 V74 H43.5 L46.5 47 H55.5 L58.5 74 H60 V81 Z"/>
+    <rect x="45" y="43.5" width="12" height="4"/>
+    <rect x="47.3" y="35" width="7.4" height="9"/>
+    <rect x="47.6" y="26" width="2" height="10"/><rect x="52.4" y="26" width="2" height="10"/>
+    <rect x="46" y="24.5" width="10" height="2.6"/>
+    <rect x="46.6" y="18" width="1.4" height="7"/><rect x="54" y="18" width="1.4" height="7"/>
+    <!-- dust catcher -->
+    <path d="M66 70 V56 a4.2 2.4 0 0 1 8.4 0 V70 L70.2 74.5 Z"/>
+    <rect x="69.2" y="74" width="2" height="7"/>
+  </g>
+  <g clip-path="url(#disc)" fill="none" stroke="#111216" stroke-linecap="butt">
+    <!-- downcomer -->
+    <path d="M55.5 25.8 C64.5 25.8 69.4 36 70.2 54" stroke-width="3"/>
+    <!-- furnace frame -->
+    <path d="M41 81 V42 M61 81 V42 M41 42 H61" stroke-width="1.2"/>
+    <!-- skip incline -->
+    <path d="M57 45 L88 81" stroke-width="2.4"/>
+    <path d="M60 44 L91 80" stroke-width="1.2"/>
+    <path d="M66 56 V81 M76 67.5 V81" stroke-width="1.4"/>
+  </g>
+</svg>
