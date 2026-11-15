@@ -69,7 +69,7 @@
   .mark-name { font-family: var(--display); font-weight: 800; font-size: 21px; line-height: 1; letter-spacing: -0.01em; text-transform: uppercase; white-space: nowrap; }
   .mark-sub { display: flex; justify-content: space-between; font: 700 10px/1 var(--display); color: var(--molten); }
   .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-  .site-nav { display: flex; align-items: center; gap: 26px; }
+  .site-nav { display: flex; align-items: center; gap: 24px; }
   .site-nav a:not(.btn) { color: var(--text); text-decoration: none; font-size: 16px; font-weight: 500; }
   .site-nav a:not(.btn):hover { color: var(--paper); }
   .site-nav .btn { min-height: 44px; padding: 0 18px; font-size: 15px; }
@@ -105,13 +105,13 @@
   @keyframes sweep { 0% { left: 0; opacity: 0; } 5% { opacity: 1; } 92% { opacity: 1; } 100% { left: 100%; opacity: 0; } }
   .hero .lead { margin-top: 28px; }
   .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 36px; }
-  .bc-toggle { margin-top: 30px; display: inline-flex; align-items: center; gap: 12px; min-height: 44px; padding: 6px 16px 6px 8px; border-radius: 999px; border: 0; cursor: pointer;
-    background: rgba(243,238,228,.06); box-shadow: 0 0 0 1px var(--line) inset; color: var(--paper); font: 500 15px/1 var(--body); }
+  .bc-toggle { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 6px 14px 6px 7px; white-space: nowrap; flex: none; border-radius: 999px; border: 0; cursor: pointer;
+    background: rgba(243,238,228,.06); box-shadow: 0 0 0 1px var(--line) inset; color: var(--paper); font: 500 14px/1 var(--body); }
   .bc-toggle:hover { background: rgba(243,238,228,.1); }
-  .bc-switch { width: 46px; height: 26px; border-radius: 999px; background: var(--steel-2); position: relative; transition: background-color .25s ease; flex: none; }
-  .bc-switch::after { content: ""; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: var(--paper); transition: transform .25s cubic-bezier(.5,1.6,.5,1); }
+  .bc-switch { width: 42px; height: 24px; border-radius: 999px; background: var(--steel-2); position: relative; transition: background-color .25s ease; flex: none; }
+  .bc-switch::after { content: ""; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: var(--paper); transition: transform .25s cubic-bezier(.5,1.6,.5,1); }
   .bc-toggle[aria-pressed="true"] .bc-switch { background: var(--molten); box-shadow: 0 0 16px rgba(232,116,44,.7); }
-  .bc-toggle[aria-pressed="true"] .bc-switch::after { transform: translateX(20px); }
+  .bc-toggle[aria-pressed="true"] .bc-switch::after { transform: translateX(18px); }
   .swap { animation: flicker .45s steps(2, end); }
   @keyframes flicker { 0% { opacity: .15; filter: blur(2px); } 50% { opacity: .6; } 100% { opacity: 1; filter: none; } }
 
@@ -275,8 +275,10 @@
   .site-foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 32px; }
   .site-foot a { color: var(--paper); }
 
-  @media (max-width: 960px) {
+  @media (max-width: 1120px) {
     .site-nav a:not(.btn) { display: none; }
+  }
+  @media (max-width: 960px) {
     .tools, .rates { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .rates .rate:last-child { grid-column: 1 / -1; }
     .about, .contact, .hero-grid { grid-template-columns: 1fr; }
@@ -313,8 +315,13 @@
     .flag { width: 115px; height: 69px; }
     .skyline-note { left: var(--pad); text-align: left; }
   }
-  @media (max-width: 380px) {
+  @media (max-width: 560px) {
     .site-nav .btn { display: none; }
+    .bc-toggle { min-height: 40px; padding: 5px 12px 5px 6px; font-size: 13px; gap: 8px; }
+  }
+  @media (max-width: 360px) {
+    .bc-label { display: none; }
+    .bc-toggle { padding-right: 6px; }
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -358,6 +365,7 @@
       <a href="#prices" data-bc="Ow much?">Prices</a>
       <a href="#how" data-bc="How it werks">How it works</a>
       <a href="#about" data-bc="Who's this?">About</a>
+      <button class="bc-toggle" id="bc-toggle" type="button" aria-pressed="false" aria-label="Black Country mode" title="Switch the site into Black Country dialect"><span class="bc-switch" aria-hidden="true"></span><span class="bc-label">Black Country</span></button>
       <a class="btn btn-molten" href="#contact" data-bc="Gizza bell">Book a free call</a>
     </nav>
   </div>
@@ -374,7 +382,6 @@
         <a class="btn btn-molten" href="#contact" data-bc="Gizza bell, it's free">Book a free 30-minute call</a>
         <a class="btn btn-ghost" href="#prices" data-bc="Ow much?">See prices</a>
       </div>
-      <button class="bc-toggle" id="bc-toggle" type="button" aria-pressed="false"><span class="bc-switch" aria-hidden="true"></span><span>Talk Black Country</span></button>
       </div>
       <div class="hero-art" aria-hidden="true">
         <div class="forge-glow"></div>
@@ -885,9 +892,6 @@
       const on = toggle.getAttribute('aria-pressed') !== 'true';
       setMode(on, true);
       cutHeadline();
-      const r = toggle.getBoundingClientRect();
-      const hr = hero.getBoundingClientRect();
-      spawn(r.left + 30 - hr.left, r.top + r.height / 2 - hr.top, 30, 4);
     });
     try { if (localStorage.getItem('bostin-bc') === '1') setMode(true, false); } catch (e) {}
 
