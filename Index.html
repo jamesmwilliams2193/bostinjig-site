@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<base target="_top">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bostin Jig CRM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE: workshop-plain and quick, a tool used between jobs.
+   IDEA: a foundry job board: tallies by stage, one card per firm.
+   PICTURE: the live pipeline bar and the lead list themselves.
+   COLOUR+TYPE: black band with a molten-orange edge, white ground, red for overdue/lost; Barlow Condensed + Barlow.
+   LAYOUT: header band, pipeline tiles, search and sort, list; a lead opens as a sheet. */
+:root{color-scheme:light dark;--bg:light-dark(#ffffff,#0e0e0e);--ink:light-dark(#141414,#f1efec);--mut:light-dark(#5f5a55,#a9a39c);--line:light-dark(#e4e0db,#2c2a28);--card:light-dark(#ffffff,#171615);--soft:light-dark(#f4f2ef,#1f1d1b);--mol:#ff6a13;--red:light-dark(#c8102e,#ff5b6e)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Barlow,system-ui,sans-serif;overflow-x:clip}
+header{background:#111;color:#f4f1ec;border-bottom:4px solid var(--mol);padding:18px max(4vw,16px)}
+.hd,main{max-width:1100px;margin:auto}
+.hd{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.brand{display:flex;gap:12px;align-items:center}
+.brand svg{width:42px;height:42px;flex:none}
+h1{font:700 34px/1.05 "Barlow Condensed",sans-serif;margin:0}
+.sub{color:#bdb6ad;font-size:14px;margin:2px 0 0}
+h2{font:700 28px/1.1 "Barlow Condensed",sans-serif;margin:0}
+h3{font:700 20px/1.2 "Barlow Condensed",sans-serif;margin:18px 0 4px}
+.btn{appearance:none;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);background:var(--card);color:var(--ink);font:600 15px Barlow,sans-serif;min-height:44px;padding:0 16px;border-radius:10px;cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn.pri{background:var(--mol);border-color:var(--mol);color:#170900}
+header .btn{background:transparent;color:#f4f1ec;border-color:#3d3935}
+header .btn.pri{background:var(--mol);color:#170900;border-color:var(--mol)}
+.btn[disabled]{opacity:.5;cursor:default}
+:is(.btn,input,select,textarea,.tile,.row):focus-visible{outline:3px solid var(--mol);outline-offset:2px}
+main{padding:18px max(4vw,16px) 64px}
+#note{background:light-dark(#fff3e8,#2b1a0e);border:1px solid var(--mol);border-radius:10px;padding:10px 14px;margin:0 0 14px;font-size:15px}
+.bar{display:flex;height:12px;border-radius:6px;overflow:hidden;background:var(--soft);margin:0 0 12px}
+.bar i{display:block;height:100%}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:8px}
+.tile{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:10px 12px;text-align:left;cursor:pointer;font:inherit;min-height:64px}
+.tile b{display:block;font:700 30px/1 "Barlow Condensed",sans-serif}
+.tile span{font-size:13px;color:var(--mut)}
+.tile.hot b{color:var(--red)}
+.tile[aria-pressed=true]{border-color:var(--mol);box-shadow:inset 0 0 0 1px var(--mol);background:var(--soft)}
+.tools{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 6px}
+.tools input{flex:1 1 240px}
+input,select,textarea{font:16px Barlow,sans-serif;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:10px;min-height:44px;padding:8px 12px;width:100%}
+.tools select{width:auto}
+.count{font-size:13px;color:var(--mut);margin:0 0 8px}
+.list{display:grid;gap:8px}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;border:1px solid var(--line);background:var(--card);color:inherit;border-radius:12px;padding:12px 14px;cursor:pointer;text-align:left;font:inherit;width:100%}
+.row:hover{border-color:light-dark(#cfc8c0,#45413d)}
+.row strong{display:block;font-weight:600;font-size:17px;line-height:1.25}
+.row small{display:block;color:var(--mut);font-size:14px}
+.meta{display:grid;justify-items:end;gap:4px}
+.pill{font-size:13px;font-weight:600;padding:2px 10px;border-radius:99px;white-space:nowrap}
+.s-new{background:light-dark(#ecebe9,#2b2927)}
+.s-emailed{background:light-dark(#dbe7ff,#1c2a48);color:light-dark(#1d3f8f,#a9c3ff)}
+.s-follow{background:light-dark(#fff0c2,#3a3014);color:light-dark(#7a5300,#f3d27a)}
+.s-replied{background:light-dark(#d9f2e3,#173326);color:light-dark(#156035,#93d9ae)}
+.s-trial{background:light-dark(#ffe1cf,#3d2214);color:light-dark(#9a3a00,#ffb48a)}
+.s-won{background:#1f7a45;color:#fff}
+.s-lost{background:light-dark(#f9d9de,#3d1820);color:light-dark(#9b0d24,#ff9aa9)}
+.when{font-size:13px;color:var(--mut);white-space:nowrap}
+.when.late{color:var(--red);font-weight:600}
+.empty{color:var(--mut);padding:24px 4px}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:flex-end;justify-content:center;z-index:5}
+.ov.on{display:flex}
+.sheet{background:var(--bg);width:min(660px,100%);max-height:92vh;overflow:auto;border-radius:16px 16px 0 0;padding:18px 18px 32px}
+.shd{display:flex;gap:12px;align-items:flex-start;justify-content:space-between;margin-bottom:12px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.full{grid-column:1/-1}
+label{display:grid;gap:4px;font-size:14px;font-weight:600;color:var(--mut)}
+.acts{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
+.cline{font-size:15px;color:var(--mut);margin:12px 0 0;overflow-wrap:anywhere}
+details{border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:14px 0 0}
+summary{cursor:pointer;font-weight:600;min-height:28px}
+.tpl{display:flex;flex-wrap:wrap;gap:16px;margin:8px 0}
+.tpl label{display:flex;gap:6px;align-items:center;color:var(--ink);font-weight:500}
+.tpl input{width:20px;min-height:20px}
+.dsub{font-weight:600;margin:6px 0}
+.log{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:6px}
+.log li{font-size:15px;border-left:3px solid var(--mol);padding:2px 0 2px 10px}
+.log time{color:var(--mut);margin-right:8px;white-space:nowrap}
+.nf{display:flex;gap:8px}
+.nf input{flex:1}
+.iomsg{margin:12px 0 0;font-weight:600}
+.iomsg:empty{display:none}
+.pv{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-top:12px;background:var(--soft)}
+.pv p{margin:0}
+.small{font-size:14px;color:var(--mut);margin:4px 0 0}
+@media(min-width:700px){.ov{align-items:center}.sheet{border-radius:16px}}
+@media(max-width:520px){.grid2{grid-template-columns:minmax(0,1fr)}h1{font-size:30px}}
+@media(prefers-reduced-motion:no-preference){.ov.on .sheet{animation:up .18s ease-out}@keyframes up{from{transform:translateY(24px);opacity:.6}}}
+.count{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+.btn.sm{min-height:40px;padding:0 12px;font-size:14px}
+.wqbar{height:6px;border-radius:3px;background:var(--soft);overflow:hidden;margin:6px 0 12px}
+.wqbar i{display:block;height:100%;background:var(--mol);width:0;transition:width .2s}
+.stack{display:grid;gap:10px;margin-top:12px}
+.trow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center;border:1px solid var(--line);background:var(--card);color:inherit;border-radius:12px;padding:10px 14px;text-align:left;font:inherit;cursor:pointer;width:100%}
+.trow strong{display:block;font-weight:600}
+.trow small{color:var(--mut);font-size:14px}
+.trow[aria-current=true]{border-color:var(--mol);box-shadow:inset 0 0 0 1px var(--mol)}
+.badge{font-size:12px;font-weight:600;padding:2px 8px;border-radius:99px;background:var(--soft);color:var(--mut);white-space:nowrap}
+.badge.def{background:light-dark(#ffe1cf,#3d2214);color:light-dark(#9a3a00,#ffb48a)}
+.chk{display:flex;gap:8px;align-items:center;color:var(--ink);font-weight:500;align-self:end;min-height:44px}
+.chk input{width:20px;min-height:20px}
+.done{text-align:center;padding:20px 8px 4px}
+.done b{display:block;font:700 44px/1 "Barlow Condensed",sans-serif;color:var(--mol)}
+.wqhead{display:grid;gap:2px}
+.wqhead p{margin:0}
+:is(.trow):focus-visible{outline:3px solid var(--mol);outline-offset:2px}
+/* View switcher */
+.views{display:flex;gap:4px;margin:16px 0 0;background:var(--soft);border-radius:12px;padding:4px;width:max-content;max-width:100%;overflow-x:auto}
+.views button{appearance:none;border:0;background:transparent;color:var(--mut);font:600 15px Barlow,sans-serif;min-height:40px;padding:0 18px;border-radius:9px;cursor:pointer}
+.views button[aria-pressed=true]{background:var(--card);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.14)}
+.views button:focus-visible,.card:focus-visible,.wk div:focus-visible{outline:3px solid var(--mol);outline-offset:2px}
+/* Board */
+.board{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(232px,1fr);gap:10px;overflow-x:auto;padding:2px 2px 12px;scroll-snap-type:x proximity}
+.col{background:var(--soft);border-radius:12px;padding:8px;display:flex;flex-direction:column;gap:6px;max-height:72vh;scroll-snap-align:start;border:2px solid transparent}
+.col.over{border-color:var(--mol)}
+.colh{display:flex;align-items:center;gap:8px;font:700 18px/1.2 "Barlow Condensed",sans-serif;padding:2px 4px 4px}
+.colh i{width:10px;height:10px;border-radius:3px;flex:none}
+.colh span{margin-left:auto;font:600 13px Barlow,sans-serif;color:var(--mut)}
+.cards{display:grid;gap:6px;overflow-y:auto;align-content:start;min-height:56px;padding:1px}
+.card{display:grid;gap:2px;border:1px solid var(--line);background:var(--card);color:inherit;border-radius:10px;padding:9px 11px;text-align:left;font:inherit;cursor:grab;width:100%}
+.card strong{font-weight:600;font-size:15px;line-height:1.25}
+.card small{color:var(--mut);font-size:13px;line-height:1.3}
+.card .when{font-size:12px}
+.card.drag{opacity:.4}
+.colempty{color:var(--mut);font-size:13px;padding:6px 4px;margin:0}
+.bhint{font-size:13px;color:var(--mut);margin:0 0 8px}
+/* Map */
+#map{height:clamp(360px,62vh,720px);border-radius:12px;border:1px solid var(--line);position:relative;z-index:0;background:var(--soft)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin:10px 0 0;font-size:14px;color:var(--mut)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:11px;height:11px;border-radius:50%;box-shadow:0 0 0 2px var(--card),0 0 0 3px var(--line)}
+.mapnote{font-size:14px;color:var(--mut);margin:6px 0 0}
+.mapnote:empty{display:none}
+.leaflet-container{font:14px/1.4 Barlow,system-ui,sans-serif}
+.leaflet-popup-content{margin:12px 14px;min-width:180px}
+.leaflet-popup-content strong{font-size:16px}
+.leaflet-popup-content .pill{display:inline-block;margin:4px 0 2px}
+.leaflet-popup-content .small{margin:2px 0 0}
+.leaflet-popup-content .btn{margin-top:10px;width:100%}
+.home-pin,.ring-l{width:0!important;height:0!important;border:0;background:none}
+.home-pin span{position:absolute;transform:translate(-50%,-50%);background:#111;color:#f4f1ec;border:2px solid var(--mol);border-radius:7px;padding:1px 7px;font:700 13px/1.4 Barlow,sans-serif;white-space:nowrap}
+.ring-l span{position:absolute;transform:translate(-50%,-50%);color:#b04a0d;font:600 12px Barlow,sans-serif;white-space:nowrap;text-shadow:0 0 3px #fff,0 0 3px #fff}
+@media(prefers-color-scheme:dark){#map .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.9) contrast(.9)}.ring-l span{color:#ff9a5c;text-shadow:0 0 3px #000,0 0 3px #000}}
+/* Stats */
+.kpis{display:grid;grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:8px}
+.kpi{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:12px 14px}
+.kpi b{display:block;font:700 34px/1 "Barlow Condensed",sans-serif}
+.kpi span{display:block;font-size:14px;font-weight:600;margin-top:4px}
+.kpi small{display:block;font-size:13px;color:var(--mut)}
+.panel{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:14px;margin-top:12px}
+.panel h3{margin:0 0 2px}
+.panel>.small{margin:0 0 12px}
+.wk{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:2px;height:150px;border-bottom:1px solid var(--line);margin-top:26px}
+.wk div{position:relative;display:flex;align-items:flex-end;justify-content:center;outline:none}
+.wk i{display:block;width:min(34px,72%);background:var(--mol);border-radius:4px 4px 0 0}
+.wk div:hover i,.wk div:focus-visible i{filter:brightness(1.12)}
+.wk em{position:absolute;left:50%;transform:translateX(-50%);font:600 13px Barlow,sans-serif;font-style:normal;color:var(--ink);white-space:nowrap}
+.wk .tt{display:none;position:absolute;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);font-size:13px;padding:4px 8px;border-radius:6px;white-space:nowrap;z-index:1;pointer-events:none}
+.wk div:hover .tt,.wk div:focus-visible .tt{display:block}
+.wk div:hover em,.wk div:focus-visible em{visibility:hidden}
+.wkl{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:2px;font-size:12px;color:var(--mut);text-align:center;margin-top:4px}
+.cols2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:0 12px}
+.tbl{width:100%;border-collapse:collapse;font-size:15px}
+.tbl th{text-align:left;color:var(--mut);font-weight:600;font-size:13px;border-bottom:1px solid var(--line);padding:6px 4px}
+.tbl td{padding:7px 4px;border-bottom:1px solid var(--line)}
+.tbl tr:last-child td{border-bottom:0}
+.tbl .n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</head>
+<body>
+<header><div class="hd">
+  <div class="brand">
+    <svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="8" fill="#c8102e"/><rect x="18" y="4" width="4" height="6" fill="#111"/><path d="M13 34 L17 10 h6 l4 24z" fill="#111"/><path d="M14.6 34 q5.4-10 10.8 0z" fill="#ff6a13"/></svg>
+    <div><h1>Bostin Jig CRM</h1><p class="sub" id="sub">Loading leads…</p><p class="sub" id="sync" style="margin:0"></p></div>
+  </div>
+  <div class="acts" style="margin:0"><button class="btn" id="teopen" type="button">Templates</button><button class="btn" id="ioopen" type="button">Import / Export</button><button class="btn" id="refresh" type="button">Refresh</button><button class="btn pri" id="add" type="button">+ Add lead</button></div>
+</div></header>
+<main>
+  <p id="note" role="status" hidden></p>
+  <section aria-label="Pipeline"><div class="bar" id="bar"></div><div class="tiles" id="tiles"></div></section>
+  <div class="views" id="views" role="group" aria-label="View">
+    <button type="button" data-v="list" aria-pressed="true">List</button>
+    <button type="button" data-v="board" aria-pressed="false">Board</button>
+    <button type="button" data-v="map" aria-pressed="false">Map</button>
+    <button type="button" data-v="stats" aria-pressed="false">Stats</button>
+  </div>
+  <div class="tools" id="tools">
+    <input id="q" type="search" placeholder="Search company, contact, trade or area" aria-label="Search leads">
+    <select id="sort" aria-label="Sort leads"><option value="due">Sort: follow-up date</option><option value="near">Sort: nearest to Bilston</option><option value="az">Sort: company A–Z</option><option value="upd">Sort: recently updated</option></select>
+  </div>
+  <div class="count" id="countrow"><span id="count"></span><button class="btn pri sm" id="wtb" type="button" hidden>Work through these</button></div>
+  <div class="list" id="list"></div>
+  <div id="boardwrap" hidden><p class="bhint" id="bhint">Drag a card to another column to move it on. Tap a card to open it.</p><div class="board" id="board"></div></div>
+  <div id="mapwrap" hidden>
+    <div id="map" role="region" aria-label="Map of leads"></div>
+    <div class="legend" id="legend"></div>
+    <p class="mapnote" id="mapnote" role="status"></p>
+  </div>
+  <div id="stats" hidden></div>
+</main>
+
+<div class="ov" id="ov"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="st">
+  <div class="shd"><h2 id="st">Lead</h2><button class="btn" id="x" type="button">Close</button></div>
+  <div id="extra">
+    <div class="acts" style="margin:0">
+      <a class="btn pri" id="mail" href="#">Email</a>
+      <a class="btn" id="call" href="#">Call</a>
+      <button class="btn" id="mk" type="button">Mark emailed</button>
+      <button class="btn" id="cp" type="button">Copy email</button>
+    </div>
+    <p class="cline" id="cline"></p>
+    <details id="draft"><summary>Email draft</summary>
+      <div class="stack">
+        <label>Template<select id="dtpl"></select></label>
+        <label>Subject<input id="dsub"></label>
+        <label>Email<textarea id="dtext" rows="12"></textarea></label>
+      </div>
+    </details>
+  </div>
+  <form id="f" class="grid2" style="margin-top:14px">
+    <label class="full">Company<input id="f_company" autocomplete="off" required></label>
+    <label>Contact name<input id="f_contact" autocomplete="off"></label>
+    <label>Email<input id="f_email" type="email" autocomplete="off"></label>
+    <label>Phone<input id="f_phone" type="tel" autocomplete="off"></label>
+    <label>Trade<input id="f_trade" autocomplete="off"></label>
+    <label>Area<input id="f_area" autocomplete="off"></label>
+    <label>Stage<select id="f_stage"></select></label>
+    <label>Next follow-up<input id="f_next" type="date"></label>
+    <label class="full">Notes<textarea id="f_notes" rows="3"></textarea></label>
+    <div class="acts full" style="margin:0"><button class="btn pri" type="submit" id="save">Save changes</button><button class="btn" type="button" id="del">Delete lead</button></div>
+  </form>
+  <div id="actwrap">
+    <h3>Activity</h3>
+    <form class="nf" id="nf"><input id="ntext" placeholder="Log a call, reply or note" aria-label="New activity note"><button class="btn" type="submit">Add</button></form>
+    <ul class="log" id="log"></ul>
+  </div>
+</div></div>
+
+<div class="ov" id="wq"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="wqt">
+  <div class="shd"><div class="wqhead"><p class="small" id="wqp"></p><h2 id="wqt">Work through</h2></div><button class="btn" id="wqx" type="button">Stop</button></div>
+  <div class="wqbar"><i id="wqbar"></i></div>
+  <div id="wqlead">
+    <p class="cline" id="wqinfo" style="margin:0"></p>
+    <p class="small" id="wqnotes"></p>
+    <div class="stack">
+      <label>Template<select id="wqtpl"></select></label>
+      <label>Subject<input id="wqsub"></label>
+      <label>Email<textarea id="wqbody" rows="10"></textarea></label>
+    </div>
+    <div class="acts"><a class="btn pri" id="wqmail" href="#">Open email</a><button class="btn" id="wqcp" type="button">Copy</button></div>
+    <div class="acts"><button class="btn pri" id="wqsent" type="button">Sent – next</button><button class="btn" id="wqskip" type="button">Skip</button><button class="btn" id="wqlost" type="button">Not interested</button></div>
+  </div>
+  <div id="wqdone" class="done" hidden><b id="wqdn">0</b><p id="wqdt"></p><div class="acts" style="justify-content:center"><button class="btn pri" id="wqclose" type="button">Done</button></div></div>
+</div></div>
+
+<div class="ov" id="te"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="tet">
+  <div class="shd"><h2 id="tet">Email templates</h2><button class="btn" id="tex" type="button">Close</button></div>
+  <p class="small">Write {first} for the contact's first name ("there" if there isn't one) and {company} for the company name. Each lead gets its type's default template automatically: Opening for new leads, Follow-up once emailed, Final after a follow-up. You can still pick any template when emailing.</p>
+  <div class="stack" id="tlist"></div>
+  <div class="acts"><button class="btn pri" id="tnew" type="button">+ New template</button><button class="btn" id="treset" type="button">Restore defaults</button></div>
+  <form id="tf" class="grid2" style="margin-top:16px" hidden>
+    <label class="full">Name<input id="t_name" required></label>
+    <label>Type<select id="t_kind"><option value="opening">Opening</option><option value="followup">Follow-up</option><option value="final">Final</option><option value="other">Other</option></select></label>
+    <label class="chk"><input type="checkbox" id="t_def"> Default for this type</label>
+    <label class="full">Subject<input id="t_subject"></label>
+    <label class="full">Email<textarea id="t_body" rows="14"></textarea></label>
+    <div class="acts full" style="margin:0"><button class="btn pri" type="submit">Save template</button><button class="btn" type="button" id="tcancel">Cancel</button><button class="btn" type="button" id="tdel">Delete</button></div>
+  </form>
+  <p class="iomsg" id="temsg" role="status"></p>
+</div></div>
+
+<div class="ov" id="io"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="iot">
+  <div class="shd"><h2 id="iot">Import / Export</h2><button class="btn" id="iox" type="button">Close</button></div>
+  <p class="small">Your leads and templates live in your Google Sheet, so they’re the same on every device. <a id="sheetlink" href="#" target="_blank" rel="noopener" hidden>Open the Google Sheet</a></p>
+  <h3>Export</h3>
+  <div class="acts"><button class="btn pri" id="exx" type="button">Excel (.xlsx)</button><button class="btn" id="exc" type="button">CSV</button><button class="btn" id="exb" type="button">Full backup</button><button class="btn" id="ext" type="button">Blank template</button></div>
+  <p class="small">Full backup keeps everything, including activity history and your email templates. Excel needs an internet connection; CSV and backups work offline.</p>
+  <h3>Import</h3>
+  <p class="small">Choose an Excel or CSV file to add leads. The first row needs column names, at least Company or Email. Matching emails update existing leads instead of duplicating them, and a status is never set back to Not contacted. Choose a backup file (.json) to restore everything from it; this replaces every lead in the Google Sheet.</p>
+  <div class="acts"><button class="btn pri" id="pick" type="button">Choose file</button></div>
+  <input id="file" type="file" accept=".xlsx,.xls,.csv,.json" hidden>
+  <p class="iomsg" id="iomsg" role="status"></p>
+  <div id="prev"></div>
+</div></div>
+
+<script>
+{
+const ST=[["new","Not contacted","#b9b4ae"],["emailed","Emailed","#3b6fe0"],["follow","Follow-up sent","#e0a800"],["replied","Replied","#2f9e5f"],["trial","Trial","#ff6a13"],["won","Won","#1f7a45"],["lost","Lost","#c8102e"]];
+const SN=Object.fromEntries(ST.map(s=>[s[0],s[1]]));
+const FIELDS=["company","contact","email","phone","trade","area","stage","next","notes"];
+const KEY="bostinjig-crm-v1";
+const KIND={opening:"Opening",followup:"Follow-up",final:"Final",other:"Other"};
+const STAGE_KIND={new:"opening",emailed:"followup",follow:"final"};
+const SIG=`James Williams
+Bostin Jig Software
+bostinjig.co.uk | james@bostinjig.co.uk`;
+const DEF_TPL=[
+{id:"t-open-a",name:"Free early access",kind:"opening",def:true,subject:"Tools going walkabout between vans?",body:`Hi {first},
+
+I'm James, founder of Bostin Jig Software, a small software company based in Bilston.
+
+I'm building a simple tool-tracking app for trade firms like {company}. You put a QR label on each tool or bit of kit, and your team scan it on their phone when they take it or bring it back. At a glance you can see who's got what and where it is, so less goes missing between vans and sites, and you're not buying the same drill twice.
+
+I'm looking for a handful of local firms to use it free while I get it right, in return for honest feedback. No contract, no card details.
+
+Would it be worth a 10-minute call, or shall I just send you a link to try it?
+
+Cheers,
+
+${SIG}
+
+If you'd rather not hear from me, just reply "no thanks" and I won't email again.`},
+{id:"t-open-b",name:"Short question",kind:"opening",def:false,subject:"Quick one about your tools",body:`Hi {first},
+
+Quick question: how much does {company} lose each year to tools that never come back from site, or time spent hunting for the one everyone needs?
+
+I'm a Bilston-based developer building Bostin Jig, a phone app that tracks shared tools and kit with QR labels. Scan out, scan in, always know who's got what.
+
+I'm offering free early access to a few Black Country firms. Fancy a look?
+
+${SIG}
+
+Not for you? Reply "no thanks" and I won't contact you again.`},
+{id:"t-follow",name:"Quick nudge",kind:"followup",def:true,subject:"Following up: tool tracking for {company}",body:`Hi {first},
+
+Just following up on my email last week about Bostin Jig, the tool-tracking app I'm building in Bilston.
+
+The short version: QR labels on your tools and kit, your team scan them in and out on their phones, and you can always see who's got what and where.
+
+I'm still looking for a few local firms to try it free and tell me what they think. Would {company} be up for a look? A one-line reply is plenty.
+
+Cheers,
+
+${SIG}
+
+If it's not for you, just reply "no thanks" and I won't email again.`},
+{id:"t-final",name:"Last one from me",kind:"final",def:true,subject:"Last one from me",body:`Hi {first},
+
+I've emailed a couple of times about Bostin Jig, so this is the last one from me.
+
+If keeping track of tools and kit across your vans is ever a headache at {company}, I'd love to let you try it free. If now's not the time, no problem at all.
+
+Thanks for reading,
+
+${SIG}`}];
+
+
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const iso=d=>new Date(d.getTime()-d.getTimezoneOffset()*6e4).toISOString().slice(0,10);
+const today=()=>iso(new Date());
+const plus=n=>{const d=new Date();d.setDate(d.getDate()+n);return iso(d)};
+const fmt=s=>s?new Date(s+"T12:00:00").toLocaleDateString("en-GB",{day:"numeric",month:"short"}):"";
+const isDue=c=>!!c.next&&c.next<=today()&&c.stage!=="won"&&c.stage!=="lost";
+const short=c=>(c||"your firm").replace(/\s+t\/a\s.*$/i,"").replace(/\s+(ltd|limited)\.?$/i,"").trim();
+const uid=p=>(p||"l-")+Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const clone=o=>JSON.parse(JSON.stringify(o));
+let list=[],tpls=[],filter="all",q="",sort="due",cur=null,isOpen=false,leadTpl=null,armed=false,armT=0,lastRows=[];
+const note=t=>{$("note").textContent=t;$("note").hidden=!t};
+$("f_stage").innerHTML=ST.map(s=>`<option value="${s[0]}">${s[1]}</option>`).join("");
+
+/* ---------- Views, distance and map positions ---------- */
+const SC=Object.fromEntries(ST.map(s=>[s[0],s[2]]));
+const VIEWS=["list","board","map","stats"];
+const HOME=[52.566,-2.073]; // Bilston WV14
+let view="list",geo={},geoBusy=false,geoErr="",geoStop=false;
+try{const v=localStorage.getItem("bj-crm-view");if(VIEWS.includes(v))view=v}catch(_){}
+const ak=c=>String(c.area||"").trim();
+const hav=(a,b)=>{const t=Math.PI/180,x=Math.sin((b[0]-a[0])*t/2)**2+Math.cos(a[0]*t)*Math.cos(b[0]*t)*Math.sin((b[1]-a[1])*t/2)**2;return 7917.6*Math.asin(Math.sqrt(x))};
+const miles=c=>{const g=geo[ak(c)];return g?hav(HOME,g):null};
+const distTxt=c=>{const m=miles(c);return m==null?"":m<1?"<1 mi":`~${Math.round(m)} mi`};
+const hashN=s=>{let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return (h>>>0)/4294967296};
+// Leads in the same postcode district are spread round its centre (up to ~700 m) so pins don't sit on top of each other.
+const pos=c=>{const g=geo[ak(c)];if(!g)return null;const id=String(c.id||c.company),a=hashN(id)*2*Math.PI,r=.3+.7*Math.sqrt(hashN(id+"~"));return [g[0]+Math.sin(a)*r*.006,g[1]+Math.cos(a)*r*.0098]};
+function setView(v){
+  if(!VIEWS.includes(v)||v===view)return;
+  view=v;try{localStorage.setItem("bj-crm-view",v)}catch(_){}
+  render();
+}
+async function ensureGeo(){
+  if(geoBusy||geoStop)return;
+  const missing=()=>[...new Set(list.map(ak).filter(a=>a&&!(a in geo)))];
+  if(!missing().length)return;
+  geoBusy=true;
+  try{
+    for(let round=0;round<8;round++){
+      const ask=missing();if(!ask.length)break;
+      const r=await api("getGeo",ask)||{};
+      Object.assign(geo,r.coords||{});
+      geoErr=r.error||"";
+      if(geoErr){geoStop=true;break}
+      if(!r.more){ask.forEach(a=>{if(!(a in geo))geo[a]=null});break}
+      if(view==="map"||sort==="near")render();
+    }
+  }catch(e){geoErr=errMsg(e);geoStop=true}
+  geoBusy=false;
+  if(view==="map"||view==="list"||sort==="near")render();
+}
+
+/* ---------- Data: Google Sheet via Apps Script ---------- */
+let loaded=false,lastLoad=0,sheetUrl="",pend=0,saving=Promise.resolve();
+const hhmm=()=>new Date().toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"});
+const setSync=t=>{$("sync").textContent=t};
+const errMsg=e=>(e&&e.message)||String(e||"error");
+function api(fn,...args){return new Promise((res,rej)=>{
+  const g=window.google&&google.script&&google.script.run;
+  if(!g){rej(new Error("open the CRM from its Apps Script web app link"));return}
+  g.withSuccessHandler(res).withFailureHandler(rej)[fn](...args);
+})}
+function queue(label,fn){
+  pend++;setSync("Saving…");
+  saving=saving.then(fn).then(()=>{},e=>{note(`Couldn’t save ${label} to the Google Sheet (${errMsg(e)}). Tap Refresh to check what was saved.`)}).then(()=>{if(--pend===0)setSync("Saved "+hhmm())});
+  return saving;
+}
+function commit(leads){const copy=clone(leads.filter(Boolean));if(copy.length)queue(copy.length===1?"that change":`${copy.length} leads`,()=>api("saveLeads",copy))}
+function commitDelete(id){queue("the delete",()=>api("deleteLead",id))}
+function commitTemplates(){const copy=clone(tpls);queue("the templates",()=>api("saveTemplates",copy))}
+async function refresh(quiet){
+  if(pend)await saving;
+  const before=new Set(list.map(c=>c.id)),first=!loaded;
+  if(!quiet)setSync("Loading…");
+  try{
+    const d=await api("getAll");
+    list=Array.isArray(d.contacts)?d.contacts:[];
+    tpls=Array.isArray(d.templates)&&d.templates.length?d.templates:clone(DEF_TPL);
+    sheetUrl=d.sheetUrl||"";loaded=true;lastLoad=Date.now();setSync("Updated "+hhmm());
+    const fresh=first?0:list.filter(c=>!before.has(c.id)).length;
+    if(fresh)note(`${fresh} new lead${fresh===1?"":"s"} added since you last looked.`);
+  }catch(e){loaded=true;setSync("");note(`Couldn’t load your leads from the Google Sheet (${errMsg(e)}).`)}
+  $("sheetlink").hidden=!sheetUrl;if(sheetUrl)$("sheetlink").href=sheetUrl;
+  render();
+  if(isOpen&&cur){const c=list.find(x=>x.id===cur);if(c)fillExtra(c);else closeLead()}
+  if(teOpen)renderTpls();
+  ensureGeo();
+}
+function afterChange(changed){render();if(isOpen&&cur){const c=list.find(x=>x.id===cur);if(c)fillExtra(c);else closeLead()}if(changed&&changed.length)commit(changed)}
+function addLead(d){const l=Object.assign({id:uid()},d);list.push(l);return l}
+function updLead(id,patch){const i=list.findIndex(x=>x.id===id);if(i<0)return null;list[i]=Object.assign({},list[i],patch);return list[i]}
+$("refresh").addEventListener("click",()=>refresh(false));
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&loaded&&Date.now()-lastLoad>60000&&!isOpen&&!wq&&!teOpen&&!ioOpen)refresh(true)});
+
+/* ---------- Templates ---------- */
+const firstName=c=>(c.contact||"").trim().split(/\s+/)[0]||"there";
+const fill=(s,c)=>String(s||"").replace(/\{first\}/gi,firstName(c)).replace(/\{company\}/gi,short(c.company));
+function defaultTpl(c){
+  const k=STAGE_KIND[c.stage||"new"];
+  const of=tpls.filter(t=>t.kind===k);
+  return of.find(t=>t.def)||of[0]||tpls.find(t=>t.kind==="opening")||tpls[0]||null;
+}
+const tplById=id=>tpls.find(t=>t.id===id)||null;
+const tplOptions=sel=>tpls.map(t=>`<option value="${esc(t.id)}"${t.id===sel?" selected":""}>${esc(t.name)} (${KIND[t.kind]||"Other"})</option>`).join("");
+const mailHref=(email,sub,body)=>email?`mailto:${email}?subject=${encodeURIComponent(sub)}&body=${encodeURIComponent(body)}`:"#";
+function sentLabel(stage){return {new:"Mark emailed",emailed:"Mark follow-up sent",follow:"Mark final email sent"}[stage||"new"]||"Log email sent"}
+function markSent(id,tname){
+  const c=list.find(x=>x.id===id);if(!c)return null;
+  const was=c.stage||"new";let st=was,nx=c.next||"",text;
+  if(was==="new"){st="emailed";nx=plus(4);text="Opening email sent"}
+  else if(was==="emailed"){st="follow";nx=plus(7);text="Follow-up email sent"}
+  else if(was==="follow"){nx="";text="Final email sent"}
+  else text="Email sent";
+  if(tname)text+=` (${tname})`;
+  const lead=updLead(id,{stage:st,last:today(),next:nx,updated:Date.now(),activity:(c.activity||[]).concat({at:today(),text})});
+  return {text,nx,lead};
+}
+
+function render(){
+  const t=list.length,cnt={};ST.forEach(s=>cnt[s[0]]=0);
+  list.forEach(c=>{cnt[c.stage]=(cnt[c.stage]||0)+1});
+  const due=list.filter(isDue).length;
+  $("sub").textContent=!loaded?"Loading leads…":t?`${t} leads · ${due} follow-up${due===1?"":"s"} due`:"No leads yet";
+  $("bar").innerHTML=t?ST.filter(s=>cnt[s[0]]).map(s=>`<i style="width:${cnt[s[0]]/t*100}%;background:${s[2]}" title="${s[1]}: ${cnt[s[0]]}"></i>`).join(""):"";
+  const tiles=[["all","All leads",t],["due","Due now",due]].concat(ST.map(s=>[s[0],s[1],cnt[s[0]]]));
+  $("tiles").innerHTML=tiles.map(([k,l,n])=>`<button type="button" class="tile${k==="due"&&n?" hot":""}" data-k="${k}" aria-pressed="${filter===k}"><b>${n}</b><span>${l}</span></button>`).join("");
+  $("views").querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.v===view)));
+  const qq=q.trim().toLowerCase();
+  const rows=list.filter(c=>filter==="all"||(filter==="due"?isDue(c):c.stage===filter))
+    .filter(c=>!qq||[c.company,c.contact,c.email,c.trade,c.area].join(" ").toLowerCase().includes(qq));
+  const nm=(a,b)=>(a.company||"").localeCompare(b.company||"");
+  const mi=c=>{const m=miles(c);return m==null?1e9:m};
+  rows.sort(sort==="az"?nm:sort==="upd"?(a,b)=>(b.updated||0)-(a.updated||0):sort==="near"?(a,b)=>mi(a)-mi(b)||nm(a,b):(a,b)=>(a.next||"9999").localeCompare(b.next||"9999")||nm(a,b));
+  lastRows=rows.map(c=>c.id);
+  const isStats=view==="stats";
+  $("tools").hidden=isStats;$("countrow").hidden=isStats;
+  $("list").hidden=view!=="list";$("boardwrap").hidden=view!=="board";$("mapwrap").hidden=view!=="map";$("stats").hidden=!isStats;
+  $("count").textContent=t?`Showing ${rows.length} of ${t}`:"";
+  $("wtb").hidden=!rows.length;$("wtb").textContent=`Work through ${rows.length===1?"this one":"these "+rows.length}`;
+  if(view==="board"){renderBoard(rows);return}
+  if(view==="map"){renderMap(rows);return}
+  if(isStats){renderStats();return}
+  $("list").innerHTML=rows.length?rows.map(c=>`<button type="button" class="row" data-id="${esc(c.id)}"><span><strong>${esc(c.company)}</strong><small>${esc([c.contact,c.trade,c.area,distTxt(c)].filter(Boolean).join(" · "))}</small></span><span class="meta"><span class="pill s-${esc(c.stage||"new")}">${SN[c.stage]||"Not contacted"}</span>${c.next?`<span class="when${isDue(c)?" late":""}">${isDue(c)?"Due":"Next"} ${fmt(c.next)}</span>`:""}</span></button>`).join("")
+    :`<p class="empty">${!loaded?"Loading your leads…":t?"No leads match this view.":"No leads yet. Tap + Add lead or import a spreadsheet."}</p>`;
+}
+
+/* ---------- Board ---------- */
+function renderBoard(rows){
+  const by={};ST.forEach(s=>by[s[0]]=[]);
+  rows.forEach(c=>(by[c.stage]||by.new).push(c));
+  $("bhint").textContent=matchMedia("(pointer:coarse)").matches?"Tap a card to open it and change its stage.":"Drag a card to another column to move it on. Click a card to open it.";
+  $("board").innerHTML=ST.map(([k,l,col])=>`<section class="col" data-st="${k}" aria-label="${l}: ${by[k].length}"><div class="colh"><i style="background:${col}"></i>${l}<span>${by[k].length}</span></div><div class="cards">${by[k].length?by[k].map(c=>`<button type="button" class="card" draggable="true" data-id="${esc(c.id)}"><strong>${esc(c.company)}</strong><small>${esc([c.trade,c.area].filter(Boolean).join(" · "))}</small>${c.next?`<span class="when${isDue(c)?" late":""}">${isDue(c)?"Due":"Next"} ${fmt(c.next)}</span>`:""}</button>`).join(""):`<p class="colempty">${loaded?"None":"…"}</p>`}</div></section>`).join("");
+}
+function moveTo(id,st){
+  const c=list.find(x=>x.id===id);
+  if(!c||!SN[st]||(c.stage||"new")===st)return;
+  const was=c.stage||"new";
+  if((was==="new"&&st==="emailed")||(was==="emailed"&&st==="follow")){
+    const r=markSent(id);if(!r)return;
+    note(`${short(c.company)}: ${r.text.toLowerCase()}${r.nx?`. Next follow-up set for ${fmt(r.nx)}.`:"."}`);afterChange([r.lead]);return;
+  }
+  const patch={stage:st,updated:Date.now(),activity:(c.activity||[]).concat({at:today(),text:"Stage changed to "+SN[st]})};
+  if(st==="won"||st==="lost")patch.next="";
+  note(`${short(c.company)} moved to ${SN[st]}.`);afterChange([updLead(id,patch)]);
+}
+let dragId=null;
+$("board").addEventListener("click",e=>{const b=e.target.closest(".card");if(b)openLead(b.dataset.id)});
+$("board").addEventListener("dragstart",e=>{const b=e.target.closest(".card");if(!b)return;dragId=b.dataset.id;b.classList.add("drag");e.dataTransfer.effectAllowed="move";try{e.dataTransfer.setData("text/plain",dragId)}catch(_){}});
+$("board").addEventListener("dragend",e=>{dragId=null;$("board").querySelectorAll(".drag,.over").forEach(x=>x.classList.remove("drag","over"))});
+$("board").addEventListener("dragover",e=>{const col=e.target.closest(".col");if(!col||!dragId)return;e.preventDefault();e.dataTransfer.dropEffect="move";$("board").querySelectorAll(".col.over").forEach(x=>{if(x!==col)x.classList.remove("over")});col.classList.add("over")});
+$("board").addEventListener("dragleave",e=>{const col=e.target.closest(".col");if(col&&!col.contains(e.relatedTarget))col.classList.remove("over")});
+$("board").addEventListener("drop",e=>{const col=e.target.closest(".col");if(!col||!dragId)return;e.preventDefault();const id=dragId;dragId=null;col.classList.remove("over");moveTo(id,col.dataset.st)});
+
+/* ---------- Map ---------- */
+let LMAP=null,LPINS=null,leafP=null,mapTok=0,lastFit="";
+const loadLeaflet=()=>window.L&&L.map?Promise.resolve(L):leafP||(leafP=new Promise((res,rej)=>{
+  const css=document.createElement("link");css.rel="stylesheet";css.href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css";document.head.appendChild(css);
+  const s=document.createElement("script");s.src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js";
+  s.onload=()=>window.L&&L.map?res(L):rej(new Error("missing"));
+  s.onerror=()=>{s.remove();css.remove();leafP=null;rej(new Error("load"))};
+  document.head.appendChild(s);
+}));
+function initMap(){
+  if(LMAP)return;
+  LMAP=L.map("map",{zoomSnap:.5}).setView(HOME,10);
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:18,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors'}).addTo(LMAP);
+  [10,20,30].forEach(mi=>{
+    L.circle(HOME,{radius:mi*1609.34,color:"#ff6a13",weight:1.5,opacity:.6,dashArray:"5 7",fill:false,interactive:false}).addTo(LMAP);
+    L.marker([HOME[0]+mi/69.05,HOME[1]],{icon:L.divIcon({className:"ring-l",html:`<span>${mi} mi</span>`,iconSize:null}),interactive:false,keyboard:false}).addTo(LMAP);
+  });
+  L.marker(HOME,{icon:L.divIcon({className:"home-pin",html:"<span>Bilston</span>",iconSize:null}),interactive:false,keyboard:false,zIndexOffset:-100}).addTo(LMAP);
+  LPINS=L.layerGroup().addTo(LMAP);
+  LMAP.on("popupopen",e=>{const b=e.popup.getElement().querySelector("[data-open]");if(b)b.addEventListener("click",()=>{const id=b.dataset.open;LMAP.closePopup();openLead(id)})});
+}
+const popupHtml=c=>`<strong>${esc(c.company)}</strong><br><span class="pill s-${esc(c.stage||"new")}">${SN[c.stage]||"Not contacted"}</span>`+
+  `<p class="small">${esc([c.trade,c.area,distTxt(c)].filter(Boolean).join(" · "))}</p>`+
+  (c.contact||c.phone?`<p class="small">${esc([c.contact,c.phone].filter(Boolean).join(" · "))}</p>`:"")+
+  (c.next?`<p class="small">${isDue(c)?"Follow-up due":"Next follow-up"} ${fmt(c.next)}</p>`:"")+
+  `<button type="button" class="btn pri sm" data-open="${esc(c.id)}">Open lead</button>`;
+async function renderMap(rows){
+  const tok=++mapTok;
+  if(!window.L||!L.map){
+    $("mapnote").textContent="Loading the map…";
+    try{await loadLeaflet()}catch(_){if(tok===mapTok)$("mapnote").textContent="The map couldn’t load. Check your internet connection, then switch to Map again.";return}
+    if(tok!==mapTok||view!=="map")return;
+  }
+  initMap();LMAP.invalidateSize();LPINS.clearLayers();
+  const pts=[],cnt={};let noArea=0,notFound=0,waiting=0;
+  rows.forEach(c=>{
+    const a=ak(c);
+    if(!a){noArea++;return}
+    if(!(a in geo)){waiting++;return}
+    const p=pos(c);if(!p){notFound++;return}
+    L.circleMarker(p,{radius:8,weight:2,color:"#ffffff",opacity:1,fillColor:SC[c.stage]||SC.new,fillOpacity:1})
+      .bindTooltip(esc(c.company),{direction:"top",offset:[0,-8]}).bindPopup(popupHtml(c)).addTo(LPINS);
+    pts.push(p);cnt[c.stage||"new"]=(cnt[c.stage||"new"]||0)+1;
+  });
+  $("legend").innerHTML=ST.filter(s=>cnt[s[0]]).map(s=>`<span><i style="background:${s[2]}"></i>${s[1]} ${cnt[s[0]]}</span>`).join("")+(pts.length?`<span><i style="background:#111;border-radius:3px"></i>Bilston, rings at 10, 20 and 30 miles</span>`:"");
+  const bits=[];
+  if(!loaded)bits.push("Loading your leads…");
+  else if(!rows.length)bits.push("No leads match this view.");
+  else bits.push(`${pts.length} of ${rows.length} lead${rows.length===1?"":"s"} on the map.`);
+  if(waiting)bits.push(geoErr?"":`Finding ${waiting} more…`);
+  if(noArea)bits.push(`${noArea} with no area.`);
+  if(notFound)bits.push(`${notFound} with an area that couldn’t be found.`);
+  if(geoErr)bits.push(`Map lookups stopped: ${geoErr}. In Apps Script, run “authorize” once, then tap Refresh.`);
+  $("mapnote").textContent=bits.filter(Boolean).join(" ");
+  const sig=lastRows.join(",")+"|"+pts.length;
+  if(pts.length&&sig!==lastFit){lastFit=sig;LMAP.fitBounds(L.latLngBounds(pts).extend(HOME).pad(.06),{maxZoom:13})}
+  if(waiting&&!geoBusy&&!geoStop)ensureGeo();
+}
+
+/* ---------- Stats ---------- */
+const REPLIED=["replied","trial","won"];
+const townOf=a=>String(a||"").replace(/\b[A-Z]{1,2}\d[A-Z\d]?(\s*\d[A-Z]{2})?\b/gi,"").replace(/[\s,]+$/,"").replace(/^[\s,]+/,"").trim();
+const cap=s=>s?s.charAt(0).toUpperCase()+s.slice(1):s;
+function groupBy(keyFn){
+  const m=new Map();
+  list.forEach(c=>{const raw=String(keyFn(c)||"").trim(),k=raw.toLowerCase()||"~";const g=m.get(k)||{k:cap(raw)||"Not set",n:0,cont:0,rep:0};g.n++;if((c.stage||"new")!=="new")g.cont++;if(REPLIED.includes(c.stage))g.rep++;m.set(k,g)});
+  return [...m.values()].sort((a,b)=>b.n-a.n||a.k.localeCompare(b.k));
+}
+function groupTable(title,first,groups){
+  const top=groups.slice(0,10),more=groups.length-top.length;
+  return `<div class="panel"><h3>${title}</h3><p class="small">Reply rate counts Replied, Trial and Won against everyone emailed.</p><table class="tbl"><thead><tr><th scope="col">${first}</th><th scope="col" class="n">Leads</th><th scope="col" class="n">Emailed</th><th scope="col" class="n">Replies</th><th scope="col" class="n">Reply rate</th></tr></thead><tbody>${top.map(g=>`<tr><td>${esc(g.k)}</td><td class="n">${g.n}</td><td class="n">${g.cont}</td><td class="n">${g.rep}</td><td class="n">${g.cont?Math.round(g.rep/g.cont*100)+"%":"–"}</td></tr>`).join("")}</tbody></table>${more>0?`<p class="small">${more} more not shown.</p>`:""}</div>`;
+}
+function renderStats(){
+  if(!loaded){$("stats").innerHTML=`<p class="empty">Loading your leads…</p>`;return}
+  if(!list.length){$("stats").innerHTML=`<p class="empty">No leads yet. Stats appear once you’ve added some.</p>`;return}
+  const contacted=list.filter(c=>(c.stage||"new")!=="new").length;
+  const replies=list.filter(c=>REPLIED.includes(c.stage)).length;
+  const trial=list.filter(c=>c.stage==="trial").length,won=list.filter(c=>c.stage==="won").length;
+  const due=list.filter(isDue).length;
+  const soon=list.filter(c=>c.next&&c.next>today()&&c.next<=plus(7)&&c.stage!=="won"&&c.stage!=="lost").length;
+  const wkAgo=Date.now()-7*864e5,added7=list.filter(c=>(c.created||0)>=wkAgo).length;
+  // Emails sent per week (Monday to Sunday), from each lead's activity log
+  const monOf=d=>{const x=new Date(d+"T12:00:00");x.setDate(x.getDate()-(x.getDay()+6)%7);return iso(x)};
+  const thisMon=monOf(today()),weeks=[];
+  for(let i=7;i>=0;i--){const d=new Date(thisMon+"T12:00:00");d.setDate(d.getDate()-7*i);weeks.push(iso(d))}
+  const wc=Object.fromEntries(weeks.map(w=>[w,0]));let sentAll=0;
+  list.forEach(c=>(c.activity||[]).forEach(a=>{if(a&&a.at&&/email sent/i.test(a.text||"")){sentAll++;const w=monOf(a.at);if(w in wc)wc[w]++}}));
+  const vals=weeks.map(w=>wc[w]),max=Math.max(1,...vals),peak=vals.indexOf(Math.max(...vals));
+  const kpi=(n,l,s)=>`<div class="kpi"><b>${n}</b><span>${l}</span><small>${s}</small></div>`;
+  const bars=weeks.map((w,i)=>{const v=vals[i],h=v/max*100,lab=i===7?"This week":`w/c ${fmt(w)}`,show=v&&(i===7||i===peak);
+    return `<div tabindex="0" aria-label="${lab}: ${v} email${v===1?"":"s"} sent"><i style="height:${h}%"></i>${show?`<em style="bottom:calc(${h}% + 4px)">${v}</em>`:""}<span class="tt" style="bottom:calc(${h}% + 6px)">${lab}: ${v} sent</span></div>`}).join("");
+  $("stats").innerHTML=`<div class="kpis">`+
+    kpi(wc[thisMon],"Emails this week",`${sentAll} sent in total`)+
+    kpi(contacted?Math.round(replies/contacted*100)+"%":"–","Reply rate",`${replies} of ${contacted} emailed`)+
+    kpi(trial,"On trial",`${won} won`)+
+    kpi(due,"Follow-ups due",`${soon} more in the next 7 days`)+
+    kpi(added7,"New leads this week",`${list.length} leads in total`)+
+  `</div>`+
+  `<div class="panel"><h3>Emails sent per week</h3><p class="small">Last 8 weeks, counted from the activity log of each lead.</p><div class="wk" role="list" aria-label="Emails sent per week">${bars.replace(/<div tabindex/g,'<div role="listitem" tabindex')}</div><div class="wkl" aria-hidden="true">${weeks.map((w,i)=>`<span>${i===7?"Now":fmt(w)}</span>`).join("")}</div></div>`+
+  `<div class="cols2">${groupTable("By trade","Trade",groupBy(c=>c.trade))}${groupTable("By town","Town",groupBy(c=>townOf(c.area)))}</div>`;
+}
+
+/* ---------- Lead sheet ---------- */
+function updLeadMail(){const c=list.find(x=>x.id===cur);if(c)$("mail").href=mailHref(c.email,$("dsub").value,$("dtext").value)}
+function fillExtra(c){
+  const t=tplById(leadTpl)||defaultTpl(c);
+  $("dtpl").innerHTML=tplOptions(t&&t.id);
+  $("dsub").value=t?fill(t.subject,c):"";$("dtext").value=t?fill(t.body,c):"";
+  $("mail").hidden=!c.email;$("cp").hidden=!c.email;updLeadMail();
+  $("call").href="tel:"+(c.phone||"").replace(/\s/g,"");$("call").hidden=!c.phone;
+  $("cline").textContent=[c.email,c.phone].filter(Boolean).join("  ·  ");
+  $("mk").textContent=sentLabel(c.stage);
+  $("log").innerHTML=(c.activity||[]).slice().reverse().map(a=>`<li><time>${fmt(a.at)}</time>${esc(a.text)}</li>`).join("")||"<li>No activity yet.</li>";
+}
+function openLead(id){
+  const c=id?list.find(x=>x.id===id):{stage:"new"};
+  if(!c)return;
+  cur=id;isOpen=true;armed=false;leadTpl=null;$("del").textContent="Delete lead";
+  $("st").textContent=id?c.company:"New lead";
+  FIELDS.forEach(k=>{$("f_"+k).value=c[k]||""});
+  if(!c.stage)$("f_stage").value="new";
+  $("extra").hidden=!id;$("actwrap").hidden=!id;$("del").hidden=!id;
+  $("save").textContent=id?"Save changes":"Add lead";
+  if(id)fillExtra(c);
+  $("ov").classList.add("on");
+  (id?$("x"):$("f_company")).focus();
+}
+function closeLead(){isOpen=false;cur=null;$("ov").classList.remove("on");$("draft").open=false}
+
+$("tiles").addEventListener("click",e=>{const b=e.target.closest(".tile");if(b){filter=b.dataset.k;if(view==="stats")setView("list");else render()}});
+$("views").addEventListener("click",e=>{const b=e.target.closest("button[data-v]");if(b)setView(b.dataset.v)});
+$("list").addEventListener("click",e=>{const b=e.target.closest(".row");if(b)openLead(b.dataset.id)});
+$("q").addEventListener("input",e=>{q=e.target.value;render()});
+$("sort").addEventListener("change",e=>{sort=e.target.value;render();if(sort==="near")ensureGeo()});
+$("add").addEventListener("click",()=>openLead(null));
+$("x").addEventListener("click",closeLead);
+$("ov").addEventListener("click",e=>{if(e.target.id==="ov")closeLead()});
+$("dtpl").addEventListener("change",e=>{leadTpl=e.target.value;const c=list.find(x=>x.id===cur);if(c)fillExtra(c)});
+$("dsub").addEventListener("input",updLeadMail);
+$("dtext").addEventListener("input",updLeadMail);
+
+$("f").addEventListener("submit",e=>{
+  e.preventDefault();
+  const d={};FIELDS.forEach(k=>{d[k]=$("f_"+k).value.trim()});
+  if(!d.company){note("Add a company name first.");return}
+  const old=cur?list.find(x=>x.id===cur):null,add=[];
+  if(!old)add.push({at:today(),text:"Lead added"});
+  else if((old.stage||"new")!==d.stage)add.push({at:today(),text:"Stage changed to "+SN[d.stage]});
+  d.updated=Date.now();d.activity=((old&&old.activity)||[]).concat(add);
+  const l=old?updLead(cur,d):addLead(Object.assign(d,{created:Date.now(),last:"",source:"Added manually"}));
+  closeLead();note("");afterChange([l]);
+});
+$("mk").addEventListener("click",()=>{
+  const t=tplById($("dtpl").value),r=markSent(cur,t&&t.name);if(!r)return;
+  leadTpl=null;const c=list.find(x=>x.id===cur);
+  $("f_stage").value=c.stage;$("f_next").value=c.next||"";
+  note(r.text+(r.nx?`. Next follow-up set for ${fmt(r.nx)}.`:"."));afterChange([r.lead]);
+});
+$("nf").addEventListener("submit",e=>{
+  e.preventDefault();const t=$("ntext").value.trim(),c=list.find(x=>x.id===cur);
+  if(!t||!c)return;
+  const l=updLead(cur,{updated:Date.now(),activity:(c.activity||[]).concat({at:today(),text:t})});$("ntext").value="";afterChange([l]);
+});
+$("del").addEventListener("click",()=>{
+  if(!armed){armed=true;$("del").textContent="Tap again to delete";clearTimeout(armT);armT=setTimeout(()=>{armed=false;$("del").textContent="Delete lead"},3000);return}
+  const id=cur;closeLead();list=list.filter(x=>x.id!==id);render();commitDelete(id);
+});
+async function copyText(btn,txt,fallbackEl,label){
+  try{await navigator.clipboard.writeText(txt);btn.textContent="Copied"}
+  catch(_){if(fallbackEl){fallbackEl.focus();fallbackEl.select()}btn.textContent="Select and copy below"}
+  setTimeout(()=>{btn.textContent=label},2500);
+}
+$("cp").addEventListener("click",()=>{
+  const c=list.find(x=>x.id===cur);if(!c)return;
+  $("draft").open=true;copyText($("cp"),`To: ${c.email}\nSubject: ${$("dsub").value}\n\n${$("dtext").value}`,$("dtext"),"Copy email");
+});
+
+/* ---------- Work-through mode ---------- */
+let wq=null;
+function wqLead(){return wq?list.find(x=>x.id===wq.ids[wq.i]):null}
+function wqShow(){
+  while(wq.i<wq.ids.length&&!wqLead())wq.i++;
+  const n=wq.ids.length;
+  $("wqbar").style.width=(Math.min(wq.i,n)/n*100)+"%";
+  if(wq.i>=n){
+    $("wqlead").hidden=true;$("wqdone").hidden=false;$("wqp").textContent=`${n} of ${n}`;$("wqt").textContent="All done";
+    $("wqdn").textContent=wq.sent;
+    $("wqdt").textContent=`email${wq.sent===1?"":"s"} sent · ${wq.skipped} skipped · ${wq.lost} not interested`;
+    $("wqclose").focus();return;
+  }
+  const c=wqLead();
+  $("wqlead").hidden=false;$("wqdone").hidden=true;
+  $("wqp").textContent=`${wq.i+1} of ${n} · ${SN[c.stage]||"Not contacted"}`;
+  $("wqt").textContent=c.company;
+  $("wqinfo").textContent=[c.contact,c.trade,c.area].filter(Boolean).join(" · ")+(c.email?"\n":"")+[c.email,c.phone].filter(Boolean).join("  ·  ");
+  $("wqinfo").style.whiteSpace="pre-line";
+  $("wqnotes").textContent=c.notes||"";$("wqnotes").hidden=!c.notes;
+  wq.tpl=null;wqFill(c);
+  $("wqsent").textContent=c.email?"Sent – next":"Done – next";
+  $("wqmail").hidden=!c.email;$("wqcp").hidden=!c.email;
+}
+function wqFill(c){
+  const t=tplById(wq.tpl)||defaultTpl(c);
+  $("wqtpl").innerHTML=tplOptions(t&&t.id);
+  $("wqsub").value=t?fill(t.subject,c):"";$("wqbody").value=t?fill(t.body,c):"";wqMail();
+}
+function wqMail(){const c=wqLead();if(c)$("wqmail").href=mailHref(c.email,$("wqsub").value,$("wqbody").value)}
+function wqNext(changed){wq.i++;if(changed)commit([changed]);render();wqShow()}
+$("wtb").addEventListener("click",()=>{
+  if(!lastRows.length)return;
+  wq={ids:lastRows.slice(),i:0,sent:0,skipped:0,lost:0,tpl:null};
+  $("wq").classList.add("on");wqShow();$("wqx").focus();
+});
+function closeWQ(){$("wq").classList.remove("on");if(wq&&(wq.sent||wq.lost))note(`Work-through: ${wq.sent} sent, ${wq.skipped} skipped, ${wq.lost} not interested.`);wq=null;render()}
+$("wqx").addEventListener("click",closeWQ);
+$("wqclose").addEventListener("click",closeWQ);
+$("wqtpl").addEventListener("change",e=>{wq.tpl=e.target.value;const c=wqLead();if(c)wqFill(c)});
+$("wqsub").addEventListener("input",wqMail);
+$("wqbody").addEventListener("input",wqMail);
+$("wqcp").addEventListener("click",()=>{const c=wqLead();if(c)copyText($("wqcp"),`To: ${c.email}\nSubject: ${$("wqsub").value}\n\n${$("wqbody").value}`,$("wqbody"),"Copy")});
+$("wqsent").addEventListener("click",()=>{const c=wqLead();if(!c)return;const t=tplById($("wqtpl").value),r=markSent(c.id,t&&t.name);wq.sent++;wqNext(r&&r.lead)});
+$("wqskip").addEventListener("click",()=>{wq.skipped++;wqNext()});
+$("wqlost").addEventListener("click",()=>{const c=wqLead();if(!c)return;const l=updLead(c.id,{stage:"lost",next:"",updated:Date.now(),activity:(c.activity||[]).concat({at:today(),text:"Marked not interested"})});wq.lost++;wqNext(l)});
+
+/* ---------- Template editor ---------- */
+let teId=null,teOpen=false,tdArm=false,trArm=false;
+const temsg=t=>{$("temsg").textContent=t};
+function renderTpls(){
+  $("tlist").innerHTML=tpls.length?tpls.map(t=>`<button type="button" class="trow" data-id="${esc(t.id)}" aria-current="${t.id===teId}"><span><strong>${esc(t.name)}</strong><small>${esc(t.subject||"(no subject)")}</small></span><span class="badge${t.def?" def":""}">${KIND[t.kind]||"Other"}${t.def?" · default":""}</span></button>`).join(""):`<p class="small">No templates yet. Add one, or restore the defaults.</p>`;
+}
+function editTpl(id){
+  const t=id?tplById(id):{name:"",kind:"opening",def:false,subject:"",body:"Hi {first},\n\n\n\nCheers,\n\n"+SIG};
+  if(!t)return;
+  teId=id;tdArm=false;$("tdel").textContent="Delete";$("tdel").hidden=!id;
+  $("t_name").value=t.name;$("t_kind").value=t.kind||"other";$("t_def").checked=!!t.def;$("t_subject").value=t.subject||"";$("t_body").value=t.body||"";
+  $("tf").hidden=false;renderTpls();temsg("");$("t_name").focus();
+}
+function closeTF(){teId=null;$("tf").hidden=true;renderTpls()}
+function openTE(){if(isOpen)closeLead();$("te").classList.add("on");teOpen=true;closeTF();temsg("");trArm=false;$("treset").textContent="Restore defaults";$("tex").focus()}
+function closeTE(){$("te").classList.remove("on");teOpen=false}
+$("teopen").addEventListener("click",openTE);
+$("tex").addEventListener("click",closeTE);
+$("te").addEventListener("click",e=>{if(e.target.id==="te")closeTE()});
+$("tlist").addEventListener("click",e=>{const b=e.target.closest(".trow");if(b)editTpl(b.dataset.id)});
+$("tnew").addEventListener("click",()=>editTpl(null));
+$("tcancel").addEventListener("click",()=>{closeTF();temsg("")});
+$("tf").addEventListener("submit",e=>{
+  e.preventDefault();
+  const d={name:$("t_name").value.trim(),kind:$("t_kind").value,def:$("t_def").checked,subject:$("t_subject").value.trim(),body:$("t_body").value};
+  if(!d.name){temsg("Give the template a name.");return}
+  if(!d.body.trim()){temsg("The email can’t be empty.");return}
+  if(d.def)tpls.forEach(t=>{if(t.kind===d.kind)t.def=false});
+  if(teId){const i=tpls.findIndex(t=>t.id===teId);if(i>=0)tpls[i]=Object.assign({},tpls[i],d)}
+  else tpls.push(Object.assign({id:uid("t-")},d));
+  commitTemplates();closeTF();temsg(`Saved “${d.name}”.`);
+});
+$("tdel").addEventListener("click",()=>{
+  if(!teId)return;
+  if(!tdArm){tdArm=true;$("tdel").textContent="Tap again to delete";setTimeout(()=>{tdArm=false;$("tdel").textContent="Delete"},3000);return}
+  const t=tplById(teId);tpls=tpls.filter(x=>x.id!==teId);commitTemplates();closeTF();temsg(t?`Deleted “${t.name}”.`:"");
+});
+$("treset").addEventListener("click",()=>{
+  if(!trArm){trArm=true;$("treset").textContent="Tap again: replace all templates";setTimeout(()=>{trArm=false;$("treset").textContent="Restore defaults"},3000);return}
+  trArm=false;$("treset").textContent="Restore defaults";tpls=clone(DEF_TPL);commitTemplates();closeTF();temsg("Default templates restored.");
+});
+
+/* ---------- Import / Export ---------- */
+const XCOLS=[["company","Company"],["stage","Status"],["email","Email"],["contact","Contact"],["next","Next follow-up"],["last","Date emailed"],["phone","Phone"],["trade","Trade"],["area","Area"],["notes","Notes"],["source","Source"],["id","CRM ID"]];
+const XL_LABEL=Object.fromEntries(XCOLS);
+const ALIAS={company:["company","business","business name","company name","name"],email:["email","e-mail","email address"],contact:["contact","contact name","first name"],phone:["phone","telephone","tel","mobile","phone number"],trade:["trade","category","type"],area:["area","location","town","postcode"],stage:["status","stage"],next:["next follow-up","next follow up","follow-up","follow up","next"],last:["date emailed","last contacted","emailed","last"],notes:["notes","note","comments"],source:["source"],id:["crm id","id"]};
+const norm=s=>String(s??"").trim().toLowerCase().replace(/\s+/g," ");
+const LBL=Object.fromEntries(ST.flatMap(s=>[[s[1].toLowerCase(),s[0]],[s[0],s[0]]]).concat([["not interested","lost"],["follow up sent","follow"],["contacted","emailed"]]));
+let XL=null,ioOpen=false,pending=null;
+const ioMsg=t=>{$("iomsg").textContent=t};
+const sorted=()=>list.slice().sort((a,b)=>(a.company||"").localeCompare(b.company||""));
+const loadXL=()=>XL?Promise.resolve(XL):new Promise((res,rej)=>{const s=document.createElement("script");s.src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js";s.onload=()=>{XL=window.XLSX||null;XL?res(XL):rej(new Error("missing"))};s.onerror=()=>{s.remove();rej(new Error("load"))};document.head.appendChild(s)});
+function toISO(v){
+  if(v instanceof Date)return isNaN(v)?"":iso(new Date(v.getTime()+432e5));
+  if(typeof v==="number"&&v>20000&&v<80000)return new Date(Math.round((v-25569)*864e5)).toISOString().slice(0,10);
+  const s=String(v??"").trim();if(!s)return "";
+  let m=s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+  if(m)return `${m[1]}-${m[2].padStart(2,"0")}-${m[3].padStart(2,"0")}`;
+  m=s.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{2}|\d{4})$/);
+  if(m)return `${m[3].length===2?"20"+m[3]:m[3]}-${m[2].padStart(2,"0")}-${m[1].padStart(2,"0")}`;
+  return "";
+}
+function phoneOf(v){let s=String(v??"").trim().replace(/^'/,"");if(typeof v==="number"&&!s.startsWith("0")&&s.length>=9&&s.length<=10)s="0"+s;return s}
+function parseCSV(t){
+  const rows=[];let row=[],f="",qt=false;t=t.replace(/^﻿/,"");
+  for(let i=0;i<t.length;i++){const c=t[i];
+    if(qt){if(c==='"'){if(t[i+1]==='"'){f+='"';i++}else qt=false}else f+=c}
+    else if(c==='"')qt=true;
+    else if(c===","){row.push(f);f=""}
+    else if(c==="\n"||c==="\r"){if(c==="\r"&&t[i+1]==="\n")i++;row.push(f);rows.push(row);row=[];f=""}
+    else f+=c}
+  if(f!==""||row.length){row.push(f);rows.push(row)}
+  return rows;
+}
+function download(name,data,type){
+  const blob=data instanceof Blob?data:new Blob([data],{type:type||"text/plain;charset=utf-8"});
+  const url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),4000);ioMsg("Downloaded "+name+".");
+}
+function openIO(){if(isOpen)closeLead();ioMsg("");$("prev").innerHTML="";pending=null;$("io").classList.add("on");ioOpen=true;$("iox").focus()}
+function closeIO(){$("io").classList.remove("on");ioOpen=false;pending=null}
+$("ioopen").addEventListener("click",openIO);
+$("iox").addEventListener("click",closeIO);
+$("io").addEventListener("click",e=>{if(e.target.id==="io")closeIO()});
+document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;if(teOpen)closeTE();else if(wq)closeWQ();else if(ioOpen)closeIO();else if(isOpen)closeLead()});
+
+async function exportXlsx(blank){
+  if(!blank&&!list.length){ioMsg("No leads to export yet.");return}
+  ioMsg("Preparing the Excel file…");
+  let X;try{X=await loadXL()}catch(_){ioMsg("Excel export needs an internet connection. Use CSV instead, which opens in Excel too.");return}
+  const rows=[XCOLS.map(c=>c[1])];
+  if(!blank)sorted().forEach(c=>rows.push(XCOLS.map(([k])=>k==="stage"?(SN[c.stage]||"Not contacted"):(k==="next"||k==="last")?(c[k]?new Date(c[k]+"T12:00:00"):""):(c[k]??""))));
+  const ws=X.utils.aoa_to_sheet(rows,{cellDates:true,dateNF:"dd/mm/yyyy"});
+  ws["!cols"]=[34,15,36,16,14,14,15,28,24,44,22,24].map(w=>({wch:w}));
+  const wb=X.utils.book_new();X.utils.book_append_sheet(wb,ws,"Leads");
+  const buf=X.write(wb,{bookType:"xlsx",type:"array"});
+  download(blank?"bostin-jig-leads-template.xlsx":`bostin-jig-leads-${today()}.xlsx`,new Blob([buf],{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}));
+}
+$("exx").addEventListener("click",()=>exportXlsx(false));
+$("ext").addEventListener("click",()=>exportXlsx(true));
+$("exc").addEventListener("click",()=>{
+  if(!list.length){ioMsg("No leads to export yet.");return}
+  const cell=v=>`"${String(v??"").replace(/"/g,'""')}"`;
+  const csv="﻿"+[XCOLS.map(c=>c[1]).join(",")].concat(sorted().map(c=>XCOLS.map(([k])=>cell(k==="stage"?(SN[c.stage]||"Not contacted"):(k==="next"||k==="last")&&c[k]?c[k].split("-").reverse().join("/"):c[k])).join(","))).join("\r\n");
+  download(`bostin-jig-leads-${today()}.csv`,csv,"text/csv;charset=utf-8");
+});
+$("exb").addEventListener("click",()=>{
+  download(`bostin-jig-backup-${today()}.json`,JSON.stringify({app:"bostin-jig-crm",v:2,exported:new Date().toISOString(),contacts:list,templates:tpls},null,1),"application/json");
+});
+
+function planImport(rows){
+  let h=-1,map={};
+  for(let r=0;r<Math.min(rows.length,10)&&h<0;r++){
+    const m={};(rows[r]||[]).forEach((cell,i)=>{const n=norm(cell);for(const k in ALIAS)if(m[k]===undefined&&ALIAS[k].includes(n))m[k]=i});
+    if(m.company!==undefined||m.email!==undefined){h=r;map=m}
+  }
+  if(h<0)return null;
+  const byId=new Map(list.map(c=>[c.id,c]));
+  const byEmail=new Map(list.filter(c=>c.email).map(c=>[c.email.toLowerCase(),c]));
+  const byCo=new Map(list.filter(c=>c.company).map(c=>[norm(c.company),c]));
+  const seen=new Set(),adds=[],ups=[];let skip=0;
+  for(const row of rows.slice(h+1)){
+    const v={};for(const k in map)v[k]=(row||[])[map[k]];
+    const d={};
+    ["company","email","contact","trade","area","notes","source"].forEach(k=>{if(k in map)d[k]=String(v[k]??"").trim()});
+    if("phone" in map)d.phone=phoneOf(v.phone);
+    if("stage" in map){const s=LBL[norm(v.stage)];if(s)d.stage=s}
+    if("next" in map)d.next=toISO(v.next);
+    if("last" in map)d.last=toISO(v.last);
+    if(!d.company&&!d.email){if(Object.values(d).some(Boolean))skip++;continue}
+    const key=d.email?d.email.toLowerCase():"co:"+norm(d.company);
+    if(seen.has(key)){skip++;continue}
+    seen.add(key);
+    const id=String(v.id??"").trim();
+    const ex=(id&&byId.get(id))||(d.email&&byEmail.get(d.email.toLowerCase()))||(!d.email&&d.company&&byCo.get(norm(d.company)));
+    if(ex){
+      const same=(k,a,b)=>k==="email"?a.toLowerCase()===b.toLowerCase():k==="phone"?a.replace(/\s/g,"")===b.replace(/\s/g,""):a===b;
+      const ch={};
+      for(const k in d){const nv=d[k];if(!nv||(k==="stage"&&nv==="new"))continue;if(!same(k,String(ex[k]??""),nv))ch[k]=nv}
+      if(Object.keys(ch).length)ups.push({id:ex.id,ch});
+    }else adds.push(d);
+  }
+  return {kind:"rows",adds,ups,skip};
+}
+const pl=(k,w)=>`${k} ${w}${k===1?"":"s"}`;
+function showPreview(name,html,n,label){
+  $("prev").innerHTML=`<div class="pv"><p><strong>${esc(name)}</strong></p>${html}${n?`<div class="acts"><button class="btn pri" id="go" type="button">${label}</button><button class="btn" id="cx" type="button">Cancel</button></div>`:`<p class="small">Nothing new to import.</p>`}</div>`;
+}
+$("pick").addEventListener("click",()=>$("file").click());
+$("file").addEventListener("change",async e=>{
+  const f=e.target.files&&e.target.files[0];e.target.value="";if(!f)return;
+  $("prev").innerHTML="";pending=null;ioMsg("Reading "+f.name+"…");
+  const ext=(f.name.split(".").pop()||"").toLowerCase();
+  if(ext==="json"){
+    let o;try{o=JSON.parse(await f.text())}catch(_){ioMsg("That backup file couldn’t be read.");return}
+    const cs=o&&Array.isArray(o.contacts)?o.contacts.filter(c=>c&&c.id&&(c.company||c.email)):null;
+    if(!cs||!cs.length){ioMsg("That isn’t a Bostin Jig CRM backup.");return}
+    const ts=Array.isArray(o.templates)&&o.templates.length?o.templates:null;
+    ioMsg("");pending={kind:"restore",contacts:cs,templates:ts};
+    showPreview(f.name,`<ul class="log"><li>Backup from ${o.exported?esc(new Date(o.exported).toLocaleString("en-GB")):"an unknown date"}</li><li>${pl(cs.length,"lead")}${ts?` and ${pl(ts.length,"template")}`:""} in the backup</li><li>This replaces all ${pl(list.length,"lead")} here now</li></ul>`,cs.length,`Restore ${cs.length}`);
+    return;
+  }
+  let rows;
+  try{
+    if(ext==="csv")rows=parseCSV(await f.text());
+    else{
+      let X;try{X=await loadXL()}catch(_){ioMsg("Reading Excel files needs an internet connection. Save the sheet as CSV and import that instead.");return}
+      const wb=X.read(await f.arrayBuffer(),{type:"array",cellDates:true});
+      rows=X.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{header:1,raw:true,defval:""});
+    }
+  }catch(_){ioMsg("That file couldn’t be read. Use an .xlsx, .xls, .csv or backup .json file.");return}
+  const p=planImport(rows);
+  if(!p){ioMsg("No header row found. The first row needs column names such as Company and Email.");return}
+  ioMsg("");pending=p;
+  const n=p.adds.length+p.ups.length;
+  showPreview(f.name,`<ul class="log"><li>${pl(p.adds.length,"new lead")}</li><li>${pl(p.ups.length,"existing lead")} updated</li>${p.skip?`<li>${pl(p.skip,"row")} skipped (no company or email, or repeated)</li>`:""}</ul>`,n,`Import ${n}`);
+});
+$("prev").addEventListener("click",e=>{
+  if(e.target.id==="cx"){pending=null;$("prev").innerHTML="";ioMsg("");return}
+  if(e.target.id!=="go"||!pending)return;
+  const p=pending;pending=null;$("prev").innerHTML="";
+  if(p.kind==="restore"){
+    const cs=p.contacts.map(c=>Object.assign({stage:"new",activity:[]},c));ioMsg(`Restoring ${pl(cs.length,"lead")}…`);
+    api("replaceAll",cs,p.templates||null).then(n=>{list=cs;ioMsg(`Restored ${pl(n,"lead")} from the backup.`);refresh(true)},e=>ioMsg(`Restore failed (${errMsg(e)}). Tap Refresh to check the Google Sheet.`));return;
+  }
+  const now=Date.now(),changed=[];
+  p.adds.forEach(d=>changed.push(addLead({company:d.company||d.email,contact:d.contact||"",email:d.email||"",phone:d.phone||"",trade:d.trade||"",area:d.area||"",stage:d.stage||"new",next:d.next||"",last:d.last||"",notes:d.notes||"",source:d.source||"Imported",activity:[{at:today(),text:"Lead imported from file"}],created:now,updated:now})));
+  p.ups.forEach(({id,ch})=>{const c=list.find(x=>x.id===id);if(!c)return;changed.push(updLead(id,Object.assign({},ch,{updated:now,activity:(c.activity||[]).concat({at:today(),text:"Updated from import: "+Object.keys(ch).map(k=>XL_LABEL[k]||k).join(", ")})})))});
+  afterChange(changed);
+  ioMsg(`Done: ${p.adds.length} added, ${p.ups.length} updated.`);
+});
+
+render();
+refresh(false);
+}
+</script>
+</body>
+</html>
