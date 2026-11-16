@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#141414">
+<title>Bostin Jig CRM</title>
+<link rel="manifest" href="crm.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="crm-icon-192.png">
+<link rel="apple-touch-icon" href="crm-apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="BJ CRM">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:#141414;color:#f1efec;
+    font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+  #app{position:fixed;inset:0;width:100%;height:100%;border:0;display:block;
+    background:#fff;opacity:0;transition:opacity .2s}
+  #app.on{opacity:1}
+  #app[hidden]{display:none}
+  .screen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:24px}
+  .screen[hidden]{display:none}
+  .box{width:100%;max-width:420px;text-align:center}
+  .logo{width:72px;height:72px;border-radius:16px;display:block;margin:0 auto 16px}
+  h1{font-size:22px;margin:0 0 8px;font-weight:700;letter-spacing:.2px}
+  p{margin:0 0 16px;color:#a9a39c}
+  input{width:100%;padding:12px 14px;border-radius:10px;border:1px solid #3a3734;
+    background:#1f1d1b;color:#f1efec;font:inherit;font-size:15px}
+  input:focus{outline:2px solid #ff6a13;outline-offset:1px;border-color:transparent}
+  button{margin-top:12px;width:100%;padding:12px 14px;border:0;border-radius:10px;
+    background:#ff6a13;color:#141414;font:inherit;font-weight:700;cursor:pointer}
+  button.ghost{background:transparent;color:#f1efec;border:1px solid #3a3734;font-weight:600}
+  .err{color:#ff5b6e;font-size:14px;margin:10px 0 0;min-height:1.2em}
+  .small{font-size:13px;margin-top:18px}
+  .spin{width:28px;height:28px;margin:18px auto 0;border-radius:50%;
+    border:3px solid #3a3734;border-top-color:#ff6a13;animation:r .8s linear infinite}
+  @keyframes r{to{transform:rotate(360deg)}}
+  #slow{margin-top:18px}
+  #slow button{margin-top:8px}
+</style>
+</head>
+<body>
+
+<!-- Loading splash, shown until the CRM has loaded -->
+<div class="screen" id="loading" hidden>
+  <div class="box">
+    <img class="logo" src="crm-icon-192.png" alt="">
+    <h1>Bostin Jig CRM</h1>
+    <div class="spin" aria-label="Loading"></div>
+    <div id="slow" hidden>
+      <p>Taking longer than usual…</p>
+      <button type="button" id="retry">Try again</button>
+      <button type="button" class="ghost" id="change">Change CRM link</button>
+    </div>
+  </div>
+</div>
+
+<!-- One-time setup on each device -->
+<div class="screen" id="setup" hidden>
+  <form class="box" id="form" autocomplete="off">
+    <img class="logo" src="crm-icon-192.png" alt="">
+    <h1>Connect your CRM</h1>
+    <p>Paste your CRM's Apps Script link (the one ending in <b>/exec</b>). It's saved on this device only.</p>
+    <input id="url" type="url" inputmode="url" placeholder="https://script.google.com/macros/s/…/exec" required>
+    <div class="err" id="err" role="alert"></div>
+    <button type="submit">Connect</button>
+    <p class="small">You only need to do this once on each device.</p>
+  </form>
+</div>
+
+<!-- No connection -->
+<div class="screen" id="offline" hidden>
+  <div class="box">
+    <img class="logo" src="crm-icon-192.png" alt="">
+    <h1>You're offline</h1>
+    <p>The CRM needs an internet connection to reach your Google Sheet.</p>
+    <button type="button" id="again">Try again</button>
+  </div>
+</div>
+
+<iframe id="app" title="Bostin Jig CRM" allow="clipboard-read; clipboard-write" hidden></iframe>
+
+<script>
+(function () {
+  "use strict";
+  var KEY = "bj-crm-url";
+  var $ = function (id) { return document.getElementById(id); };
+  var frame = $("app"), slowTimer = null;
+
+  // Storage can throw in some private modes, so every access is guarded.
+  function getUrl() { try { return localStorage.getItem(KEY) || ""; } catch (e) { return ""; } }
+  function setUrl(v) { try { localStorage.setItem(KEY, v); return true; } catch (e) { return false; } }
+  function clearUrl() { try { localStorage.removeItem(KEY); } catch (e) {} }
+
+  // Accept a full web app link (any /macros/ form) or a bare deployment ID.
+  function normalise(raw) {
+    var s = String(raw || "").trim();
+    try { s = decodeURIComponent(s); } catch (e) {}
+    var m = s.match(/^https:\/\/script\.google\.com\/(?:a\/macros\/[^\/]+|macros)(?:\/u\/\d+)?\/s\/([A-Za-z0-9_-]{20,})\/exec\b/);
+    if (m) return "https://script.google.com/macros/s/" + m[1] + "/exec";
+    if (/^AKfy[A-Za-z0-9_-]{20,}$/.test(s)) return "https://script.google.com/macros/s/" + s + "/exec";
+    return "";
+  }
+
+  function show(id) {
+    ["loading", "setup", "offline"].forEach(function (s) { $(s).hidden = s !== id; });
+  }
+
+  function showSetup(msg) {
+    clearTimeout(slowTimer);
+    frame.hidden = true; frame.classList.remove("on"); frame.removeAttribute("src");
+    $("err").textContent = msg || "";
+    $("url").value = "";
+    show("setup");
+    setTimeout(function () { $("url").focus(); }, 50);
+  }
+
+  function load() {
+    var url = getUrl();
+    if (!url) { showSetup(); return; }
+    if (navigator.onLine === false) { frame.hidden = true; show("offline"); return; }
+    show("loading");
+    $("slow").hidden = true;
+    clearTimeout(slowTimer);
+    slowTimer = setTimeout(function () { $("slow").hidden = false; }, 15000);
+    frame.classList.remove("on");
+    frame.hidden = false;
+    frame.src = url;
+  }
+
+  frame.addEventListener("load", function () {
+    if (!frame.getAttribute("src")) return;
+    clearTimeout(slowTimer);
+    frame.classList.add("on");
+    show(null);
+  });
+
+  $("form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var url = normalise($("url").value);
+    if (!url) { $("err").textContent = "That doesn't look like an Apps Script web app link ending in /exec."; return; }
+    if (!setUrl(url)) { $("err").textContent = "This browser won't let the app save the link. Turn off private browsing and try again."; return; }
+    load();
+  });
+
+  $("retry").addEventListener("click", load);
+  $("again").addEventListener("click", load);
+  $("change").addEventListener("click", function () { clearUrl(); showSetup(); });
+  window.addEventListener("online", function () { if (!$("offline").hidden) load(); });
+
+  // Handy links: /crm.html#setup=<link or ID> saves the link; /crm.html#reset forgets it.
+  function handleHash() {
+    var h = location.hash;
+    if (!h) return false;
+    var handled = false;
+    if (h.indexOf("#setup=") === 0) {
+      var url = normalise(h.slice(7));
+      if (url && setUrl(url)) handled = true;
+    } else if (h === "#reset") {
+      clearUrl(); handled = true;
+    }
+    try { history.replaceState(null, "", location.pathname + location.search); } catch (e) {}
+    return handled;
+  }
+
+  handleHash();
+  window.addEventListener("hashchange", function () { if (handleHash()) load(); });
+  load();
+
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+      navigator.serviceWorker.register("/crm-sw.js", { scope: "/crm" }).catch(function () {});
+    });
+  }
+})();
+</script>
+</body>
+</html>
