@@ -38,7 +38,7 @@
 <script>document.documentElement.classList.add('js');if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('calm');</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600&family=Unbounded:wght@500;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Instrument+Serif:ital@1&family=Rubik:wght@400;500;600&family=Unbounded:wght@700;800&display=swap">
 <style>
   :root {
     --bg: #0E0F12;
@@ -54,6 +54,8 @@
     --hot: #FFB27A;
     --white-hot: #FFE8D2;
     --display: 'Unbounded', 'Arial Black', system-ui, sans-serif;
+    --head: 'Big Shoulders Display', 'Arial Narrow', 'Roboto Condensed', system-ui, sans-serif;
+    --serif: 'Instrument Serif', 'Times New Roman', Georgia, serif;
     --body: 'Rubik', system-ui, sans-serif;
     --wrap: 1200px;
     --flag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 60' preserveAspectRatio='none'%3E%3Cdefs%3E%3CclipPath id='w'%3E%3Cpolygon points='43.6,0 56.1,0 56.1,10.3 85,60 15,60 43.6,10.3'/%3E%3C/clipPath%3E%3C/defs%3E%3Crect width='100' height='60' fill='%23111111'/%3E%3Crect x='50' width='50' height='60' fill='%23C8102E'/%3E%3Cpolygon points='43.6,0 56.1,0 56.1,10.3 85,60 15,60 43.6,10.3' fill='%23F5F3EF'/%3E%3Cg%3E%3Cellipse cx='16.0' cy='22.2' rx='12.2' ry='7.5' fill='none' stroke='%23F5F3EF' stroke-width='5.2'/%3E%3Cellipse cx='84.0' cy='22.2' rx='12.2' ry='7.5' fill='none' stroke='%23F5F3EF' stroke-width='5.2'/%3E%3Cellipse cx='50' cy='37.6' rx='12.2' ry='7.5' fill='none' stroke='%23F5F3EF' stroke-width='5.2'/%3E%3Cline x1='22.6' y1='25.9' x2='44.2' y2='37.2' stroke='%23F5F3EF' stroke-width='5.1' stroke-linecap='round'/%3E%3Cline x1='77.4' y1='25.9' x2='55.8' y2='37.2' stroke='%23F5F3EF' stroke-width='5.1' stroke-linecap='round'/%3E%3Cline x1='9.6' y1='19.1' x2='-4' y2='11.0' stroke='%23F5F3EF' stroke-width='5.1' stroke-linecap='round'/%3E%3Cline x1='90.4' y1='19.1' x2='104' y2='11.0' stroke='%23F5F3EF' stroke-width='5.1' stroke-linecap='round'/%3E%3C/g%3E%3Cg clip-path='url%28%23w%29'%3E%3Cellipse cx='16.0' cy='22.2' rx='12.2' ry='7.5' fill='none' stroke='%23111111' stroke-width='5.2'/%3E%3Cellipse cx='84.0' cy='22.2' rx='12.2' ry='7.5' fill='none' stroke='%23111111' stroke-width='5.2'/%3E%3Cellipse cx='50' cy='37.6' rx='12.2' ry='7.5' fill='none' stroke='%23111111' stroke-width='5.2'/%3E%3Cline x1='22.6' y1='25.9' x2='44.2' y2='37.2' stroke='%23111111' stroke-width='5.1' stroke-linecap='round'/%3E%3Cline x1='77.4' y1='25.9' x2='55.8' y2='37.2' stroke='%23111111' stroke-width='5.1' stroke-linecap='round'/%3E%3Cline x1='9.6' y1='19.1' x2='-4' y2='11.0' stroke='%23111111' stroke-width='5.1' stroke-linecap='round'/%3E%3Cline x1='90.4' y1='19.1' x2='104' y2='11.0' stroke='%23111111' stroke-width='5.1' stroke-linecap='round'/%3E%3C/g%3E%3C/svg%3E");
@@ -67,8 +69,8 @@
   img, svg { display: block; }
   a { color: var(--hot); }
   h1, h2, h3, p { margin: 0; }
-  h2 { font-family: var(--display); font-weight: 700; color: var(--paper); font-size: clamp(30px, 4.6vw, 52px); line-height: 1.05; letter-spacing: -0.02em; text-wrap: balance; }
-  h3 { font-family: var(--display); font-weight: 500; color: var(--paper); font-size: 19px; line-height: 1.25; letter-spacing: -0.01em; }
+  h2 { font-family: var(--head); font-weight: 800; color: var(--paper); font-size: clamp(42px, 5.8vw, 74px); line-height: .94; letter-spacing: .005em; text-transform: uppercase; text-wrap: balance; }
+  h3 { font-family: var(--head); font-weight: 700; color: var(--paper); font-size: 25px; line-height: 1.1; letter-spacing: .02em; text-transform: uppercase; }
   .wrap { max-width: var(--wrap); margin: 0 auto; padding-inline: var(--pad); }
   .band { padding-block: clamp(60px, 8vw, 104px); position: relative; }
   .section-head { display: grid; gap: 16px; margin-bottom: clamp(36px, 5vw, 56px); max-width: 760px; }
@@ -102,20 +104,36 @@
 
   /* Hero */
   .hero { position: relative; overflow: hidden; min-height: min(86vh, 820px); display: flex; align-items: center; isolation: isolate; }
-  .hero::before { content: ""; position: absolute; inset: auto -10% -40% -10%; height: 80%; z-index: -2;
-    background: radial-gradient(60% 60% at 50% 100%, rgba(232,116,44,.3), rgba(200,16,46,.14) 45%, transparent 72%); }
+  .hero::before { content: ""; position: absolute; inset: 0; z-index: -3;
+    background:
+      radial-gradient(38% 62% at 76% 100%, rgba(255,154,74,.42), rgba(232,116,44,.24) 35%, rgba(200,16,46,.16) 58%, transparent 80%),
+      radial-gradient(70% 40% at 70% 100%, rgba(200,16,46,.22), transparent 70%); }
   .hero::after { content: ""; position: absolute; inset: 0; z-index: -2; opacity: .5;
     background: linear-gradient(rgba(243,238,228,.05) 1px, transparent 1px) 0 0 / 100% 64px;
     mask-image: linear-gradient(transparent, #000 30%, #000 70%, transparent); -webkit-mask-image: linear-gradient(transparent, #000 30%, #000 70%, transparent); }
   #sparks { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
   .hero .wrap { width: 100%; padding-block: clamp(48px, 8vw, 96px); }
-  .hero-grid { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 56px); align-items: center; }
-  .hero-art { position: relative; display: grid; place-items: center; }
-  .hero-art svg { width: 100%; max-width: 420px; height: auto; position: relative; filter: drop-shadow(0 30px 50px rgba(200,16,46,.35)); }
-  .forge-glow { position: absolute; inset: -4%; border-radius: 50%; background: radial-gradient(closest-side, rgba(232,116,44,.5), rgba(200,16,46,.22) 60%, transparent); filter: blur(18px); animation: breathe 5s ease-in-out infinite; }
+  .hero-grid > div { max-width: 700px; }
+
+  /* Lizzy: the Elisabeth blast furnace, lit up behind the hero */
+  .lizzy { position: absolute; z-index: -2; pointer-events: none; right: max(0px, calc((100% - 1500px) / 2)); bottom: 0; width: min(66%, 1000px); height: 94%;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 28%); mask-image: linear-gradient(90deg, transparent, #000 28%); }
+  .lizzy svg { width: 100%; height: 100%; overflow: visible; }
+  .lz-ink { fill: #07080B; }
+  .lz-rig { fill: none; stroke: #07080B; stroke-linecap: square; }
+  .lz-lit { fill: #FFB27A; opacity: .85; animation: flick 3.2s steps(1, end) infinite; }
+  .lz-glow { animation: breathe 3.2s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+  .lz-tap { animation: breathe 4.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+  .lz-smoke { fill: rgba(190, 110, 90, .16); transform-box: fill-box; transform-origin: center; animation: smoke 8s ease-out infinite; opacity: 0; }
+  .lz-smoke.d2 { animation-delay: -2.6s; } .lz-smoke.d3 { animation-delay: -5.3s; } .lz-smoke.d4 { animation-delay: -1.2s; } .lz-smoke.d5 { animation-delay: -5s; }
+  @keyframes flick { 0%, 100% { opacity: .85; } 47% { opacity: .55; } 52% { opacity: .9; } 80% { opacity: .7; } }
   @keyframes breathe { 0%, 100% { opacity: .65; transform: scale(.96); } 50% { opacity: 1; transform: scale(1.03); } }
-  .cut { position: relative; font-family: var(--display); font-weight: 800; color: var(--paper); font-size: clamp(42px, 5.8vw, 86px); line-height: 1.02; letter-spacing: -0.035em; max-width: 12ch; text-wrap: balance; }
+  .cut { position: relative; color: var(--paper); font-size: clamp(52px, 6.8vw, 96px); }
   .cut-text { display: block; }
+  .h-bold { display: block; font: 900 1em/.9 var(--head); letter-spacing: .005em; text-transform: uppercase; }
+  .h-serif { display: block; width: fit-content; margin-top: .06em; padding-right: .12em; font: italic 400 .92em/1.02 var(--serif); letter-spacing: -.01em; text-transform: none; text-wrap: balance; text-shadow: none;
+    background: linear-gradient(90deg, var(--hot), var(--molten) 55%, var(--red)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  h2 .h-serif { font-size: 1em; line-height: 1; margin-top: .02em; }
   .laser { position: absolute; top: -10%; bottom: -10%; left: 0; width: 3px; border-radius: 3px; opacity: 0; pointer-events: none;
     background: linear-gradient(transparent, var(--white-hot) 18%, #fff 50%, var(--white-hot) 82%, transparent);
     box-shadow: 0 0 10px 3px rgba(255,178,122,.9), 0 0 40px 12px rgba(232,116,44,.5); }
@@ -143,14 +161,16 @@
 
 
   /* Made in the Black Country */
-  .bc-band { position: relative; overflow: hidden; isolation: isolate; padding-top: clamp(72px, 9vw, 120px);
-    background: linear-gradient(180deg, var(--bg) 0%, #1A0A10 22%, #4E0A16 46%, #9A0E24 68%, #C8102E 82%, #E8742C 100%); }
-  .bc-band::before { content: ""; position: absolute; left: 0; right: 0; margin-inline: auto; bottom: 8%; width: min(900px, 120vw); height: 70%; z-index: -1;
-    background: radial-gradient(closest-side, rgba(255,178,122,.55), rgba(232,116,44,.2) 55%, transparent); filter: blur(20px); animation: breathe 6s ease-in-out infinite; }
-  .bc-copy { position: relative; z-index: 2; max-width: 760px; }
-  .bc-title { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 24px; }
-  .bc-copy h2 { color: #fff; }
-  .bc-copy .lead { color: #F3E3DC; margin-top: 20px; }
+  .bc-band { position: relative; overflow: hidden; isolation: isolate; padding-block: clamp(72px, 9vw, 120px);
+    background: radial-gradient(60% 50% at 0% 0%, rgba(200,16,46,.16), transparent 70%), linear-gradient(180deg, #0B0C0F, #120C0F 55%, #0E0F12);
+    border-top: 1px solid rgba(232,116,44,.35); }
+  .bc-band::after { content: "BILSTON"; position: absolute; z-index: -1; right: -1%; top: 30px; pointer-events: none;
+    font: 900 clamp(130px, 24vw, 360px)/.8 var(--head); letter-spacing: .01em; color: transparent; -webkit-text-stroke: 1.5px rgba(243,238,228,.07); }
+  .bc-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(36px, 6vw, 80px); align-items: center; }
+  .bc-copy { position: relative; }
+  .bc-copy h2 { margin-top: 26px; }
+  .bc-copy .lead { margin-top: 20px; }
+  .bc-line { margin-top: 18px; color: var(--paper); font-weight: 500; font-size: 18px; }
   .flag-wrap { display: flex; align-items: flex-start; flex: none; }
   .flag-pole { width: 5px; height: 150px; border-radius: 2px; background: linear-gradient(90deg, #8A93A6, #E8ECF2, #6B7385); position: relative; }
   .flag-pole::before { content: ""; position: absolute; top: -7px; left: -3px; width: 10px; height: 10px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #FFE8D2, #B8892F); }
@@ -161,17 +181,24 @@
     background: repeating-linear-gradient(90deg, rgba(255,255,255,.0) 0, rgba(255,255,255,.35) 12%, rgba(0,0,0,.35) 25%, rgba(255,255,255,0) 37%) 0 0 / 200% 100%; animation: shade 2.4s linear infinite; }
   @keyframes wave { 0%, 100% { transform: translateY(-3px); } 50% { transform: translateY(3px); } }
   @keyframes shade { to { background-position: -200% 0; } }
-  .skyline { position: relative; display: block; overflow: visible; width: 100%; height: clamp(240px, 34vw, 420px); margin-top: clamp(24px, 4vw, 48px); }
-  .skyline .ink { fill: #0A0C11; }
-  .skyline .rig { stroke: #0A0C11; fill: none; stroke-linecap: square; }
-  .smoke { fill: rgba(40, 20, 24, .55); transform-box: fill-box; transform-origin: center; animation: smoke 9s ease-out infinite; }
-  .smoke.s2 { animation-delay: -3s; } .smoke.s3 { animation-delay: -6s; }
   @keyframes smoke { 0% { transform: translate(0, 0) scale(.4); opacity: 0; } 15% { opacity: .9; } 100% { transform: translate(60px, -150px) scale(2.4); opacity: 0; } }
-  .ember { fill: #FFB27A; transform-box: fill-box; animation: ember 4s linear infinite; opacity: 0; }
-  .ember.e2 { animation-delay: -1.3s; } .ember.e3 { animation-delay: -2.6s; } .ember.e4 { animation-delay: -.7s; }
-  @keyframes ember { 0% { transform: translate(0, 0); opacity: 0; } 10% { opacity: 1; } 100% { transform: translate(24px, -120px); opacity: 0; } }
-  .furnace-glow { fill: #FFB27A; opacity: .9; filter: url(#glow-blur); animation: breathe 3s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
-  .skyline-note { position: absolute; right: var(--pad); bottom: 14px; z-index: 2; font-size: 13px; color: rgba(243,238,228,.85); text-align: right; max-width: 60ch; }
+  .lz-stats { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .stat { position: relative; padding: 26px 24px 24px; border-radius: 14px; background: linear-gradient(145deg, #2B2D34, #1D1E23 60%, #24262C);
+    box-shadow: 0 0 0 1px rgba(243,238,228,.12) inset, 0 20px 40px -24px rgba(0,0,0,.9); }
+  .stat::before, .stat::after { content: ""; position: absolute; top: 12px; width: 9px; height: 9px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #9A9DA6, #3A3C44); box-shadow: 0 1px 1px rgba(0,0,0,.5); }
+  .stat::before { left: 12px; } .stat::after { right: 12px; }
+  .stat dt { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; }
+  .stat .num { font: 900 clamp(40px, 4.2vw, 60px)/.9 var(--head); letter-spacing: .01em; font-variant-numeric: tabular-nums; white-space: nowrap;
+    background: linear-gradient(180deg, var(--white-hot), var(--hot) 45%, var(--molten)); -webkit-background-clip: text; background-clip: text; color: transparent;
+    filter: drop-shadow(0 0 14px rgba(232,116,44,.35)); }
+  .stat small { font: 700 18px/1 var(--head); letter-spacing: .04em; text-transform: uppercase; color: var(--soft); }
+  .stat dd { margin: 12px 0 0; color: var(--text); font-size: 15px; line-height: 1.45; }
+  .stats-src { margin-top: 14px; font-size: 13px; color: var(--soft); }
+  .three-one { margin-top: clamp(64px, 8vw, 104px); padding-top: clamp(48px, 6vw, 72px); position: relative; }
+  .three-one::after { content: ""; position: absolute; top: 0; left: var(--pad); right: var(--pad); height: 1px; background: var(--line); }
+  .three-one::before { content: ""; position: absolute; z-index: 1; top: -1px; left: var(--pad); width: 120px; height: 2px; background: linear-gradient(90deg, var(--red), var(--molten)); box-shadow: 0 0 14px rgba(232,116,44,.7); }
+  .h-big { font-family: var(--head); font-weight: 800; font-size: clamp(40px, 5.2vw, 66px); line-height: .94; letter-spacing: .005em; text-transform: uppercase; }
+  .h-big .h-serif { font-size: 1.05em; line-height: 1; }
   .bc-switch::after { background-size: cover; }
   .bc-toggle[aria-pressed="true"] .bc-switch::after { background: var(--flag) center / cover no-repeat; box-shadow: 0 0 0 1.5px #F5F2EC; }
 
@@ -259,18 +286,18 @@
   .prices { background: linear-gradient(180deg, transparent, rgba(24,25,30,.7) 20%, rgba(24,25,30,.7) 80%, transparent); }
   .rates { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
   .rate { padding: 30px 26px; border-radius: 18px; background: var(--iron); box-shadow: 0 0 0 1px var(--line) inset; display: flex; flex-direction: column; gap: 12px; }
-  .rate .price { font: 800 clamp(38px, 4.4vw, 52px)/1 var(--display); color: var(--paper); letter-spacing: -0.03em; white-space: nowrap; }
+  .rate .price { font: 800 clamp(54px, 6vw, 72px)/.95 var(--head); color: var(--paper); letter-spacing: .01em; white-space: nowrap; }
   .rate .from { font: 500 15px/1 var(--body); color: var(--soft); letter-spacing: 0; }
   .rate p { color: var(--soft); font-size: 16px; }
   .rate .when { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--line); color: var(--paper); font-weight: 500; font-size: 15px; white-space: nowrap; }
   .founding { margin-top: 16px; position: relative; border-radius: 18px; padding: 26px 28px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 28px;
     background: linear-gradient(100deg, rgba(200,16,46,.32), rgba(232,116,44,.1) 60%, rgba(232,116,44,.22)); box-shadow: 0 0 0 1px rgba(232,116,44,.6) inset, 0 0 50px -16px rgba(200,16,46,.8); }
-  .founding h3 { font-weight: 700; font-size: 22px; }
+  .founding h3 { font-weight: 800; font-size: 30px; }
   .founding p { color: var(--paper); max-width: 52ch; }
-  .founding .price-tag { font: 800 40px/1 var(--display); color: var(--white-hot); text-shadow: 0 0 22px rgba(232,116,44,.8); white-space: nowrap; }
+  .founding .price-tag { font: 900 60px/1 var(--head); color: var(--white-hot); text-shadow: 0 0 22px rgba(232,116,44,.8); white-space: nowrap; }
   .care { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 16px; }
   .care-plan { padding: 26px; border-radius: 18px; box-shadow: 0 0 0 1px var(--line) inset; display: grid; gap: 10px; }
-  .care-price { font: 700 30px/1 var(--display); color: var(--paper); letter-spacing: -0.02em; }
+  .care-price { font: 800 44px/1 var(--head); color: var(--paper); letter-spacing: .01em; }
   .care-price span { font: 500 15px var(--body); color: var(--soft); letter-spacing: 0; }
   .care-plan p:last-child { color: var(--soft); font-size: 16px; }
   .founding .price-tag s { font-size: .5em; font-weight: 600; color: var(--soft); text-shadow: none; text-decoration-thickness: 2px; margin-right: 8px; vertical-align: middle; }
@@ -318,7 +345,7 @@
   .steps.lit::after { transform: scaleX(1); }
   .step { position: relative; counter-increment: step; }
   .step::before { content: counter(step); display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; margin-bottom: 22px; position: relative; z-index: 1;
-    background: var(--iron); color: var(--paper); font: 700 20px/1 var(--display); box-shadow: 0 0 0 2px var(--steel-2) inset; transition: background-color .4s ease, color .4s ease, box-shadow .4s ease; }
+    background: var(--iron); color: var(--paper); font: 900 28px/1 var(--head); box-shadow: 0 0 0 2px var(--steel-2) inset; transition: background-color .4s ease, color .4s ease, box-shadow .4s ease; }
   .steps.lit .step::before { background: var(--molten); color: #1A1209; box-shadow: 0 0 0 2px var(--hot) inset, 0 0 26px rgba(232,116,44,.7); }
   .steps.lit .step:nth-child(2)::before { transition-delay: .4s; }
   .steps.lit .step:nth-child(3)::before { transition-delay: .8s; }
@@ -370,9 +397,8 @@
   @media (max-width: 960px) {
     .tools, .rates { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .rates .rate:last-child { grid-column: 1 / -1; }
-    .about, .contact, .hero-grid, .faq-wrap { grid-template-columns: 1fr; }
+    .about, .contact, .hero-grid, .faq-wrap, .bc-grid { grid-template-columns: 1fr; }
     .faq-wrap .section-head { position: static; }
-    .hero-art { display: none; }
     .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 36px; }
     .steps::before, .steps::after { display: none; }
   }
@@ -388,7 +414,7 @@
     .tools-foot .btn { width: 100%; }
     .proof { flex-direction: column; gap: 10px; }
     .cta-bar { display: block; }
-    .founding .price-tag { font-size: 34px; }
+    .founding .price-tag { font-size: 50px; }
     .tools { gap: 12px; }
     .tool { display: grid; grid-template-columns: 40px minmax(0, 1fr); column-gap: 16px; padding: 20px 18px; }
     .tool svg { width: 36px; height: 36px; margin: 0; grid-row: span 2; }
@@ -408,7 +434,8 @@
     .founding { padding: 24px 22px; }
     .flag-pole { height: 110px; }
     .flag { width: 115px; height: 69px; }
-    .skyline-note { left: var(--pad); text-align: left; }
+    .stat { padding: 24px 16px 18px; }
+    .stat small { font-size: 15px; }
   }
   @media (max-width: 560px) {
     .site-nav .btn { display: none; }
@@ -469,10 +496,55 @@
 
 <main id="top">
   <section class="hero" id="hero" aria-labelledby="hero-title">
+    <div class="lizzy" aria-hidden="true">
+      <svg viewBox="430 0 480 300" preserveAspectRatio="xMidYMax meet">
+        <defs>
+          <radialGradient id="lz-mouth" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#FFE8D2"/><stop offset=".35" stop-color="#FFB27A"/><stop offset="1" stop-color="#E8742C" stop-opacity="0"/></radialGradient>
+          <radialGradient id="lz-tap" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#FFE8D2"/><stop offset=".3" stop-color="#FF9A4A"/><stop offset="1" stop-color="#C8102E" stop-opacity="0"/></radialGradient>
+          <filter id="lz-soft" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="9"/></filter>
+          <filter id="lz-haze" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="10"/></filter>
+        </defs>
+        <ellipse class="lz-glow" cx="632" cy="92" rx="74" ry="46" fill="url(#lz-mouth)" filter="url(#lz-haze)"/>
+        <g filter="url(#lz-soft)">
+          <circle class="lz-smoke" cx="612" cy="14" r="12"/><circle class="lz-smoke d2" cx="652" cy="14" r="12"/><circle class="lz-smoke d3" cx="612" cy="14" r="12"/>
+          <circle class="lz-smoke d4" cx="461" cy="56" r="9"/><circle class="lz-smoke d5" cx="461" cy="56" r="9"/>
+        </g>
+        <g class="lz-ink">
+          <rect x="430" y="292" width="480" height="8"/>
+          <rect x="455" y="58" width="12" height="234"/>
+          <path d="M472 292 V136 A14 14 0 0 1 500 136 V292 Z M506 292 V128 A14 14 0 0 1 534 128 V292 Z M540 292 V136 A14 14 0 0 1 568 136 V292 Z"/>
+          <rect x="466" y="176" width="170" height="8"/>
+          <path d="M588 292 V222 H596 L612 112 H652 L668 222 H676 V292 Z"/>
+          <rect x="600" y="100" width="64" height="14"/>
+          <rect x="614" y="70" width="36" height="30"/>
+          <rect x="616" y="40" width="7" height="32"/><rect x="641" y="40" width="7" height="32"/>
+          <rect x="608" y="36" width="48" height="8"/>
+          <rect x="609" y="14" width="5" height="24"/><rect x="650" y="14" width="5" height="24"/>
+          <path d="M708 238 V172 A18 10 0 0 1 744 172 V238 L726 258 Z"/>
+          <rect x="712" y="256" width="5" height="36"/><rect x="735" y="256" width="5" height="36"/>
+          <path d="M676 292 V246 H760 V292 Z"/>
+          <path d="M430 292 V258 L452 246 V292 Z"/>
+        </g>
+        <g class="lz-rig">
+          <path d="M584 292 V96 M680 292 V96 M584 96 H680 M584 140 L680 196 M680 140 L584 196 M584 196 L680 252 M680 196 L584 252" stroke-width="3"/>
+          <path d="M652 40 C700 40 716 90 726 164" stroke-width="10"/>
+          <path d="M652 92 L880 292 M666 82 L894 282" stroke-width="5"/>
+          <path d="M700 134 L716 124 M740 169 L756 159 M780 204 L796 194 M820 239 L836 229 M860 274 L876 264" stroke-width="3"/>
+          <path d="M748 176 V292 M806 227 V292 M852 267 V292" stroke-width="4"/>
+          <path d="M708 200 H636" stroke-width="7"/>
+        </g>
+        <g class="lz-lit">
+          <rect x="684" y="258" width="6" height="8"/><rect x="698" y="258" width="6" height="8"/><rect x="740" y="258" width="6" height="8"/>
+          <rect x="603" y="240" width="5" height="10"/><rect x="657" y="240" width="5" height="10"/>
+        </g>
+        <ellipse class="lz-tap" cx="632" cy="290" rx="70" ry="14" fill="url(#lz-tap)"/>
+        <circle id="lz-vent" cx="632" cy="22" r="1" fill="none"/>
+      </svg>
+    </div>
     <canvas id="sparks" aria-hidden="true"></canvas>
     <div class="wrap hero-grid">
       <div>
-      <h1 class="cut" id="hero-title"><span class="cut-text" data-bc="Bostin tools, made to fit yer business.">Brilliant tools, made to fit your business.</span><span class="laser" aria-hidden="true"></span></h1>
+      <h1 class="cut" id="hero-title"><span class="cut-text"><span class="h-bold" data-bc="Bostin tools,">Brilliant tools,</span> <span class="h-serif" data-bc="med to fit yer business.">made to fit your business.</span></span><span class="laser" aria-hidden="true"></span></h1>
       <p class="lead" data-bc="Bin the spreadsheets, paper forms and WhatsApp threads yer lot am juggling. One simple app, med round how yow already werk. Fixed price, live in weeks.">I swap the spreadsheets, paper forms and WhatsApp threads your team juggles for one simple app, built around how you already work. Fixed price, live in weeks.</p>
       <div class="hero-actions">
         <a class="btn btn-molten" href="#contact" data-bc="Gizza bell, it's free">Book a free 30-minute call</a>
@@ -484,157 +556,75 @@
         <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5 L8 14.5 L16 6"/></svg><span data-bc="Yer data stays yourn">Your data stays yours</span></li>
       </ul>
       </div>
-      <div class="hero-art" aria-hidden="true">
-        <div class="forge-glow"></div>
-        <svg viewBox="0 0 100 100" id="emblem">
-  <defs>
-    <radialGradient id="sky-hero" cx="50" cy="82" r="62" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#FFE0B8"/>
-      <stop offset="0.22" stop-color="#FF9A4A"/>
-      <stop offset="0.5" stop-color="#E8742C"/>
-      <stop offset="0.78" stop-color="#C8102E"/>
-      <stop offset="1" stop-color="#7E0A1C"/>
-    </radialGradient>
-    <clipPath id="disc-hero"><circle cx="50" cy="50" r="46"/></clipPath>
-  </defs>
-  <circle cx="50" cy="50" r="46" fill="url(#sky-hero)"/>
-  <g clip-path="url(#disc-hero)" fill="#111216">
-    <rect x="0" y="80" width="100" height="20"/>
-    <rect x="16.5" y="34" width="3" height="47"/>
-    <path d="M21.5 81 V58 a3 3 0 0 1 6 0 V81 Z M28.5 81 V55 a3 3 0 0 1 6 0 V81 Z M35.5 81 V58 a3 3 0 0 1 6 0 V81 Z"/>
-    <rect x="21" y="64" width="25" height="2"/>
-    <path d="M42 81 V74 H43.5 L46.5 47 H55.5 L58.5 74 H60 V81 Z"/>
-    <rect x="45" y="43.5" width="12" height="4"/>
-    <rect x="47.3" y="35" width="7.4" height="9"/>
-    <rect x="47.6" y="26" width="2" height="10"/><rect x="52.4" y="26" width="2" height="10"/>
-    <rect x="46" y="24.5" width="10" height="2.6"/>
-    <rect x="46.6" y="18" width="1.4" height="7"/><rect x="54" y="18" width="1.4" height="7"/>
-    <path d="M66 70 V56 a4.2 2.4 0 0 1 8.4 0 V70 L70.2 74.5 Z"/>
-    <rect x="69.2" y="74" width="2" height="7"/>
-  </g>
-  <g clip-path="url(#disc-hero)" fill="none" stroke="#111216" stroke-linecap="butt">
-    <path d="M55.5 25.8 C64.5 25.8 69.4 36 70.2 54" stroke-width="3"/>
-    <path d="M41 81 V42 M61 81 V42 M41 42 H61" stroke-width="1.2"/>
-    <path d="M57 45 L88 81" stroke-width="2.4"/>
-    <path d="M60 44 L91 80" stroke-width="1.2"/>
-    <path d="M66 56 V81 M76 67.5 V81" stroke-width="1.4"/>
-  </g>
-</svg>
-      </div>
+
     </div>
   </section>
 
-  <section class="bc-band" aria-labelledby="bc-title">
-    <div class="wrap"><div class="bc-copy">
-      <div class="bc-title">
+  <section class="bc-band" id="bilston" aria-labelledby="bc-title">
+    <div class="wrap bc-grid">
+      <div class="bc-copy">
         <div class="flag-wrap" aria-hidden="true"><span class="flag-pole"></span><span class="flag" id="flag"></span></div>
-        <h2 id="bc-title" data-bc="Black Country born an' bred">Made in the Black Country</h2>
+        <h2 id="bc-title"><span data-bc="Black Country">Made in the</span> <span class="h-serif" data-bc="born an’ bred">Black Country</span></h2>
+        <p class="lead">Bostin Jig is built in Bilston. In 1954 the steelworks at Spring Vale swapped three old blast furnaces for one new one: Elisabeth. The men who worked her called her Big Lizzy. Black by day, red by night.</p>
       </div>
-      <p class="lead">Bostin Jig is built in Bilston, where Elisabeth, the blast furnace locals called Big Lizzy, lit up the sky until 1977. Black by day, red by night. Black Country steel, now in software.</p>
-    </div></div>
-    <svg class="skyline" viewBox="0 0 1200 320" preserveAspectRatio="xMidYMax slice" role="img" aria-label="Silhouette of the Bilston skyline with the Elisabeth blast furnace against a red sky">
-      <defs><filter id="glow-blur" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="14"/></filter><filter id="smoke-blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter></defs>
-      <ellipse class="furnace-glow" cx="632" cy="96" rx="70" ry="40"/>
-      <g filter="url(#smoke-blur)">
-        <circle class="smoke" cx="612" cy="24" r="16"/><circle class="smoke s2" cx="612" cy="24" r="16"/><circle class="smoke s3" cx="612" cy="24" r="16"/>
-        <circle class="smoke" cx="461" cy="54" r="12"/><circle class="smoke s3" cx="461" cy="54" r="12"/>
-      </g>
-      <circle class="ember" cx="630" cy="70" r="2"/><circle class="ember e2" cx="638" cy="66" r="1.6"/><circle class="ember e3" cx="624" cy="72" r="1.8"/><circle class="ember e4" cx="644" cy="70" r="1.4"/>
-      <g class="ink">
-        <rect x="0" y="292" width="1200" height="28"/>
-        <!-- terraces, left -->
-        <path d="M0 292 V236 L22 220 L44 236 V292 Z M44 292 V232 L68 214 L92 232 V292 Z M92 292 V238 L114 222 L136 238 V292 Z M136 292 V230 L160 212 L184 230 V292 Z M184 292 V236 L206 220 L228 236 V292 Z M228 292 V232 L252 214 L276 232 V292 Z M276 292 V240 L298 224 L320 240 V292 Z"/>
-        <path d="M30 222 h6 v-14 h-6 Z M76 216 h6 v-16 h-6 Z M120 224 h6 v-14 h-6 Z M168 214 h6 v-16 h-6 Z M212 222 h6 v-14 h-6 Z M260 216 h6 v-16 h-6 Z M304 226 h6 v-14 h-6 Z"/>
-        <!-- works sheds -->
-        <path d="M320 292 V250 L350 232 V250 L380 232 V250 L410 232 V250 L440 232 V292 Z"/>
-        <!-- stove chimney -->
-        <rect x="455" y="58" width="12" height="234"/>
-        <!-- hot blast stoves -->
-        <path d="M472 292 V136 A14 14 0 0 1 500 136 V292 Z M506 292 V128 A14 14 0 0 1 534 128 V292 Z M540 292 V136 A14 14 0 0 1 568 136 V292 Z"/>
-        <rect x="466" y="176" width="170" height="8"/>
-        <!-- Elisabeth: furnace body -->
-        <path d="M588 292 V222 H596 L612 112 H652 L668 222 H676 V292 Z"/>
-        <rect x="600" y="100" width="64" height="14"/>
-        <rect x="614" y="70" width="36" height="30"/>
-        <!-- uptakes and bleeders -->
-        <rect x="616" y="40" width="7" height="32"/><rect x="641" y="40" width="7" height="32"/>
-        <rect x="608" y="36" width="48" height="8"/>
-        <rect x="609" y="14" width="5" height="24"/><rect x="650" y="14" width="5" height="24"/>
-        <!-- dust catcher -->
-        <path d="M708 238 V172 A18 10 0 0 1 744 172 V238 L726 258 Z"/>
-        <rect x="712" y="256" width="5" height="36"/><rect x="735" y="256" width="5" height="36"/>
-        <!-- workshop and cast house -->
-        <path d="M676 292 V246 H760 V292 Z"/>
-        <!-- right terraces and stack -->
-        <rect x="1004" y="120" width="14" height="172"/>
-        <path d="M900 292 V238 L922 222 L944 238 V292 Z M944 292 V232 L968 214 L992 232 V292 Z M992 292 V240 L1014 224 L1036 240 V292 Z M1036 292 V234 L1060 216 L1084 234 V292 Z M1084 292 V238 L1106 222 L1128 238 V292 Z M1128 292 V232 L1152 214 L1176 232 V292 Z M1176 292 V238 L1200 222 V292 Z"/>
-        <path d="M928 224 h6 v-14 h-6 Z M976 216 h6 v-16 h-6 Z M1020 226 h6 v-14 h-6 Z M1068 218 h6 v-16 h-6 Z M1112 224 h6 v-14 h-6 Z M1160 216 h6 v-16 h-6 Z"/>
-      </g>
-      <g class="rig">
-        <!-- furnace frame -->
-        <path d="M584 292 V96 M680 292 V96 M584 96 H680 M584 140 L680 196 M680 140 L584 196 M584 196 L680 252 M680 196 L584 252" stroke-width="3"/>
-        <!-- downcomer -->
-        <path d="M652 40 C700 40 716 90 726 164" stroke-width="10"/>
-        <!-- skip incline -->
-        <path d="M652 92 L880 292 M666 82 L894 282" stroke-width="5"/>
-        <path d="M700 134 L716 124 M740 169 L756 159 M780 204 L796 194 M820 239 L836 229 M860 274 L876 264" stroke-width="3"/>
-        <path d="M748 176 V292 M806 227 V292 M852 267 V292" stroke-width="4"/>
-        <!-- gas main from dust catcher to stoves -->
-        <path d="M708 200 H636" stroke-width="7"/>
-      </g>
-    </svg>
-    <p class="skyline-note">Skyline inspired by Elisabeth, Bilston Steel Works, 1954 to 1980.</p>
-  </section>
-
-  <section class="band" aria-labelledby="familiar">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 id="familiar" data-bc="Sound familiar, ay it?">Sound familiar?</h2>
-        <p class="lead" data-bc="Gi' the handle a shove and see the difference.">Drag the handle to see the difference one simple app makes.</p>
+      <div>
+        <dl class="lz-stats" id="lz-stats">
+          <div class="stat"><dt><span class="num">1954</span></dt><dd>Big Lizzy replaces three old furnaces</dd></div>
+          <div class="stat"><dt><span class="num" data-to="275000">275,000</span><small>tons</small></dt><dd>of steel a year, from her alone</dd></div>
+          <div class="stat"><dt><span class="num" data-to="5.5" data-dec="1">5.5</span><small>million tons</small></dt><dd>of pig iron, and more, in her lifetime</dd></div>
+          <div class="stat"><dt><span class="num">1980</span></dt><dd>She came down on 5 October</dd></div>
+        </dl>
+        <p class="stats-src">Figures from the Express &amp; Star photo archive.</p>
       </div>
-      <div class="ba" id="ba">
-        <div class="ba-layer ba-before" aria-hidden="true">
-          <span class="ba-tag">Now</span>
-          <div class="sheet">
-            <div class="sheet-title">Jobs_FINAL_v3_REAL.xlsx</div>
-            <div class="sheet-grid">
-              <span class="h">Job</span><span class="h">Who</span><span class="h">Status</span><span class="h">Paid?</span>
-              <span>14 Cross St</span><span>Dave?</span><span>???</span><span class="bad">#REF!</span>
-              <span>Unit 4 fit-out</span><span></span><span>chase quote</span><span>no</span>
-              <span>Van 2 check</span><span>Sam</span><span class="bad">#N/A</span><span></span>
-              <span>Mrs Patel boiler</span><span>see WhatsApp</span><span>done??</span><span>?</span>
-              <span>New enquiry</span><span></span><span>lost email</span><span class="bad">#VALUE!</span>
-            </div>
-          </div>
-          <div class="note">Ring Dave about the quote!!</div>
-          <div class="chat">
-            <div class="chat-head">Lads (work)</div>
-            <div class="bubble">Who's got the van keys??<small>07:42</small></div>
-            <div class="bubble">Which job am I on today?<small>07:58</small></div>
-            <div class="bubble me">Check the spreadsheet<small>08:03</small></div>
-            <div class="bubble">Which one?!<small>08:04</small></div>
-          </div>
-        </div>
-        <div class="ba-layer ba-after" aria-hidden="true">
-          <span class="ba-tag">With Bostin Jig</span>
-          <div class="phone">
-            <div class="screen">
-              <div class="app-top"><b>Today</b><span>4 jobs</span></div>
-              <div class="jobs">
-                <div class="job"><p>Boiler service<small>14 Cross St · Dave</small></p><span class="chip live">On site</span></div>
-                <div class="job"><p>Unit 4 fit-out<small>Quote ready</small></p><span class="chip send">Send</span></div>
-                <div class="job"><p>Van 2 check<small>Sam · 07:30</small></p><span class="chip done">Done</span></div>
-                <div class="job"><p>New enquiry<small>From the website</small></p><span class="chip new">New</span></div>
-              </div>
-              <div class="app-cta">+ New job</div>
-            </div>
-          </div>
-        </div>
-        <div class="ba-handle"><div class="ba-knob"><svg width="26" height="18" viewBox="0 0 26 18" aria-hidden="true"><path d="M8 2 L2 9 L8 16 M18 2 L24 9 L18 16" fill="none" stroke="#1A1209" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
-        <input class="ba-range" id="ba-range" type="range" min="0" max="100" value="50" aria-label="Compare the old way with the app: left shows the old way, right shows the app">
-      </div>
-      <p class="ba-hint">Sample data, made up to show the idea.</p>
     </div>
+      <div class="wrap three-one">
+        <div class="section-head">
+          <h3 class="h-big"><span data-bc="Three into">Three into</span> <span class="h-serif" data-bc="one, ar.">one.</span></h3>
+          <p class="lead" data-bc="Lizzy replaced three old furnaces. I do the same for yer business: the spreadsheet, the WhatsApp group an' the paper forms, swapped for one simple app med round how yow already werk.">Lizzy replaced three old furnaces. I do the same for your business: the spreadsheet, the WhatsApp group and the paper forms, swapped for one simple app built around how you already work.</p>
+        </div>
+        <div class="ba" id="ba">
+          <div class="ba-layer ba-before" aria-hidden="true">
+            <span class="ba-tag">Now</span>
+            <div class="sheet">
+              <div class="sheet-title">Jobs_FINAL_v3_REAL.xlsx</div>
+              <div class="sheet-grid">
+                <span class="h">Job</span><span class="h">Who</span><span class="h">Status</span><span class="h">Paid?</span>
+                <span>14 Cross St</span><span>Dave?</span><span>???</span><span class="bad">#REF!</span>
+                <span>Unit 4 fit-out</span><span></span><span>chase quote</span><span>no</span>
+                <span>Van 2 check</span><span>Sam</span><span class="bad">#N/A</span><span></span>
+                <span>Mrs Patel boiler</span><span>see WhatsApp</span><span>done??</span><span>?</span>
+                <span>New enquiry</span><span></span><span>lost email</span><span class="bad">#VALUE!</span>
+              </div>
+            </div>
+            <div class="note">Ring Dave about the quote!!</div>
+            <div class="chat">
+              <div class="chat-head">Lads (work)</div>
+              <div class="bubble">Who's got the van keys??<small>07:42</small></div>
+              <div class="bubble">Which job am I on today?<small>07:58</small></div>
+              <div class="bubble me">Check the spreadsheet<small>08:03</small></div>
+              <div class="bubble">Which one?!<small>08:04</small></div>
+            </div>
+          </div>
+          <div class="ba-layer ba-after" aria-hidden="true">
+            <span class="ba-tag">With Bostin Jig</span>
+            <div class="phone">
+              <div class="screen">
+                <div class="app-top"><b>Today</b><span>4 jobs</span></div>
+                <div class="jobs">
+                  <div class="job"><p>Boiler service<small>14 Cross St · Dave</small></p><span class="chip live">On site</span></div>
+                  <div class="job"><p>Unit 4 fit-out<small>Quote ready</small></p><span class="chip send">Send</span></div>
+                  <div class="job"><p>Van 2 check<small>Sam · 07:30</small></p><span class="chip done">Done</span></div>
+                  <div class="job"><p>New enquiry<small>From the website</small></p><span class="chip new">New</span></div>
+                </div>
+                <div class="app-cta">+ New job</div>
+              </div>
+            </div>
+          </div>
+          <div class="ba-handle"><div class="ba-knob"><svg width="26" height="18" viewBox="0 0 26 18" aria-hidden="true"><path d="M8 2 L2 9 L8 16 M18 2 L24 9 L18 16" fill="none" stroke="#1A1209" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+          <input class="ba-range" id="ba-range" type="range" min="0" max="100" value="50" aria-label="Compare the old way with the app: left shows the old way, right shows the app">
+        </div>
+        <p class="ba-hint" data-bc="Gi' the handle a shove to see the difference. Sample data, med up to show the idea.">Drag the handle to see the difference. Sample data, made up to show the idea.</p>
+      </div>
   </section>
 
   <section class="band" id="build" aria-labelledby="build-title">
@@ -877,7 +867,7 @@
   <section class="band" id="contact" aria-labelledby="contact-title">
     <div class="wrap contact">
       <div>
-        <h2 id="contact-title" data-bc="What's gerrin' on yer nerves?">Tell me what’s driving you mad</h2>
+        <h2 id="contact-title"><span data-bc="What's gerrin'">Tell me what’s</span> <span class="h-serif" data-bc="on yer nerves?">driving you mad</span></h2>
         <p class="lead">Describe the spreadsheet, form or process you want gone. I’ll reply within 2 working days to book your free 30-minute call.</p>
         <p class="contact-direct">Or email <a href="mailto:james@bostinjig.co.uk">james@bostinjig.co.uk</a></p>
       </div>
@@ -1006,7 +996,7 @@
       for (let i = 0; i < n && sparks.length < 500; i++) {
         const a = Math.random() * Math.PI * 2;
         const s = (0.6 + Math.random() * 1.4) * power;
-        sparks.push({ x, y, vx: Math.cos(a) * s, vy: Math.sin(a) * s - power * 0.9, life: 0, max: 30 + Math.random() * 40, hue: 22 + Math.random() * 22 });
+        sparks.push({ x, y, vx: Math.cos(a) * s, vy: Math.sin(a) * s - power * 0.9, life: 0, max: 30 + Math.random() * 40, hue: 22 + Math.random() * 22, g: 0.14, w: 1 });
       }
       if (!running) { running = true; requestAnimationFrame(tick); }
     };
@@ -1018,7 +1008,7 @@
       for (let i = sparks.length - 1; i >= 0; i--) {
         const p = sparks[i];
         p.life++;
-        p.vy += 0.14;
+        p.vy += p.g;
         p.vx *= 0.985;
         p.vy *= 0.985;
         p.x += p.vx;
@@ -1026,7 +1016,7 @@
         const t = 1 - p.life / p.max;
         if (t <= 0) { sparks.splice(i, 1); continue; }
         ctx.strokeStyle = `hsla(${p.hue}, 100%, ${55 + t * 35}%, ${t})`;
-        ctx.lineWidth = (1 + t * 1.6) * dpr;
+        ctx.lineWidth = (1 + t * 1.6) * p.w * dpr;
         ctx.beginPath();
         ctx.moveTo(p.x * dpr, p.y * dpr);
         ctx.lineTo((p.x - p.vx * 2.4) * dpr, (p.y - p.vy * 2.4) * dpr);
@@ -1052,6 +1042,29 @@
       const [x, y] = local(e);
       spawn(x, y, 26, 4.2);
     });
+
+    /* Lizzy breathes embers out of her top, all by herself */
+    const vent = document.getElementById('lz-vent');
+    const ember = () => {
+      if (calm || document.hidden || sparks.length > 160) return;
+      const v = vent.getBoundingClientRect();
+      const r = hero.getBoundingClientRect();
+      if (!v.width && !v.height && !v.top) return;
+      const x = v.left + v.width / 2 - r.left + (Math.random() - 0.5) * 26;
+      const y = v.top + v.height / 2 - r.top + Math.random() * 8;
+      sparks.push({ x, y, vx: -0.2 + Math.random() * 0.9, vy: -(0.7 + Math.random() * 1.3), life: 0, max: 70 + Math.random() * 90, hue: 18 + Math.random() * 26, g: -0.006, w: 0.75 });
+      if (!running) { running = true; requestAnimationFrame(tick); }
+    };
+    let emberTimer = 0;
+    const embers = (on) => {
+      if (on && !emberTimer && !calm) emberTimer = setInterval(() => { ember(); if (Math.random() < 0.5) ember(); }, 110);
+      if (!on && emberTimer) { clearInterval(emberTimer); emberTimer = 0; }
+    };
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver((entries) => embers(entries[0].isIntersecting), { threshold: 0.05 }).observe(hero);
+    } else {
+      embers(true);
+    }
 
     /* Laser-cut headline */
     const cut = document.getElementById('hero-title');
@@ -1088,7 +1101,7 @@
       toggle.setAttribute('aria-pressed', String(on));
       swaps.forEach((el) => {
         el.textContent = on ? el.dataset.bc : el.dataset.std;
-        if (animate && !calm && el !== cut.querySelector('.cut-text')) {
+        if (animate && !calm && !cut.contains(el)) {
           el.classList.remove('swap'); void el.offsetWidth; el.classList.add('swap');
         }
       });
@@ -1185,6 +1198,26 @@
       io.observe(ba);
     } else {
       steps.classList.add('lit');
+    }
+
+    /* Big Lizzy's numbers count up the first time they're seen */
+    const stats = document.getElementById('lz-stats');
+    if (stats && !calm && 'IntersectionObserver' in window) {
+      const nums = [...stats.querySelectorAll('.num[data-to]')];
+      const fmt = (v, dec) => dec ? v.toFixed(dec) : Math.round(v).toLocaleString('en-GB');
+      nums.forEach((n) => { n.textContent = fmt(0, Number(n.dataset.dec || 0)); });
+      new IntersectionObserver((entries, obs) => {
+        if (!entries[0].isIntersecting) return;
+        obs.disconnect();
+        const t0 = performance.now();
+        const run = (now) => {
+          const k = Math.min(1, (now - t0) / 1600);
+          const e = 1 - Math.pow(1 - k, 3);
+          nums.forEach((n) => { n.textContent = fmt(Number(n.dataset.to) * e, Number(n.dataset.dec || 0)); });
+          if (k < 1) requestAnimationFrame(run);
+        };
+        requestAnimationFrame(run);
+      }, { threshold: 0.4 }).observe(stats);
     }
 
     /* Sticky call button on phones: shows after the hero, hides at the form and footer */
